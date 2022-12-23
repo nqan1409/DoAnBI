@@ -1,0 +1,611 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="12/22/2022 5:03:51 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-LGAKUBU"
+  DTS:CreatorName="DESKTOP-LGAKUBU\ASUS"
+  DTS:DTSID="{42362D39-0B39-4E9E-8C8A-875D8194B519}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.845.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{03CF684C-B2EF-451A-98BA-31842671115C}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Cases Report.csv]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{9DF526CF-25E6-494C-8D02-3D5B0C479EB8}"
+      DTS:ObjectName="Cases Report.csv">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="D:\Study\University\4th-year\HKI\BI\Thực hành\Datasource\Cases Report.csv" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CasesReport_Profiling]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{79D3A940-FBD5-4FD4-986D-411C78EBD30A}"
+      DTS:ObjectName="CasesReport_Profiling">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="CasesReport_Profiling" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CasesReport_ProfilingData]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{5DF650CE-892E-4C87-9912-DCBE6D3DA863}"
+      DTS:ObjectName="CasesReport_ProfilingData">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="CasesReport_ProfilingData" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CompiledCOVID19CaseDetails_Profiling]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{B47A6851-E47C-4203-9F1C-637493ABBB41}"
+      DTS:ObjectName="CompiledCOVID19CaseDetails_Profiling">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="CompiledCOVID19CaseDetails_Profiling" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CompiledCOVID19CaseDetails_ProfilingData]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{6C23FDA2-F1E4-40A6-BDA5-31F3347627C7}"
+      DTS:ObjectName="CompiledCOVID19CaseDetails_ProfilingData">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="CompiledCOVID19CaseDetails_ProfilingData" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.ProfilingData]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{A759A11A-704A-441A-BC09-CBA80E7B9A74}"
+      DTS:ObjectName="LocalHost.ProfilingData">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=.;Initial Catalog=ProfilingData;Integrated Security=True;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OngoingOutbreaksPhu]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{49E20E90-4D6B-447E-9BDE-0B609C886C1F}"
+      DTS:ObjectName="OngoingOutbreaksPhu">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="OngoingOutbreaksPhu" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[OngoingOutbreaksPhu_ProfilingData]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{CBE3E974-DCE2-4A8A-A7F0-284EE4915CB8}"
+      DTS:ObjectName="OngoingOutbreaksPhu_ProfilingData">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="OngoingOutbreaksPhu_ProfilingData" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[PublicHealthUnit]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{E2889DF6-FC6B-48F5-9F0C-9F7A2492A076}"
+      DTS:ObjectName="PublicHealthUnit">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="PublicHealthUnit" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[PublicHealthUnitsGROUP]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{9389109C-02E8-4184-B414-E1D1960AC4FA}"
+      DTS:ObjectName="PublicHealthUnitsGROUP">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="PublicHealthUnitsGROUP" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[PublicHealthUnitsGROUP_ProfilingData]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{02131559-728B-4ACE-933B-587453167E33}"
+      DTS:ObjectName="PublicHealthUnitsGROUP_ProfilingData">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="PublicHealthUnitsGROUP_ProfilingData" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[PublicHealthUnit_ProfilingData]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{33B0C4CD-83D2-4241-9BEC-DC50C2C60FFA}"
+      DTS:ObjectName="PublicHealthUnit_ProfilingData">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="PublicHealthUnit_ProfilingData" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[VaccinesByAgePhu]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{48B0CFF1-6C14-4131-B2A4-0D4CBD0E5E21}"
+      DTS:ObjectName="VaccinesByAgePhu">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="VaccinesByAgePhu" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[VaccinesByAgePhu_ProfilingData]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{F186168B-83FE-4996-9A93-1EAB98C65038}"
+      DTS:ObjectName="VaccinesByAgePhu_ProfilingData">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="1"
+          DTS:ConnectionString="VaccinesByAgePhu_ProfilingData" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\CasesReport"
+      DTS:CreationName="Microsoft.DataProfilingTask"
+      DTS:Description="Data Profiling Task"
+      DTS:DTSID="{73F3E33A-751B-4C6E-B021-88A986394293}"
+      DTS:ExecutableType="Microsoft.DataProfilingTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CasesReport"
+      DTS:ThreadHint="2">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <DataProfilingTaskData
+          Destination="CasesReport_ProfilingData"
+          OverwriteDestination="True">
+          <ProfileInput><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<DataProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/sqlserver/2008/DataDebugger/">
+  <ProfileVersion>1.0</ProfileVersion>
+  <DataSources />
+  <DataProfileInput>
+    <ProfileMode>Exact</ProfileMode>
+    <Timeout>0</Timeout>
+    <Requests>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="CasesReport" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="CasesReport" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="CasesReport" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="CasesReport" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="CasesReport" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+    </Requests>
+  </DataProfileInput>
+  <DataProfileOutput>
+    <Profiles />
+  </DataProfileOutput>
+</DataProfile>]]></ProfileInput>
+        </DataProfilingTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\CompiledCOVID19CaseDetails"
+      DTS:CreationName="Microsoft.DataProfilingTask"
+      DTS:Description="Data Profiling Task"
+      DTS:DTSID="{4c991dd5-1fd2-4c3a-a0c5-d5b25160ec5a}"
+      DTS:ExecutableType="Microsoft.DataProfilingTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CompiledCOVID19CaseDetails"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <DataProfilingTaskData
+          Destination="CompiledCOVID19CaseDetails_ProfilingData"
+          OverwriteDestination="True">
+          <ProfileInput><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<DataProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/sqlserver/2008/DataDebugger/">
+  <ProfileVersion>1.0</ProfileVersion>
+  <DataSources />
+  <DataProfileInput>
+    <ProfileMode>Exact</ProfileMode>
+    <Timeout>0</Timeout>
+    <Requests>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="CompiledCOVID19CaseDetails" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="CompiledCOVID19CaseDetails" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="CompiledCOVID19CaseDetails" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="CompiledCOVID19CaseDetails" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="CompiledCOVID19CaseDetails" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+    </Requests>
+  </DataProfileInput>
+  <DataProfileOutput>
+    <Profiles />
+  </DataProfileOutput>
+</DataProfile>]]></ProfileInput>
+        </DataProfilingTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\OngoingOutbreaksPhu"
+      DTS:CreationName="Microsoft.DataProfilingTask"
+      DTS:Description="Data Profiling Task"
+      DTS:DTSID="{cdf9e8cd-5d24-482a-9974-45ac73a19170}"
+      DTS:ExecutableType="Microsoft.DataProfilingTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="OngoingOutbreaksPhu"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <DataProfilingTaskData
+          Destination="OngoingOutbreaksPhu_ProfilingData"
+          OverwriteDestination="True">
+          <ProfileInput><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<DataProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/sqlserver/2008/DataDebugger/">
+  <ProfileVersion>1.0</ProfileVersion>
+  <DataSources />
+  <DataProfileInput>
+    <ProfileMode>Exact</ProfileMode>
+    <Timeout>0</Timeout>
+    <Requests>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="OngoingOutbreaksPhu" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="OngoingOutbreaksPhu" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="OngoingOutbreaksPhu" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="OngoingOutbreaksPhu" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="OngoingOutbreaksPhu" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+    </Requests>
+  </DataProfileInput>
+  <DataProfileOutput>
+    <Profiles />
+  </DataProfileOutput>
+</DataProfile>]]></ProfileInput>
+        </DataProfilingTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\PublicHealthUnit"
+      DTS:CreationName="Microsoft.DataProfilingTask"
+      DTS:Description="Data Profiling Task"
+      DTS:DTSID="{555483f1-3cd0-449f-835c-ec3303f7275b}"
+      DTS:ExecutableType="Microsoft.DataProfilingTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PublicHealthUnit"
+      DTS:ThreadHint="3">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <DataProfilingTaskData
+          Destination="PublicHealthUnit_ProfilingData"
+          OverwriteDestination="True">
+          <ProfileInput><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<DataProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/sqlserver/2008/DataDebugger/">
+  <ProfileVersion>1.0</ProfileVersion>
+  <DataSources />
+  <DataProfileInput>
+    <ProfileMode>Exact</ProfileMode>
+    <Timeout>0</Timeout>
+    <Requests>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="PublicHealthUnit" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="PublicHealthUnit" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="PublicHealthUnit" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="PublicHealthUnit" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="PublicHealthUnit" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+    </Requests>
+  </DataProfileInput>
+  <DataProfileOutput>
+    <Profiles />
+  </DataProfileOutput>
+</DataProfile>]]></ProfileInput>
+        </DataProfilingTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\PublicHealthUnitsGROUP"
+      DTS:CreationName="Microsoft.DataProfilingTask"
+      DTS:Description="Data Profiling Task"
+      DTS:DTSID="{48f9b68d-3426-48ef-808c-c9aaad948f21}"
+      DTS:ExecutableType="Microsoft.DataProfilingTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PublicHealthUnitsGROUP"
+      DTS:ThreadHint="4">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <DataProfilingTaskData
+          Destination="PublicHealthUnitsGROUP_ProfilingData"
+          OverwriteDestination="True">
+          <ProfileInput><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<DataProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/sqlserver/2008/DataDebugger/">
+  <ProfileVersion>1.0</ProfileVersion>
+  <DataSources />
+  <DataProfileInput>
+    <ProfileMode>Exact</ProfileMode>
+    <Timeout>0</Timeout>
+    <Requests>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="PublicHealthUnitsGROUP" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="PublicHealthUnitsGROUP" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="PublicHealthUnitsGROUP" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="PublicHealthUnitsGROUP" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="PublicHealthUnitsGROUP" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+    </Requests>
+  </DataProfileInput>
+  <DataProfileOutput>
+    <Profiles />
+  </DataProfileOutput>
+</DataProfile>]]></ProfileInput>
+        </DataProfilingTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\VaccinesByAgePhu"
+      DTS:CreationName="Microsoft.DataProfilingTask"
+      DTS:Description="Data Profiling Task"
+      DTS:DTSID="{ffb3a695-65c0-46e1-8357-e6e7a14a0cb9}"
+      DTS:ExecutableType="Microsoft.DataProfilingTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="VaccinesByAgePhu"
+      DTS:ThreadHint="5">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <DataProfilingTaskData
+          Destination="VaccinesByAgePhu_ProfilingData"
+          OverwriteDestination="True">
+          <ProfileInput><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<DataProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/sqlserver/2008/DataDebugger/">
+  <ProfileVersion>1.0</ProfileVersion>
+  <DataSources />
+  <DataProfileInput>
+    <ProfileMode>Exact</ProfileMode>
+    <Timeout>0</Timeout>
+    <Requests>
+      <ColumnNullRatioProfileRequest ID="NullRatioReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="VaccinesByAgePhu" />
+        <Column IsWildCard="true" />
+      </ColumnNullRatioProfileRequest>
+      <ColumnStatisticsProfileRequest ID="StatisticsReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="VaccinesByAgePhu" />
+        <Column IsWildCard="true" />
+      </ColumnStatisticsProfileRequest>
+      <ColumnLengthDistributionProfileRequest ID="LengthDistReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="VaccinesByAgePhu" />
+        <Column IsWildCard="true" />
+        <IgnoreLeadingSpace>false</IgnoreLeadingSpace>
+        <IgnoreTrailingSpace>true</IgnoreTrailingSpace>
+      </ColumnLengthDistributionProfileRequest>
+      <ColumnValueDistributionProfileRequest ID="ValueDistReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="VaccinesByAgePhu" />
+        <Column IsWildCard="true" />
+        <Option>FrequentValues</Option>
+        <FrequentValueThreshold>0.001</FrequentValueThreshold>
+      </ColumnValueDistributionProfileRequest>
+      <CandidateKeyProfileRequest ID="KeyReq">
+        <DataSourceID>{A759A11A-704A-441A-BC09-CBA80E7B9A74}</DataSourceID>
+        <Table Schema="dbo" Table="VaccinesByAgePhu" />
+        <KeyColumns>
+          <Column IsWildCard="true" />
+        </KeyColumns>
+        <ThresholdSetting>Specified</ThresholdSetting>
+        <KeyStrengthThreshold>0.95</KeyStrengthThreshold>
+        <VerifyOutputInFastMode>false</VerifyOutputInFastMode>
+        <MaxNumberOfViolations>100</MaxNumberOfViolations>
+      </CandidateKeyProfileRequest>
+    </Requests>
+  </DataProfileInput>
+  <DataProfileOutput>
+    <Profiles />
+  </DataProfileOutput>
+</DataProfile>]]></ProfileInput>
+        </DataProfilingTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="138,42.6666666666667"
+          Id="Package\CasesReport"
+          TopLeft="191.086803029343,41.4374992590398" />
+        <NodeLayout
+          Size="220,42.6666666666667"
+          Id="Package\CompiledCOVID19CaseDetails"
+          TopLeft="150.086803029343,144.104165925706" />
+        <NodeLayout
+          Size="185.333333333334,42.6666666666667"
+          Id="Package\OngoingOutbreaksPhu"
+          TopLeft="167.420136362676,246.770832592373" />
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\PublicHealthUnit"
+          TopLeft="440.697910228899,43.125004736334" />
+        <NodeLayout
+          Size="196,42.6666666666667"
+          Id="Package\PublicHealthUnitsGROUP"
+          TopLeft="420.697910228899,145.791671403001" />
+        <NodeLayout
+          Size="168,42.6666666666667"
+          Id="Package\VaccinesByAgePhu"
+          TopLeft="434.697910228899,248.458338069667" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
