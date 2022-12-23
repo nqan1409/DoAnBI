@@ -2,33 +2,33 @@
 <BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProjectInfo>
     <Name>Ontario_Covid</Name>
-    <LastWriteTime>2022-12-23T14:39:51.2010247Z</LastWriteTime>
+    <LastWriteTime>2022-12-23T15:23:09.4580068Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
     <ProjectBuildItemInfo>
       <Name>SourceToStage.dtsx</Name>
-      <LastWriteTime>2022-12-23T14:31:45.3515056Z</LastWriteTime>
+      <LastWriteTime>2022-12-23T14:57:47.1346975Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>StageToNDS.dtsx</Name>
-      <LastWriteTime>2022-12-23T14:31:45.3515056Z</LastWriteTime>
+      <LastWriteTime>2022-12-23T14:57:47.1427357Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>CleanData.dtsx</Name>
-      <LastWriteTime>2022-12-23T14:31:45.3515056Z</LastWriteTime>
+      <LastWriteTime>2022-12-23T15:23:09.4200081Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>SourceToDBProfiling.dtsx</Name>
-      <LastWriteTime>2022-12-23T14:31:45.3515056Z</LastWriteTime>
+      <LastWriteTime>2022-12-23T14:57:47.1346975Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>Profiling.dtsx</Name>
-      <LastWriteTime>2022-12-23T14:40:35.982348Z</LastWriteTime>
+      <LastWriteTime>2022-12-23T14:57:47.1346975Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>

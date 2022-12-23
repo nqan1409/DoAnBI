@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="12/22/2022 5:02:36 PM"
@@ -7,13 +7,1498 @@
   DTS:CreatorName="DESKTOP-LGAKUBU\ASUS"
   DTS:DTSID="{0FA5FD7C-3440-49D8-963C-8A9885C0F6E0}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.948.0"
+  DTS:LastModifiedProductVersion="16.0.845.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionGUID="{7BF26458-6278-456B-9E53-C19CCA600ED2}">
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{287E3435-B028-4484-B529-2E59B4ED10E3}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{B664BFC4-EE8A-4E5F-88D0-1606A6C1220C}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\LENOVO\OneDrive - VNU-HCMUS\Tri tue kd\Ontario\Datasource\Cases Report.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.CleanData]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{620FE19F-C840-4872-90C9-9BD727832ADF}"
+      DTS:ObjectName="LocalHost.CleanData">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=CleanData;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{620FE19F-C840-4872-90C9-9BD727832ADF}LocalHost.CleanData;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
   <DTS:Variables />
-  <DTS:Executables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\CasesReport"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{4FA54B70-9B85-4370-89D8-174170D34755}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CasesReport"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\CasesReport\CasesReport"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="CasesReport"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">'Cases Report$'</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CasesReport\CasesReport.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Outcome]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[Outcome]"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Outcome]"
+                      name="Outcome"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Age]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[Age]"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Age]"
+                      name="Age"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Gender]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[Gender]"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Reporting PHU]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[Reporting PHU]"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Reporting PHU]"
+                      name="Reporting PHU"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[SpecimenDate]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[SpecimenDate]"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[SpecimenDate]"
+                      name="SpecimenDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseReported Date]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[CaseReported Date]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseReported Date]"
+                      name="CaseReported Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHUCity]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHUCity]"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHUCity]"
+                      name="PHUCity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[TestReported Date]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[TestReported Date]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[TestReported Date]"
+                      name="TestReported Date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseAcquisition info]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[CaseAcquisition info]"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseAcquisition info]"
+                      name="CaseAcquisition info"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[AccurateEpisode Dt]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[AccurateEpisode Dt]"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[AccurateEpisode Dt]"
+                      name="AccurateEpisode Dt"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Address]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHU Address]"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Address]"
+                      name="PHU Address"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Website]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHU Website]"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Website]"
+                      name="PHU Website"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[OutbreakRelated]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[OutbreakRelated]"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[OutbreakRelated]"
+                      name="OutbreakRelated"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Latitude]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHU Latitude]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Latitude]"
+                      name="PHU Latitude"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Longitude]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHU Longitude]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Longitude]"
+                      name="PHU Longitude"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Postal Code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHU Postal Code]"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Postal Code]"
+                      name="PHU Postal Code"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[Outcome]"
+                      dataType="wstr"
+                      length="255"
+                      name="Outcome" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[Age]"
+                      dataType="wstr"
+                      length="255"
+                      name="Age" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="255"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[Reporting PHU]"
+                      dataType="wstr"
+                      length="255"
+                      name="Reporting PHU" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[SpecimenDate]"
+                      dataType="wstr"
+                      length="255"
+                      name="SpecimenDate" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[CaseReported Date]"
+                      dataType="date"
+                      name="CaseReported Date" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHUCity]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHUCity" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[TestReported Date]"
+                      dataType="date"
+                      name="TestReported Date" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[CaseAcquisition info]"
+                      dataType="wstr"
+                      length="255"
+                      name="CaseAcquisition info" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[AccurateEpisode Dt]"
+                      dataType="wstr"
+                      length="255"
+                      name="AccurateEpisode Dt" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHU Address]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHU Address" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHU Website]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHU Website" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[OutbreakRelated]"
+                      dataType="wstr"
+                      length="255"
+                      name="OutbreakRelated" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHU Latitude]"
+                      dataType="r8"
+                      name="PHU Latitude" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHU Longitude]"
+                      dataType="r8"
+                      name="PHU Longitude" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHU Postal Code]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHU Postal Code" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[Outcome]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[Outcome]"
+                      name="Outcome" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[Age]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[Age]"
+                      name="Age" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[Gender]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[Reporting PHU]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[Reporting PHU]"
+                      name="Reporting PHU" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[SpecimenDate]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[SpecimenDate]"
+                      name="SpecimenDate" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[CaseReported Date]"
+                      dataType="date"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[CaseReported Date]"
+                      name="CaseReported Date" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHUCity]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHUCity]"
+                      name="PHUCity" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[TestReported Date]"
+                      dataType="date"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[TestReported Date]"
+                      name="TestReported Date" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[CaseAcquisition info]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[CaseAcquisition info]"
+                      name="CaseAcquisition info" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[AccurateEpisode Dt]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[AccurateEpisode Dt]"
+                      name="AccurateEpisode Dt" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHU Address]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHU Address]"
+                      name="PHU Address" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHU Website]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHU Website]"
+                      name="PHU Website" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[OutbreakRelated]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[OutbreakRelated]"
+                      name="OutbreakRelated" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHU Latitude]"
+                      dataType="r8"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHU Latitude]"
+                      name="PHU Latitude" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHU Longitude]"
+                      dataType="r8"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHU Longitude]"
+                      name="PHU Longitude" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHU Postal Code]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHU Postal Code]"
+                      name="PHU Postal Code" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CasesReport\CasesReportDataClean"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="CasesReportDataClean"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[CasesReportDataClean]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CasesReport\CasesReportDataClean.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.CleanData]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.CleanData]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[Outcome]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Outcome"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Outcome]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Outcome]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[Age]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Age"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Age]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Age]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[SpecimenDate]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="SpecimenDate"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[SpecimenDate]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[SpecimenDate]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[PHUCity]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHUCity"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHUCity]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHUCity]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[Reporting PHU]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Reporting PHU"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[ReportingPHU]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Reporting PHU]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[CaseReported Date]"
+                      cachedDataType="date"
+                      cachedName="CaseReported Date"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[CaseReportedDate]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseReported Date]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[TestReported Date]"
+                      cachedDataType="date"
+                      cachedName="TestReported Date"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[TestReportedDate]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[TestReported Date]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[CaseAcquisition info]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CaseAcquisition info"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[CaseAcquisitionInfo]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseAcquisition info]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[AccurateEpisode Dt]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="AccurateEpisode Dt"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[AccurateEpisodeDate]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[AccurateEpisode Dt]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[PHU Address]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHU Address"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHUAddress]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Address]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[PHU Website]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHU Website"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHUWebsite]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Website]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[OutbreakRelated]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="OutbreakRelated"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[OutbreakRelated]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[OutbreakRelated]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[PHU Latitude]"
+                      cachedDataType="r8"
+                      cachedName="PHU Latitude"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHULatitude]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Latitude]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[PHU Longitude]"
+                      cachedDataType="r8"
+                      cachedName="PHU Longitude"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHULongitude]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Longitude]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[PHU Postal Code]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHU Postal Code"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHUPostalCode]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Postal Code]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Outcome]"
+                      dataType="wstr"
+                      length="255"
+                      name="Outcome" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Age]"
+                      dataType="wstr"
+                      length="255"
+                      name="Age" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="255"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[ReportingPHU]"
+                      dataType="wstr"
+                      length="255"
+                      name="ReportingPHU" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[SpecimenDate]"
+                      dataType="dbDate"
+                      name="SpecimenDate" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[CaseReportedDate]"
+                      dataType="dbDate"
+                      name="CaseReportedDate" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHUCity]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHUCity" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[TestReportedDate]"
+                      dataType="dbDate"
+                      name="TestReportedDate" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[CaseAcquisitionInfo]"
+                      dataType="wstr"
+                      length="255"
+                      name="CaseAcquisitionInfo" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[AccurateEpisodeDate]"
+                      dataType="dbDate"
+                      name="AccurateEpisodeDate" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHUAddress]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHUAddress" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHUWebsite]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHUWebsite" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[OutbreakRelated]"
+                      dataType="wstr"
+                      length="255"
+                      name="OutbreakRelated" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHULatitude]"
+                      dataType="r8"
+                      name="PHULatitude" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHULongitude]"
+                      dataType="r8"
+                      name="PHULongitude" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHUPostalCode]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHUPostalCode" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CasesReport\CasesReportDataClean.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CasesReport\CasesReportDataClean.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CasesReport\CasesReportDataClean.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CasesReport\CasesReportDataNull"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="CasesReportDataNull"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[CasesReportDataNull]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\CasesReport\CasesReportDataNull.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.CleanData]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.CleanData]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[Outcome]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Outcome"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Outcome]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Outcome]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[Age]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Age"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Age]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Age]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[SpecimenDate]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="SpecimenDate"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[SpecimenDate]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[SpecimenDate]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[PHUCity]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHUCity"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHUCity]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHUCity]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[OutbreakRelated]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="OutbreakRelated"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[OutbreakRelated]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[OutbreakRelated]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[Reporting PHU]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Reporting PHU"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[ReportingPHU]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Reporting PHU]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[CaseReported Date]"
+                      cachedDataType="date"
+                      cachedName="CaseReported Date"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[CaseReportedDate]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseReported Date]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[TestReported Date]"
+                      cachedDataType="date"
+                      cachedName="TestReported Date"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[TestReportedDate]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[TestReported Date]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[CaseAcquisition info]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CaseAcquisition info"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[CaseAcquisitionInfo]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseAcquisition info]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[AccurateEpisode Dt]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="AccurateEpisode Dt"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[AccurateEpisodeDate]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[AccurateEpisode Dt]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[PHU Address]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHU Address"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHUAddress]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Address]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[PHU Website]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHU Website"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHUWebsite]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Website]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[PHU Postal Code]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHU Postal Code"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHULatitude]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Postal Code]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[PHU Latitude]"
+                      cachedDataType="r8"
+                      cachedName="PHU Latitude"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHULongitude]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Latitude]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[PHU Longitude]"
+                      cachedDataType="r8"
+                      cachedName="PHU Longitude"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHUPostalCode]"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Longitude]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Outcome]"
+                      dataType="wstr"
+                      length="255"
+                      name="Outcome" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Age]"
+                      dataType="wstr"
+                      length="255"
+                      name="Age" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="255"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[ReportingPHU]"
+                      dataType="wstr"
+                      length="255"
+                      name="ReportingPHU" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[SpecimenDate]"
+                      dataType="dbDate"
+                      name="SpecimenDate" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[CaseReportedDate]"
+                      dataType="dbDate"
+                      name="CaseReportedDate" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHUCity]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHUCity" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[TestReportedDate]"
+                      dataType="dbDate"
+                      name="TestReportedDate" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[CaseAcquisitionInfo]"
+                      dataType="wstr"
+                      length="255"
+                      name="CaseAcquisitionInfo" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[AccurateEpisodeDate]"
+                      dataType="dbDate"
+                      name="AccurateEpisodeDate" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHUAddress]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHUAddress" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHUWebsite]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHUWebsite" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[OutbreakRelated]"
+                      dataType="wstr"
+                      length="255"
+                      name="OutbreakRelated" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHULatitude]"
+                      dataType="r8"
+                      name="PHULatitude" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHULongitude]"
+                      dataType="r8"
+                      name="PHULongitude" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHUPostalCode]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHUPostalCode" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CasesReport\CasesReportDataNull.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CasesReport\CasesReportDataNull.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CasesReport\CasesReportDataNull.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CasesReport\CasesReportDataNull.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\CasesReport\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[Outcome]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Outcome"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Outcome]" />
+                    <inputColumn
+                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[Age]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Age"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Age]" />
+                    <inputColumn
+                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Gender"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[Reporting PHU]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Reporting PHU"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Reporting PHU]" />
+                    <inputColumn
+                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[SpecimenDate]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="SpecimenDate"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[SpecimenDate]" />
+                    <inputColumn
+                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[CaseReported Date]"
+                      cachedDataType="date"
+                      cachedName="CaseReported Date"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseReported Date]" />
+                    <inputColumn
+                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[PHUCity]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHUCity"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHUCity]" />
+                    <inputColumn
+                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[TestReported Date]"
+                      cachedDataType="date"
+                      cachedName="TestReported Date"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[TestReported Date]" />
+                    <inputColumn
+                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[CaseAcquisition info]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="CaseAcquisition info"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseAcquisition info]" />
+                    <inputColumn
+                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[AccurateEpisode Dt]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="AccurateEpisode Dt"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[AccurateEpisode Dt]" />
+                    <inputColumn
+                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[PHU Address]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHU Address"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Address]" />
+                    <inputColumn
+                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[PHU Website]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHU Website"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Website]" />
+                    <inputColumn
+                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[OutbreakRelated]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="OutbreakRelated"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[OutbreakRelated]" />
+                    <inputColumn
+                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[PHU Latitude]"
+                      cachedDataType="r8"
+                      cachedName="PHU Latitude"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Latitude]" />
+                    <inputColumn
+                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[PHU Longitude]"
+                      cachedDataType="r8"
+                      cachedName="PHU Longitude"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Longitude]" />
+                    <inputColumn
+                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[PHU Postal Code]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHU Postal Code"
+                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Postal Code]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CasesReport\Conditional Split.Outputs[DataNull]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="DataNull"
+                  synchronousInputId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Outcome]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Age]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Gender]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Reporting PHU]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[SpecimenDate]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseReported Date]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHUCity]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[TestReported Date]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseAcquisition info]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[AccurateEpisode Dt]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Address]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Website]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[OutbreakRelated]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Latitude]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Longitude]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Postal Code]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(Outcome) || ISNULL(Age) || ISNULL(Gender) || ISNULL([Reporting PHU]) || ISNULL(SpecimenDate) || ISNULL([CaseReported Date]) || ISNULL(PHUCity) || ISNULL([TestReported Date]) || ISNULL([CaseAcquisition info]) || ISNULL([AccurateEpisode Dt]) || ISNULL([PHU Address]) || ISNULL([PHU Website]) || ISNULL(OutbreakRelated) || ISNULL([PHU Latitude]) || ISNULL([PHU Longitude]) || ISNULL([PHU Postal Code])</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CasesReport\Conditional Split.Outputs[DataNotNull]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="DataNotNull"
+                  synchronousInputId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CasesReport\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CasesReport\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CasesReport\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CasesReport\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CasesReport\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\CasesReport.Paths[DataNotNull]"
+              endId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input]"
+              name="DataNotNull"
+              startId="Package\CasesReport\Conditional Split.Outputs[DataNotNull]" />
+            <path
+              refId="Package\CasesReport.Paths[DataNull]"
+              endId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input]"
+              name="DataNull"
+              startId="Package\CasesReport\Conditional Split.Outputs[DataNull]" />
+            <path
+              refId="Package\CasesReport.Paths[Excel Source Output]"
+              endId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input]"
+              name="Excel Source Output"
+              startId="Package\CasesReport\CasesReport.Outputs[Excel Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\CompiledCOVID19CaseDetails"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{074a8f04-9a9f-43dc-9786-af0a47227fff}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="CompiledCOVID19CaseDetails"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\OngoingOutbreaksPhu"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{ea7b02a5-d5d6-4d8a-800b-467ab94dc5e7}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="OngoingOutbreaksPhu"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\PublicHealthUnit"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{f790a679-66b5-40a3-b4f3-38c3b4b9712c}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PublicHealthUnit"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\PublicHealthUnitsGROUP"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{40dbfabd-48fc-4420-9ca2-b37c0f4afcaa}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="PublicHealthUnitsGROUP"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\VaccinesByAgePhu"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{31bbc92b-c423-4ebf-8027-300702878735}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="VaccinesByAgePhu"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="138,42.6666666666667"
+          Id="Package\CasesReport"
+          TopLeft="120.930554074753,38.3000020688772" />
+        <NodeLayout
+          Size="220,42.6666666666667"
+          Id="Package\CompiledCOVID19CaseDetails"
+          TopLeft="79.9305540747527,140.966668735544" />
+        <NodeLayout
+          Size="185.333333333334,42.6666666666667"
+          Id="Package\OngoingOutbreaksPhu"
+          TopLeft="97.263887408086,243.633335402211" />
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\PublicHealthUnit"
+          TopLeft="366.791661330188,38.3000020688772" />
+        <NodeLayout
+          Size="196,42.6666666666667"
+          Id="Package\PublicHealthUnitsGROUP"
+          TopLeft="346.791661330188,140.966668735544" />
+        <NodeLayout
+          Size="168,42.6666666666667"
+          Id="Package\VaccinesByAgePhu"
+          TopLeft="360.791661330188,243.633335402211" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\CasesReport">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="138,42.6666666666667"
+          Id="Package\CasesReport\CasesReport"
+          TopLeft="329.499995157123,11.5374997936934" />
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\CasesReport\Conditional Split"
+          TopLeft="320.499995157123,112.287497992143" />
+        <EdgeLayout
+          Id="Package\CasesReport.Paths[Excel Source Output]"
+          TopLeft="398.499995157123,54.2041664603601">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58.083331531783"
+              Start="0,0"
+              End="0,50.583331531783">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.583331531783" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="178.666666666667,42.6666666666667"
+          Id="Package\CasesReport\CasesReportDataNull"
+          TopLeft="138.281247939449,190.1249966003" />
+        <NodeLayout
+          Size="186.666666666667,42.6666666666667"
+          Id="Package\CasesReport\CasesReportDataClean"
+          TopLeft="493.749992642552,185.249996687472" />
+        <EdgeLayout
+          Id="Package\CasesReport.Paths[DataNull]"
+          TopLeft="398.499995157123,154.95416465881">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-170.88541388434,35.1708319414905"
+              Start="0,0"
+              End="-170.88541388434,27.6708319414905">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.5854159707452" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.5854159707452"
+                    Point2="0,17.5854159707452"
+                    Point3="-4,17.5854159707452" />
+                  <mssgle:LineSegment
+                    End="-166.88541388434,17.5854159707452" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-166.88541388434,17.5854159707452"
+                    Point2="-170.88541388434,17.5854159707452"
+                    Point3="-170.88541388434,21.5854159707452" />
+                  <mssgle:LineSegment
+                    End="-170.88541388434,27.6708319414905" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-104.45483584842,22.5854159707452,38.0242578125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CasesReport.Paths[DataNotNull]"
+          TopLeft="423.166661823789,154.95416465881">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="163.916664152096,30.2958320286622"
+              Start="0,0"
+              End="163.916664152096,22.7958320286622">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,8.30287595072578" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,8.30287595072578"
+                    Point2="0,12.3028759507258"
+                    Point3="4,12.3028759507258" />
+                  <mssgle:LineSegment
+                    End="159.916664152096,12.3028759507258" />
+                  <mssgle:CubicBezierSegment
+                    Point1="159.916664152096,12.3028759507258"
+                    Point2="163.916664152096,12.3028759507258"
+                    Point3="163.916664152096,16.3028759507258" />
+                  <mssgle:LineSegment
+                    End="163.916664152096,22.7958320286622" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="55.2262031697978,17.3028759507258,53.4642578125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\CasesReport\CasesReport">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CasesReport\CasesReportDataNull">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CasesReport\CasesReportDataClean">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
