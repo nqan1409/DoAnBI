@@ -37,6 +37,7 @@ CREATE TABLE [dbo].[DataSource](
 CREATE TABLE [dbo].[AgeGroup](
 	[ID_AgeGroupSK] [int] NOT NULL,
 	[Age_Group] [nvarchar](255) NULL,
+	[ID_DataSource] [int] NULL,
 	[CreateDate] [datetime] NULL,
 	[UpdateDate] [datetime] NULL
 ) ON [PRIMARY];
@@ -53,6 +54,7 @@ CREATE TABLE [dbo].[PHU_Group](
 	[ID_GROUPSK] [int] IDENTITY(1,1) NOT NULL,
 	[PHU_Group] [nvarchar](255) NULL,
 	[PHU_City] [nvarchar](255) NULL,
+	[PHU_region] [nvarchar](255) NULL,
 	[CreateDate] [datetime] NULL,
 	[UpdateDate] [datetime] NULL
 ) ON [PRIMARY];
@@ -86,10 +88,10 @@ CREATE TABLE [dbo].[VaccineByAge](
 	[IDPHU_SK] [int] NULL,
 	[Date] [date] NULL,
 	[ID_AgeGroupSK] [int] NULL,
-	[At least one dose_cumulative ] [int] NULL,
-	[Second_dose_cumulative ] [int] NULL,
+	[At_least_one_dose_cumulative] [int] NULL,
+	[Second_dose_cumulative] [int] NULL,
 	[Fully_vaccinated_cumulative] [int] NULL,
-	[Third_dose_cumulative ] [int] NULL,
+	[Third_dose_cumulative] [int] NULL,
 	[CreateDate] [datetime] NULL,
 	[UpdateDate] [datetime] NULL
 ) ON [PRIMARY];
@@ -206,6 +208,13 @@ ALTER TABLE [dbo].[VaccineByAge] ADD
     ) REFERENCES [dbo].[AgeGroup] ([ID_AgeGroupSK]);
 GO
 
+ALTER TABLE [dbo].[AgeGroup] ADD 
+    CONSTRAINT [FK_AgeGroup_DataSource] FOREIGN KEY
+    (
+        [ID_DataSource]
+    ) REFERENCES [dbo].[DataSource] ([ID_DataSource]);
+GO
+
 ALTER TABLE [dbo].[ReportedCases] ADD 
     CONSTRAINT [FK_ReportedCases_PublicHealthUnit] FOREIGN KEY 
     (
@@ -221,4 +230,14 @@ ALTER TABLE [dbo].[ReportedCases] ADD
 	(
 		[ID_DataSource]
 	) REFERENCES [dbo].[DataSource] ([ID_DataSource]);
+GO
+
+INSERT INTO [dbo].[DataSource] ([DataSourceName], [CreatDate], [UpdateDate])
+VALUES 
+  (N'CasesReport', '20010822 00:00:00.000', '20010822 00:00:00.000')
+GO
+
+INSERT INTO [dbo].[DataSource] ([DataSourceName], [CreatDate], [UpdateDate])
+VALUES 
+  (N'CompiledCOVID19CaseDetails', '20010822 00:00:00.000', '20010822 00:00:00.000')
 GO
