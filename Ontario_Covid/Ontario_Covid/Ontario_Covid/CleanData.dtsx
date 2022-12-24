@@ -11,21 +11,33 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="11"
-  DTS:VersionGUID="{8D0B501B-F569-458A-8FED-F3691B79C553}">
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{F77EA9F5-32E6-4F72-A30B-8C0A8509E081}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[LocalHost.CleanData]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{B66FFC6F-B5CE-48CC-800C-15870B7706F5}"
+      DTS:DTSID="{7EB67F84-A7F5-464D-959A-D1960A9A826C}"
       DTS:ObjectName="LocalHost.CleanData">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=.;Initial Catalog=CleanData;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{B66FFC6F-B5CE-48CC-800C-15870B7706F5}LocalHost.CleanData;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=.;Initial Catalog=CleanData;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{7EB67F84-A7F5-464D-959A-D1960A9A826C}LocalHost.CleanData;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.METADATA]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{12CDA638-6099-4776-A068-CA368EBE914E}"
+      DTS:ObjectName="LocalHost.METADATA">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=METADATA;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{12CDA638-6099-4776-A068-CA368EBE914E}LocalHost.METADATA;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -57,6 +69,101 @@
         <pipeline
           version="1">
           <components>
+            <component
+              refId="Package\CasesReport\Add CreateDate, UpdateDate"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Add CreateDate, UpdateDate"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\CasesReport\Add CreateDate, UpdateDate.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CasesReport\Add CreateDate, UpdateDate.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\CasesReport\Add CreateDate, UpdateDate.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CasesReport\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CasesReport\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[CreatDate]"
+                      name="CreatDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CasesReport\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CasesReport\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[UpdateDate]"
+                      name="UpdateDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CasesReport\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\CasesReport\Add CreateDate, UpdateDate.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CasesReport\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CasesReport\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CasesReport\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CasesReport\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
             <component
               refId="Package\CasesReport\CasesReport"
               componentClassID="Microsoft.OLEDBSource"
@@ -641,6 +748,18 @@
                       cachedName="PHU_Postal_Code"
                       externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHUPostalCode]"
                       lineageId="Package\CasesReport\CasesReport.Outputs[OLE DB Source Output].Columns[PHU_Postal_Code]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[CreatDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreatDate"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[CreatDate]"
+                      lineageId="Package\CasesReport\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[CreatDate]" />
+                    <inputColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[UpdateDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="UpdateDate"
+                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[UpdateDate]"
+                      lineageId="Package\CasesReport\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[UpdateDate]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -718,6 +837,14 @@
                       dataType="wstr"
                       length="255"
                       name="PHUPostalCode" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatDate" />
+                    <externalMetadataColumn
+                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      name="UpdateDate" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1201,7 +1328,7 @@
           <paths>
             <path
               refId="Package\CasesReport.Paths[DataNotNull]"
-              endId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input]"
+              endId="Package\CasesReport\Add CreateDate, UpdateDate.Inputs[Derived Column Input]"
               name="DataNotNull"
               startId="Package\CasesReport\Conditional Split.Outputs[DataNotNull]" />
             <path
@@ -1209,6 +1336,11 @@
               endId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input]"
               name="DataNull"
               startId="Package\CasesReport\Conditional Split.Outputs[DataNull]" />
+            <path
+              refId="Package\CasesReport.Paths[Derived Column Output]"
+              endId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\CasesReport\Add CreateDate, UpdateDate.Outputs[Derived Column Output]" />
             <path
               refId="Package\CasesReport.Paths[OLE DB Source Output]"
               endId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input]"
@@ -1232,6 +1364,101 @@
         <pipeline
           version="1">
           <components>
+            <component
+              refId="Package\CompiledCOVID19CaseDetails\Add CreateDate, UpdateDate"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Add CreateDate, UpdateDate"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\CompiledCOVID19CaseDetails\Add CreateDate, UpdateDate.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\CompiledCOVID19CaseDetails\Add CreateDate, UpdateDate.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\CompiledCOVID19CaseDetails\Add CreateDate, UpdateDate.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CompiledCOVID19CaseDetails\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CompiledCOVID19CaseDetails\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[CreatDate]"
+                      name="CreatDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\CompiledCOVID19CaseDetails\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\CompiledCOVID19CaseDetails\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[UpdateDate]"
+                      name="UpdateDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\CompiledCOVID19CaseDetails\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\CompiledCOVID19CaseDetails\Add CreateDate, UpdateDate.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\CompiledCOVID19CaseDetails\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\CompiledCOVID19CaseDetails\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\CompiledCOVID19CaseDetails\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\CompiledCOVID19CaseDetails\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
             <component
               refId="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetails"
               componentClassID="Microsoft.OLEDBSource"
@@ -1636,6 +1863,18 @@
                       cachedName="province"
                       externalMetadataColumnId="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetailsDataClean.Inputs[OLE DB Destination Input].ExternalColumns[province]"
                       lineageId="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetails.Outputs[OLE DB Source Output].Columns[province]" />
+                    <inputColumn
+                      refId="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetailsDataClean.Inputs[OLE DB Destination Input].Columns[CreatDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreatDate"
+                      externalMetadataColumnId="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetailsDataClean.Inputs[OLE DB Destination Input].ExternalColumns[CreatDate]"
+                      lineageId="Package\CompiledCOVID19CaseDetails\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[CreatDate]" />
+                    <inputColumn
+                      refId="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetailsDataClean.Inputs[OLE DB Destination Input].Columns[UpdateDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="UpdateDate"
+                      externalMetadataColumnId="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetailsDataClean.Inputs[OLE DB Destination Input].ExternalColumns[UpdateDate]"
+                      lineageId="Package\CompiledCOVID19CaseDetails\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[UpdateDate]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1682,6 +1921,14 @@
                       dataType="wstr"
                       length="255"
                       name="province" />
+                    <externalMetadataColumn
+                      refId="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetailsDataClean.Inputs[OLE DB Destination Input].ExternalColumns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatDate" />
+                    <externalMetadataColumn
+                      refId="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetailsDataClean.Inputs[OLE DB Destination Input].ExternalColumns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      name="UpdateDate" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -2057,7 +2304,7 @@
           <paths>
             <path
               refId="Package\CompiledCOVID19CaseDetails.Paths[DataNotNull]"
-              endId="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetailsDataClean.Inputs[OLE DB Destination Input]"
+              endId="Package\CompiledCOVID19CaseDetails\Add CreateDate, UpdateDate.Inputs[Derived Column Input]"
               name="DataNotNull"
               startId="Package\CompiledCOVID19CaseDetails\Conditional Split.Outputs[DataNotNull]" />
             <path
@@ -2065,6 +2312,11 @@
               endId="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetailsDataNull.Inputs[OLE DB Destination Input]"
               name="DataNull"
               startId="Package\CompiledCOVID19CaseDetails\Conditional Split.Outputs[DataNull]" />
+            <path
+              refId="Package\CompiledCOVID19CaseDetails.Paths[Derived Column Output]"
+              endId="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetailsDataClean.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\CompiledCOVID19CaseDetails\Add CreateDate, UpdateDate.Outputs[Derived Column Output]" />
             <path
               refId="Package\CompiledCOVID19CaseDetails.Paths[OLE DB Source Output]"
               endId="Package\CompiledCOVID19CaseDetails\Conditional Split.Inputs[Conditional Split Input]"
@@ -2088,6 +2340,101 @@
         <pipeline
           version="1">
           <components>
+            <component
+              refId="Package\OngoingOutbreaksPhu\Add CreateDate, UpdateDate"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Add CreateDate, UpdateDate"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\OngoingOutbreaksPhu\Add CreateDate, UpdateDate.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\OngoingOutbreaksPhu\Add CreateDate, UpdateDate.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\OngoingOutbreaksPhu\Add CreateDate, UpdateDate.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\OngoingOutbreaksPhu\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\OngoingOutbreaksPhu\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[CreatDate]"
+                      name="CreatDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\OngoingOutbreaksPhu\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\OngoingOutbreaksPhu\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[UpdateDate]"
+                      name="UpdateDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\OngoingOutbreaksPhu\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\OngoingOutbreaksPhu\Add CreateDate, UpdateDate.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\OngoingOutbreaksPhu\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\OngoingOutbreaksPhu\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\OngoingOutbreaksPhu\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\OngoingOutbreaksPhu\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
             <component
               refId="Package\OngoingOutbreaksPhu\Conditional Split"
               componentClassID="Microsoft.ConditionalSplit"
@@ -2453,6 +2800,18 @@
                       cachedName="number_ongoing_outbreaks"
                       externalMetadataColumnId="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhuDataClean.Inputs[OLE DB Destination Input].ExternalColumns[number_ongoing_outbreaks]"
                       lineageId="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhu.Outputs[OLE DB Source Output].Columns[number_ongoing_outbreaks]" />
+                    <inputColumn
+                      refId="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhuDataClean.Inputs[OLE DB Destination Input].Columns[CreatDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreatDate"
+                      externalMetadataColumnId="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhuDataClean.Inputs[OLE DB Destination Input].ExternalColumns[CreatDate]"
+                      lineageId="Package\OngoingOutbreaksPhu\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[CreatDate]" />
+                    <inputColumn
+                      refId="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhuDataClean.Inputs[OLE DB Destination Input].Columns[UpdateDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="UpdateDate"
+                      externalMetadataColumnId="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhuDataClean.Inputs[OLE DB Destination Input].ExternalColumns[UpdateDate]"
+                      lineageId="Package\OngoingOutbreaksPhu\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[UpdateDate]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -2473,6 +2832,14 @@
                       refId="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhuDataClean.Inputs[OLE DB Destination Input].ExternalColumns[number_ongoing_outbreaks]"
                       dataType="i4"
                       name="number_ongoing_outbreaks" />
+                    <externalMetadataColumn
+                      refId="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhuDataClean.Inputs[OLE DB Destination Input].ExternalColumns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatDate" />
+                    <externalMetadataColumn
+                      refId="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhuDataClean.Inputs[OLE DB Destination Input].ExternalColumns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      name="UpdateDate" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -2650,7 +3017,7 @@
           <paths>
             <path
               refId="Package\OngoingOutbreaksPhu.Paths[DataNotNull]"
-              endId="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhuDataClean.Inputs[OLE DB Destination Input]"
+              endId="Package\OngoingOutbreaksPhu\Add CreateDate, UpdateDate.Inputs[Derived Column Input]"
               name="DataNotNull"
               startId="Package\OngoingOutbreaksPhu\Conditional Split.Outputs[DataNotNull]" />
             <path
@@ -2658,6 +3025,11 @@
               endId="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhuDataNull.Inputs[OLE DB Destination Input]"
               name="DataNull"
               startId="Package\OngoingOutbreaksPhu\Conditional Split.Outputs[DataNull]" />
+            <path
+              refId="Package\OngoingOutbreaksPhu.Paths[Derived Column Output]"
+              endId="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhuDataClean.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\OngoingOutbreaksPhu\Add CreateDate, UpdateDate.Outputs[Derived Column Output]" />
             <path
               refId="Package\OngoingOutbreaksPhu.Paths[OLE DB Source Output]"
               endId="Package\OngoingOutbreaksPhu\Conditional Split.Inputs[Conditional Split Input]"
@@ -2681,6 +3053,101 @@
         <pipeline
           version="1">
           <components>
+            <component
+              refId="Package\PublicHealthUnit\Add CreateDate, UpdateDate"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Add CreateDate, UpdateDate"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\PublicHealthUnit\Add CreateDate, UpdateDate.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\PublicHealthUnit\Add CreateDate, UpdateDate.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\PublicHealthUnit\Add CreateDate, UpdateDate.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PublicHealthUnit\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\PublicHealthUnit\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[CreatDate]"
+                      name="CreatDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\PublicHealthUnit\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\PublicHealthUnit\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[UpdateDate]"
+                      name="UpdateDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\PublicHealthUnit\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\PublicHealthUnit\Add CreateDate, UpdateDate.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PublicHealthUnit\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\PublicHealthUnit\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnit\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\PublicHealthUnit\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
             <component
               refId="Package\PublicHealthUnit\Conditional Split"
               componentClassID="Microsoft.ConditionalSplit"
@@ -3182,6 +3649,18 @@
                       cachedName="Reporting_PHU_Longitude"
                       externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Longitude]"
                       lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Longitude]" />
+                    <inputColumn
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].Columns[CreatDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreatDate"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[CreatDate]"
+                      lineageId="Package\PublicHealthUnit\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[CreatDate]" />
+                    <inputColumn
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].Columns[UpdateDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="UpdateDate"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[UpdateDate]"
+                      lineageId="Package\PublicHealthUnit\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[UpdateDate]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -3222,6 +3701,14 @@
                       refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Longitude]"
                       dataType="r8"
                       name="Reporting_PHU_Longitude" />
+                    <externalMetadataColumn
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatDate" />
+                    <externalMetadataColumn
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      name="UpdateDate" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -3447,7 +3934,7 @@
           <paths>
             <path
               refId="Package\PublicHealthUnit.Paths[DataNotNull]"
-              endId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input]"
+              endId="Package\PublicHealthUnit\Add CreateDate, UpdateDate.Inputs[Derived Column Input]"
               name="DataNotNull"
               startId="Package\PublicHealthUnit\Conditional Split.Outputs[DataNotNull]" />
             <path
@@ -3455,6 +3942,11 @@
               endId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input]"
               name="DataNull"
               startId="Package\PublicHealthUnit\Conditional Split.Outputs[DataNull]" />
+            <path
+              refId="Package\PublicHealthUnit.Paths[Derived Column Output]"
+              endId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\PublicHealthUnit\Add CreateDate, UpdateDate.Outputs[Derived Column Output]" />
             <path
               refId="Package\PublicHealthUnit.Paths[OLE DB Source Output]"
               endId="Package\PublicHealthUnit\Conditional Split.Inputs[Conditional Split Input]"
@@ -3478,6 +3970,101 @@
         <pipeline
           version="1">
           <components>
+            <component
+              refId="Package\PublicHealthUnitsGROUP\Add CreateDate, UpdateDate"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Add CreateDate, UpdateDate"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\PublicHealthUnitsGROUP\Add CreateDate, UpdateDate.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\PublicHealthUnitsGROUP\Add CreateDate, UpdateDate.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\PublicHealthUnitsGROUP\Add CreateDate, UpdateDate.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PublicHealthUnitsGROUP\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\PublicHealthUnitsGROUP\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[CreatDate]"
+                      name="CreatDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\PublicHealthUnitsGROUP\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\PublicHealthUnitsGROUP\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[UpdateDate]"
+                      name="UpdateDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\PublicHealthUnitsGROUP\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\PublicHealthUnitsGROUP\Add CreateDate, UpdateDate.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PublicHealthUnitsGROUP\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\PublicHealthUnitsGROUP\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnitsGROUP\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\PublicHealthUnitsGROUP\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
             <component
               refId="Package\PublicHealthUnitsGROUP\Conditional Split"
               componentClassID="Microsoft.ConditionalSplit"
@@ -3824,6 +4411,18 @@
                       cachedName="PHU_region"
                       externalMetadataColumnId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHU_region]"
                       lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[PHU_region]" />
+                    <inputColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input].Columns[CreatDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreatDate"
+                      externalMetadataColumnId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input].ExternalColumns[CreatDate]"
+                      lineageId="Package\PublicHealthUnitsGROUP\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[CreatDate]" />
+                    <inputColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input].Columns[UpdateDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="UpdateDate"
+                      externalMetadataColumnId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input].ExternalColumns[UpdateDate]"
+                      lineageId="Package\PublicHealthUnitsGROUP\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[UpdateDate]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -3842,6 +4441,14 @@
                       dataType="wstr"
                       length="255"
                       name="PHU_region" />
+                    <externalMetadataColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input].ExternalColumns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatDate" />
+                    <externalMetadataColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input].ExternalColumns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      name="UpdateDate" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -4013,7 +4620,7 @@
           <paths>
             <path
               refId="Package\PublicHealthUnitsGROUP.Paths[DataNotNull]"
-              endId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input]"
+              endId="Package\PublicHealthUnitsGROUP\Add CreateDate, UpdateDate.Inputs[Derived Column Input]"
               name="DataNotNull"
               startId="Package\PublicHealthUnitsGROUP\Conditional Split.Outputs[DataNotNull]" />
             <path
@@ -4021,6 +4628,11 @@
               endId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull.Inputs[OLE DB Destination Input]"
               name="DataNull"
               startId="Package\PublicHealthUnitsGROUP\Conditional Split.Outputs[DataNull]" />
+            <path
+              refId="Package\PublicHealthUnitsGROUP.Paths[Derived Column Output]"
+              endId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\PublicHealthUnitsGROUP\Add CreateDate, UpdateDate.Outputs[Derived Column Output]" />
             <path
               refId="Package\PublicHealthUnitsGROUP.Paths[OLE DB Source Output]"
               endId="Package\PublicHealthUnitsGROUP\Conditional Split.Inputs[Conditional Split Input]"
@@ -4044,6 +4656,101 @@
         <pipeline
           version="1">
           <components>
+            <component
+              refId="Package\VaccinesByAgePhu\Add CreateDate, UpdateDate"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Add CreateDate, UpdateDate"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\VaccinesByAgePhu\Add CreateDate, UpdateDate.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\VaccinesByAgePhu\Add CreateDate, UpdateDate.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\VaccinesByAgePhu\Add CreateDate, UpdateDate.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\VaccinesByAgePhu\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\VaccinesByAgePhu\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[CreatDate]"
+                      name="CreatDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\VaccinesByAgePhu\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\VaccinesByAgePhu\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[UpdateDate]"
+                      name="UpdateDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\VaccinesByAgePhu\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\VaccinesByAgePhu\Add CreateDate, UpdateDate.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\VaccinesByAgePhu\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\VaccinesByAgePhu\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\VaccinesByAgePhu\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\VaccinesByAgePhu\Add CreateDate, UpdateDate.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
             <component
               refId="Package\VaccinesByAgePhu\Conditional Split"
               componentClassID="Microsoft.ConditionalSplit"
@@ -4476,6 +5183,18 @@
                       cachedName="third_dose_cumulative"
                       externalMetadataColumnId="Package\VaccinesByAgePhu\VaccinesByAgePhuDataClean.Inputs[OLE DB Destination Input].ExternalColumns[third_dose_cumulative]"
                       lineageId="Package\VaccinesByAgePhu\VaccinesByAgePhu.Outputs[OLE DB Source Output].Columns[third_dose_cumulative]" />
+                    <inputColumn
+                      refId="Package\VaccinesByAgePhu\VaccinesByAgePhuDataClean.Inputs[OLE DB Destination Input].Columns[CreatDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="CreatDate"
+                      externalMetadataColumnId="Package\VaccinesByAgePhu\VaccinesByAgePhuDataClean.Inputs[OLE DB Destination Input].ExternalColumns[CreatDate]"
+                      lineageId="Package\VaccinesByAgePhu\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[CreatDate]" />
+                    <inputColumn
+                      refId="Package\VaccinesByAgePhu\VaccinesByAgePhuDataClean.Inputs[OLE DB Destination Input].Columns[UpdateDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="UpdateDate"
+                      externalMetadataColumnId="Package\VaccinesByAgePhu\VaccinesByAgePhuDataClean.Inputs[OLE DB Destination Input].ExternalColumns[UpdateDate]"
+                      lineageId="Package\VaccinesByAgePhu\Add CreateDate, UpdateDate.Outputs[Derived Column Output].Columns[UpdateDate]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -4508,6 +5227,14 @@
                       refId="Package\VaccinesByAgePhu\VaccinesByAgePhuDataClean.Inputs[OLE DB Destination Input].ExternalColumns[third_dose_cumulative]"
                       dataType="i4"
                       name="third_dose_cumulative" />
+                    <externalMetadataColumn
+                      refId="Package\VaccinesByAgePhu\VaccinesByAgePhuDataClean.Inputs[OLE DB Destination Input].ExternalColumns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatDate" />
+                    <externalMetadataColumn
+                      refId="Package\VaccinesByAgePhu\VaccinesByAgePhuDataClean.Inputs[OLE DB Destination Input].ExternalColumns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      name="UpdateDate" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -4715,7 +5442,7 @@
           <paths>
             <path
               refId="Package\VaccinesByAgePhu.Paths[DataNotNull]"
-              endId="Package\VaccinesByAgePhu\VaccinesByAgePhuDataClean.Inputs[OLE DB Destination Input]"
+              endId="Package\VaccinesByAgePhu\Add CreateDate, UpdateDate.Inputs[Derived Column Input]"
               name="DataNotNull"
               startId="Package\VaccinesByAgePhu\Conditional Split.Outputs[DataNotNull]" />
             <path
@@ -4723,6 +5450,11 @@
               endId="Package\VaccinesByAgePhu\VaccinesByAgePhuDataNull.Inputs[OLE DB Destination Input]"
               name="DataNull"
               startId="Package\VaccinesByAgePhu\Conditional Split.Outputs[DataNull]" />
+            <path
+              refId="Package\VaccinesByAgePhu.Paths[Derived Column Output]"
+              endId="Package\VaccinesByAgePhu\VaccinesByAgePhuDataClean.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\VaccinesByAgePhu\Add CreateDate, UpdateDate.Outputs[Derived Column Output]" />
             <path
               refId="Package\VaccinesByAgePhu.Paths[OLE DB Source Output]"
               endId="Package\VaccinesByAgePhu\Conditional Split.Inputs[Conditional Split Input]"
@@ -4746,6 +5478,18 @@
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
+          Size="136.8,41.6"
+          Id="Package\CasesReport"
+          TopLeft="135.71546673033,240.97451255918" />
+        <NodeLayout
+          Size="219.2,41.6"
+          Id="Package\CompiledCOVID19CaseDetails"
+          TopLeft="376.505947539152,238.856863226718" />
+        <NodeLayout
+          Size="184,41.6"
+          Id="Package\OngoingOutbreaksPhu"
+          TopLeft="112.11546673033,343.37451255918" />
+        <NodeLayout
           Size="156,42.4"
           Id="Package\PublicHealthUnit"
           TopLeft="126.11546673033,138.57451255918" />
@@ -4754,18 +5498,6 @@
           Id="Package\PublicHealthUnitsGROUP"
           TopLeft="388.105947539152,138.57451255918" />
         <NodeLayout
-          Size="136.8,41.6"
-          Id="Package\CasesReport"
-          TopLeft="135.71546673033,240.97451255918" />
-        <NodeLayout
-          Size="184,41.6"
-          Id="Package\OngoingOutbreaksPhu"
-          TopLeft="112.11546673033,343.37451255918" />
-        <NodeLayout
-          Size="219.2,41.6"
-          Id="Package\CompiledCOVID19CaseDetails"
-          TopLeft="376.505947539152,238.856863226718" />
-        <NodeLayout
           Size="166.4,41.6"
           Id="Package\VaccinesByAgePhu"
           TopLeft="402.905947539152,341.256863226718" />
@@ -4773,10 +5505,559 @@
     </LayoutInfo>
   </Package>
   <TaskHost
+    design-time-name="Package\CasesReport">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="176.8,41.6"
+          Id="Package\CasesReport\CasesReportDataNull"
+          TopLeft="275.230769230769,262.076923076923" />
+        <NodeLayout
+          Size="184.8,41.6"
+          Id="Package\CasesReport\CasesReportDataClean"
+          TopLeft="824.861538461539,343.076923076923" />
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\CasesReport\Conditional Split"
+          TopLeft="554.223076923077,151.846153846154" />
+        <NodeLayout
+          Size="136.8,41.6"
+          Id="Package\CasesReport\CasesReport"
+          TopLeft="563.023076923077,36.5384615384615" />
+        <EdgeLayout
+          Id="Package\CasesReport.Paths[OLE DB Source Output]"
+          TopLeft="631.423076923077,78.1384615384615">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,73.7076923076923"
+              Start="0,0"
+              End="0,66.2076923076923">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,66.2076923076923" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CasesReport.Paths[DataNull]"
+          TopLeft="607.023076923077,193.446153846154">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-243.392307692308,68.6307692307693"
+              Start="0,0"
+              End="-243.392307692308,61.1307692307693">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.8746508875739" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.8746508875739"
+                    Point2="0,27.8746508875739"
+                    Point3="-4,27.8746508875739" />
+                  <mssgle:LineSegment
+                    End="-239.392307692308,27.8746508875739" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-239.392307692308,27.8746508875739"
+                    Point2="-243.392307692308,27.8746508875739"
+                    Point3="-243.392307692308,31.8746508875739" />
+                  <mssgle:LineSegment
+                    End="-243.392307692308,61.1307692307693" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-140.708282752404,32.8746508875739,38.0242578125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="214.4,41.6"
+          Id="Package\CasesReport\Add CreateDate, UpdateDate"
+          TopLeft="810.061538461538,257.8" />
+        <EdgeLayout
+          Id="Package\CasesReport.Paths[DataNotNull]"
+          TopLeft="655.823076923077,193.446153846154">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="261.438461538462,64.353846153846"
+              Start="0,0"
+              End="261.438461538462,56.853846153846">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.1375621301775" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.1375621301775"
+                    Point2="0,26.1375621301775"
+                    Point3="4,26.1375621301775" />
+                  <mssgle:LineSegment
+                    End="257.438461538462,26.1375621301775" />
+                  <mssgle:CubicBezierSegment
+                    Point1="257.438461538462,26.1375621301775"
+                    Point2="261.438461538462,26.1375621301775"
+                    Point3="261.438461538462,30.1375621301775" />
+                  <mssgle:LineSegment
+                    End="261.438461538462,56.853846153846" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="103.987101862981,31.1375621301775,53.4642578125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CasesReport.Paths[Derived Column Output]"
+          TopLeft="917.261538461539,299.4">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.676923076923"
+              Start="0,0"
+              End="0,36.176923076923">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.176923076923" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\CasesReport\CasesReportDataNull">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CasesReport\CasesReportDataClean">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CasesReport\CasesReport">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\CompiledCOVID19CaseDetails">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\CompiledCOVID19CaseDetails\Conditional Split"
+          TopLeft="626.7,177" />
+        <NodeLayout
+          Size="267.2,41.6"
+          Id="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetailsDataClean"
+          TopLeft="778.3,389.5" />
+        <NodeLayout
+          Size="259.2,41.6"
+          Id="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetailsDataNull"
+          TopLeft="357,303.45" />
+        <NodeLayout
+          Size="219.2,41.6"
+          Id="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetails"
+          TopLeft="594.3,60" />
+        <EdgeLayout
+          Id="Package\CompiledCOVID19CaseDetails.Paths[OLE DB Source Output]"
+          TopLeft="703.9,101.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,75.4"
+              Start="0,0"
+              End="0,67.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,67.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CompiledCOVID19CaseDetails.Paths[DataNull]"
+          TopLeft="679.5,218.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-192.9,84.85"
+              Start="0,0"
+              End="-192.9,77.35">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.4621538461538" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.4621538461538"
+                    Point2="0,34.4621538461538"
+                    Point3="-4,34.4621538461538" />
+                  <mssgle:LineSegment
+                    End="-188.9,34.4621538461538" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-188.9,34.4621538461538"
+                    Point2="-192.9,34.4621538461538"
+                    Point3="-192.9,38.4621538461538" />
+                  <mssgle:LineSegment
+                    End="-192.9,77.35" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-115.46212890625,39.4621538461538,38.0242578125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="214.4,41.6"
+          Id="Package\CompiledCOVID19CaseDetails\Add CreateDate, UpdateDate"
+          TopLeft="804.7,303.45" />
+        <EdgeLayout
+          Id="Package\CompiledCOVID19CaseDetails.Paths[DataNotNull]"
+          TopLeft="728.3,218.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="183.6,84.85"
+              Start="0,0"
+              End="183.6,77.35">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.4621538461539" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.4621538461539"
+                    Point2="0,34.4621538461539"
+                    Point3="4,34.4621538461539" />
+                  <mssgle:LineSegment
+                    End="179.6,34.4621538461539" />
+                  <mssgle:CubicBezierSegment
+                    Point1="179.6,34.4621538461539"
+                    Point2="183.6,34.4621538461539"
+                    Point3="183.6,38.4621538461539" />
+                  <mssgle:LineSegment
+                    End="183.6,77.35" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="65.06787109375,39.4621538461539,53.4642578125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\CompiledCOVID19CaseDetails.Paths[Derived Column Output]"
+          TopLeft="911.9,345.05">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.45"
+              Start="0,0"
+              End="0,36.95">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.95" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetailsDataClean">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetailsDataNull">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetails">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\OngoingOutbreaksPhu">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="224,41.6"
+          Id="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhuDataNull"
+          TopLeft="44,307.05" />
+        <NodeLayout
+          Size="184,41.6"
+          Id="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhu"
+          TopLeft="280.1,70" />
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\OngoingOutbreaksPhu\Conditional Split"
+          TopLeft="294.9,177" />
+        <NodeLayout
+          Size="232,41.6"
+          Id="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhuDataClean"
+          TopLeft="444.1,390.5" />
+        <EdgeLayout
+          Id="Package\OngoingOutbreaksPhu.Paths[OLE DB Source Output]"
+          TopLeft="372.1,111.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,65.4"
+              Start="0,0"
+              End="0,57.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\OngoingOutbreaksPhu.Paths[DataNull]"
+          TopLeft="347.7,218.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-191.7,88.45"
+              Start="0,0"
+              End="-191.7,80.95">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.9243076923077" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.9243076923077"
+                    Point2="0,35.9243076923077"
+                    Point3="-4,35.9243076923077" />
+                  <mssgle:LineSegment
+                    End="-187.7,35.9243076923077" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-187.7,35.9243076923077"
+                    Point2="-191.7,35.9243076923077"
+                    Point3="-191.7,39.9243076923077" />
+                  <mssgle:LineSegment
+                    End="-191.7,80.95" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-114.86212890625,40.9243076923077,38.0242578125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="214.4,41.6"
+          Id="Package\OngoingOutbreaksPhu\Add CreateDate, UpdateDate"
+          TopLeft="452.9,307.05" />
+        <EdgeLayout
+          Id="Package\OngoingOutbreaksPhu.Paths[DataNotNull]"
+          TopLeft="396.5,218.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="163.6,88.45"
+              Start="0,0"
+              End="163.6,80.95">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.9243076923077" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.9243076923077"
+                    Point2="0,35.9243076923077"
+                    Point3="4,35.9243076923077" />
+                  <mssgle:LineSegment
+                    End="159.6,35.9243076923077" />
+                  <mssgle:CubicBezierSegment
+                    Point1="159.6,35.9243076923077"
+                    Point2="163.6,35.9243076923077"
+                    Point3="163.6,39.9243076923077" />
+                  <mssgle:LineSegment
+                    End="163.6,80.95" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="55.06787109375,40.9243076923077,53.4642578125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\OngoingOutbreaksPhu.Paths[Derived Column Output]"
+          TopLeft="560.1,348.65">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.8499999999999"
+              Start="0,0"
+              End="0,34.3499999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.3499999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhuDataNull">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhu">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhuDataClean">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
     design-time-name="Package\PublicHealthUnit">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="195.2,41.6"
           Id="Package\PublicHealthUnit\PublicHealthUnitDataNull"
@@ -4784,7 +6065,7 @@
         <NodeLayout
           Size="203.2,41.6"
           Id="Package\PublicHealthUnit\PublicHealthUnitDataClean"
-          TopLeft="760,252.5" />
+          TopLeft="771.575516824889,348.634455129762" />
         <NodeLayout
           Size="154.4,41.6"
           Id="Package\PublicHealthUnit\Conditional Split"
@@ -4851,40 +6132,66 @@
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="214.4,41.6"
+          Id="Package\PublicHealthUnit\Add CreateDate, UpdateDate"
+          TopLeft="765.975516824889,246.890759765071" />
         <EdgeLayout
           Id="Package\PublicHealthUnit.Paths[DataNotNull]"
           TopLeft="652.835714422562,189.511764732694">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="208.764285577439,62.9882352673058"
+              EndConnector="220.339802402327,57.3789950323767"
               Start="0,0"
-              End="208.764285577439,55.4882352673058">
+              End="220.339802402327,49.8789950323767">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,21.5829140162596" />
+                    End="0,19.3046995208422" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,21.5829140162596"
-                    Point2="0,25.5829140162596"
-                    Point3="4,25.5829140162596" />
+                    Point1="0,19.3046995208422"
+                    Point2="0,23.3046995208422"
+                    Point3="4,23.3046995208422" />
                   <mssgle:LineSegment
-                    End="204.764285577439,25.5829140162596" />
+                    End="216.339802402327,23.3046995208422" />
                   <mssgle:CubicBezierSegment
-                    Point1="204.764285577439,25.5829140162596"
-                    Point2="208.764285577439,25.5829140162596"
-                    Point3="208.764285577439,29.5829140162596" />
+                    Point1="216.339802402327,23.3046995208422"
+                    Point2="220.339802402327,23.3046995208422"
+                    Point3="220.339802402327,27.3046995208422" />
                   <mssgle:LineSegment
-                    End="208.764285577439,55.4882352673058" />
+                    End="220.339802402327,49.8789950323767" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="77.6500138824693,30.5829140162596,53.4642578125,9.7490234375"
+              BoundingBox="83.4377722949137,28.3046995208422,53.4642578125,9.7490234375"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\PublicHealthUnit.Paths[Derived Column Output]"
+          TopLeft="873.175516824889,288.490759765071">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.1436953646914"
+              Start="0,0"
+              End="0,52.6436953646914">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.6436953646914" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -4933,11 +6240,11 @@
     design-time-name="Package\PublicHealthUnitsGROUP">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="242.4,41.6"
           Id="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean"
-          TopLeft="614.833333333333,246.166666666667" />
+          TopLeft="634.416666666667,328.166666666667" />
         <NodeLayout
           Size="234.4,41.6"
           Id="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull"
@@ -5008,40 +6315,66 @@
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="214.4,41.6"
+          Id="Package\PublicHealthUnitsGROUP\Add CreateDate, UpdateDate"
+          TopLeft="648.416666666667,240" />
         <EdgeLayout
           Id="Package\PublicHealthUnitsGROUP.Paths[DataNotNull]"
           TopLeft="527.933333333333,181.266666666667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="208.1,64.9"
+              EndConnector="227.683333333334,58.733333333333"
               Start="0,0"
-              End="208.1,57.4">
+              End="227.683333333334,51.233333333333">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22.3593846153846" />
+                    End="0,19.8547692307691" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,22.3593846153846"
-                    Point2="0,26.3593846153846"
-                    Point3="4,26.3593846153846" />
+                    Point1="0,19.8547692307691"
+                    Point2="0,23.8547692307691"
+                    Point3="4,23.8547692307691" />
                   <mssgle:LineSegment
-                    End="204.1,26.3593846153846" />
+                    End="223.683333333334,23.8547692307691" />
                   <mssgle:CubicBezierSegment
-                    Point1="204.1,26.3593846153846"
-                    Point2="208.1,26.3593846153846"
-                    Point3="208.1,30.3593846153846" />
+                    Point1="223.683333333334,23.8547692307691"
+                    Point2="227.683333333334,23.8547692307691"
+                    Point3="227.683333333334,27.8547692307691" />
                   <mssgle:LineSegment
-                    End="208.1,57.4" />
+                    End="227.683333333334,51.233333333333" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="77.3178710937501,31.3593846153846,53.4642578125,9.7490234375"
+              BoundingBox="87.1095377604168,28.8547692307691,53.4642578125,9.7490234375"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\PublicHealthUnitsGROUP.Paths[Derived Column Output]"
+          TopLeft="755.616666666667,281.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.5666666666669"
+              Start="0,0"
+              End="0,39.0666666666669">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.0666666666669" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -5087,396 +6420,29 @@
     </Properties>
   </PipelineComponentMetadata>
   <TaskHost
-    design-time-name="Package\CasesReport">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="136.8,41.6"
-          Id="Package\CasesReport\CasesReport"
-          TopLeft="563.023076923077,36.5384615384615" />
-        <NodeLayout
-          Size="154.4,41.6"
-          Id="Package\CasesReport\Conditional Split"
-          TopLeft="554.223076923077,151.846153846154" />
-        <EdgeLayout
-          Id="Package\CasesReport.Paths[OLE DB Source Output]"
-          TopLeft="631.423076923077,78.1384615384615">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,73.7076923076923"
-              Start="0,0"
-              End="0,66.2076923076923">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,66.2076923076923" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="176.8,41.6"
-          Id="Package\CasesReport\CasesReportDataNull"
-          TopLeft="275.230769230769,262.076923076923" />
-        <NodeLayout
-          Size="184.8,41.6"
-          Id="Package\CasesReport\CasesReportDataClean"
-          TopLeft="786.923076923077,262.076923076923" />
-        <EdgeLayout
-          Id="Package\CasesReport.Paths[DataNull]"
-          TopLeft="607.023076923077,193.446153846154">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-243.392307692308,68.6307692307693"
-              Start="0,0"
-              End="-243.392307692308,61.1307692307693">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,23.8746508875739" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,23.8746508875739"
-                    Point2="0,27.8746508875739"
-                    Point3="-4,27.8746508875739" />
-                  <mssgle:LineSegment
-                    End="-239.392307692308,27.8746508875739" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-239.392307692308,27.8746508875739"
-                    Point2="-243.392307692308,27.8746508875739"
-                    Point3="-243.392307692308,31.8746508875739" />
-                  <mssgle:LineSegment
-                    End="-243.392307692308,61.1307692307693" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-140.708282752404,32.8746508875739,38.0242578125,9.7490234375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\CasesReport.Paths[DataNotNull]"
-          TopLeft="655.823076923077,193.446153846154">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="223.5,68.6307692307693"
-              Start="0,0"
-              End="223.5,61.1307692307693">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,23.874650887574" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,23.874650887574"
-                    Point2="0,27.874650887574"
-                    Point3="4,27.874650887574" />
-                  <mssgle:LineSegment
-                    End="219.5,27.874650887574" />
-                  <mssgle:CubicBezierSegment
-                    Point1="219.5,27.874650887574"
-                    Point2="223.5,27.874650887574"
-                    Point3="223.5,31.874650887574" />
-                  <mssgle:LineSegment
-                    End="223.5,61.1307692307693" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="85.01787109375,32.874650887574,53.4642578125,9.7490234375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\CasesReport\CasesReport">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <TaskHost
-    design-time-name="Package\OngoingOutbreaksPhu">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="154.4,41.6"
-          Id="Package\OngoingOutbreaksPhu\Conditional Split"
-          TopLeft="274.9,177" />
-        <NodeLayout
-          Size="184,41.6"
-          Id="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhu"
-          TopLeft="260.1,60" />
-        <NodeLayout
-          Size="224,41.6"
-          Id="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhuDataNull"
-          TopLeft="44,306.5" />
-        <NodeLayout
-          Size="232,41.6"
-          Id="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhuDataClean"
-          TopLeft="437,306.5" />
-        <EdgeLayout
-          Id="Package\OngoingOutbreaksPhu.Paths[OLE DB Source Output]"
-          TopLeft="352.1,101.6">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,75.4"
-              Start="0,0"
-              End="0,67.9">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,67.9" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\OngoingOutbreaksPhu.Paths[DataNull]"
-          TopLeft="327.7,218.6">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-171.7,87.9"
-              Start="0,0"
-              End="-171.7,80.4">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,31.7009230769231" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,31.7009230769231"
-                    Point2="0,35.7009230769231"
-                    Point3="-4,35.7009230769231" />
-                  <mssgle:LineSegment
-                    End="-167.7,35.7009230769231" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-167.7,35.7009230769231"
-                    Point2="-171.7,35.7009230769231"
-                    Point3="-171.7,39.7009230769231" />
-                  <mssgle:LineSegment
-                    End="-171.7,80.4" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-104.86212890625,40.7009230769231,38.0242578125,9.7490234375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\OngoingOutbreaksPhu.Paths[DataNotNull]"
-          TopLeft="376.5,218.6">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="176.5,87.9"
-              Start="0,0"
-              End="176.5,80.4">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,31.7009230769231" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,31.7009230769231"
-                    Point2="0,35.7009230769231"
-                    Point3="4,35.7009230769231" />
-                  <mssgle:LineSegment
-                    End="172.5,35.7009230769231" />
-                  <mssgle:CubicBezierSegment
-                    Point1="172.5,35.7009230769231"
-                    Point2="176.5,35.7009230769231"
-                    Point3="176.5,39.7009230769231" />
-                  <mssgle:LineSegment
-                    End="176.5,80.4" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="61.51787109375,40.7009230769231,53.4642578125,9.7490234375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <TaskHost
-    design-time-name="Package\CompiledCOVID19CaseDetails">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="154.4,41.6"
-          Id="Package\CompiledCOVID19CaseDetails\Conditional Split"
-          TopLeft="613.7,174" />
-        <NodeLayout
-          Size="219.2,41.6"
-          Id="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetails"
-          TopLeft="581.3,57" />
-        <NodeLayout
-          Size="259.2,41.6"
-          Id="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetailsDataNull"
-          TopLeft="357,304.5" />
-        <NodeLayout
-          Size="267.2,41.6"
-          Id="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetailsDataClean"
-          TopLeft="750,304.5" />
-        <EdgeLayout
-          Id="Package\CompiledCOVID19CaseDetails.Paths[OLE DB Source Output]"
-          TopLeft="690.9,98.6">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,75.4"
-              Start="0,0"
-              End="0,67.9">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,67.9" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\CompiledCOVID19CaseDetails.Paths[DataNull]"
-          TopLeft="666.5,215.6">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-179.9,88.9"
-              Start="0,0"
-              End="-179.9,81.4">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,32.1070769230769" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,32.1070769230769"
-                    Point2="0,36.1070769230769"
-                    Point3="-4,36.1070769230769" />
-                  <mssgle:LineSegment
-                    End="-175.9,36.1070769230769" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-175.9,36.1070769230769"
-                    Point2="-179.9,36.1070769230769"
-                    Point3="-179.9,40.1070769230769" />
-                  <mssgle:LineSegment
-                    End="-179.9,81.4" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-108.96212890625,41.1070769230769,38.0242578125,9.7490234375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\CompiledCOVID19CaseDetails.Paths[DataNotNull]"
-          TopLeft="715.3,215.6">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="168.3,88.9"
-              Start="0,0"
-              End="168.3,81.4">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,32.1070769230769" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,32.1070769230769"
-                    Point2="0,36.1070769230769"
-                    Point3="4,36.1070769230769" />
-                  <mssgle:LineSegment
-                    End="164.3,36.1070769230769" />
-                  <mssgle:CubicBezierSegment
-                    Point1="164.3,36.1070769230769"
-                    Point2="168.3,36.1070769230769"
-                    Point3="168.3,40.1070769230769" />
-                  <mssgle:LineSegment
-                    End="168.3,81.4" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="57.4178710937502,41.1070769230769,53.4642578125,9.7490234375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <TaskHost
     design-time-name="Package\VaccinesByAgePhu">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="154.4,41.6"
-          Id="Package\VaccinesByAgePhu\Conditional Split"
-          TopLeft="270.5,177" />
-        <NodeLayout
-          Size="166.4,41.6"
-          Id="Package\VaccinesByAgePhu\VaccinesByAgePhu"
-          TopLeft="264.5,60" />
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="206.4,41.6"
           Id="Package\VaccinesByAgePhu\VaccinesByAgePhuDataNull"
-          TopLeft="60,306.5" />
+          TopLeft="60,310.95" />
         <NodeLayout
           Size="214.4,41.6"
           Id="Package\VaccinesByAgePhu\VaccinesByAgePhuDataClean"
-          TopLeft="453,306.5" />
+          TopLeft="492.5,412.192307692308" />
+        <NodeLayout
+          Size="166.4,41.6"
+          Id="Package\VaccinesByAgePhu\VaccinesByAgePhu"
+          TopLeft="273,60" />
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\VaccinesByAgePhu\Conditional Split"
+          TopLeft="279,177" />
         <EdgeLayout
           Id="Package\VaccinesByAgePhu.Paths[OLE DB Source Output]"
-          TopLeft="347.7,101.6">
+          TopLeft="356.2,101.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -5498,196 +6464,105 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package\VaccinesByAgePhu.Paths[DataNull]"
-          TopLeft="323.3,218.6">
+          TopLeft="331.8,218.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-160.1,87.9"
+              EndConnector="-168.6,92.35"
               Start="0,0"
-              End="-160.1,80.4">
+              End="-168.6,84.85">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.7009230769231" />
+                    End="0,33.5083076923077" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,31.7009230769231"
-                    Point2="0,35.7009230769231"
-                    Point3="-4,35.7009230769231" />
+                    Point1="0,33.5083076923077"
+                    Point2="0,37.5083076923077"
+                    Point3="-4,37.5083076923077" />
                   <mssgle:LineSegment
-                    End="-156.1,35.7009230769231" />
+                    End="-164.6,37.5083076923077" />
                   <mssgle:CubicBezierSegment
-                    Point1="-156.1,35.7009230769231"
-                    Point2="-160.1,35.7009230769231"
-                    Point3="-160.1,39.7009230769231" />
+                    Point1="-164.6,37.5083076923077"
+                    Point2="-168.6,37.5083076923077"
+                    Point3="-168.6,41.5083076923077" />
                   <mssgle:LineSegment
-                    End="-160.1,80.4" />
+                    End="-168.6,84.85" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-99.06212890625,40.7009230769231,38.0242578125,9.7490234375"
+              BoundingBox="-103.31212890625,42.5083076923077,38.0242578125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="214.4,41.6"
+          Id="Package\VaccinesByAgePhu\Add CreateDate, UpdateDate"
+          TopLeft="492.5,310.95" />
+        <EdgeLayout
+          Id="Package\VaccinesByAgePhu.Paths[DataNotNull]"
+          TopLeft="380.6,218.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="219.1,92.35"
+              Start="0,0"
+              End="219.1,84.85">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5083076923077" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.5083076923077"
+                    Point2="0,37.5083076923077"
+                    Point3="4,37.5083076923077" />
+                  <mssgle:LineSegment
+                    End="215.1,37.5083076923077" />
+                  <mssgle:CubicBezierSegment
+                    Point1="215.1,37.5083076923077"
+                    Point2="219.1,37.5083076923077"
+                    Point3="219.1,41.5083076923077" />
+                  <mssgle:LineSegment
+                    End="219.1,84.85" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="82.81787109375,42.5083076923077,53.4642578125,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\VaccinesByAgePhu.Paths[DataNotNull]"
-          TopLeft="372.1,218.6">
+          Id="Package\VaccinesByAgePhu.Paths[Derived Column Output]"
+          TopLeft="599.7,352.55">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="188.1,87.9"
+              EndConnector="0,59.6423076923078"
               Start="0,0"
-              End="188.1,80.4">
+              End="0,52.1423076923078">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.7009230769231" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,31.7009230769231"
-                    Point2="0,35.7009230769231"
-                    Point3="4,35.7009230769231" />
-                  <mssgle:LineSegment
-                    End="184.1,35.7009230769231" />
-                  <mssgle:CubicBezierSegment
-                    Point1="184.1,35.7009230769231"
-                    Point2="188.1,35.7009230769231"
-                    Point3="188.1,39.7009230769231" />
-                  <mssgle:LineSegment
-                    End="188.1,80.4" />
+                    End="0,52.1423076923078" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="67.31787109375,40.7009230769231,53.4642578125,9.7490234375"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\CasesReport\CasesReportDataNull">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\CasesReport\CasesReportDataClean">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetails">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetailsDataNull">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\CompiledCOVID19CaseDetails\CompiledCOVID19CaseDetailsDataClean">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhu">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhuDataNull">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\OngoingOutbreaksPhu\OngoingOutbreaksPhuDataClean">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\VaccinesByAgePhu\VaccinesByAgePhu">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\VaccinesByAgePhu\VaccinesByAgePhuDataNull">
     <Properties>
@@ -5703,6 +6578,19 @@
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\VaccinesByAgePhu\VaccinesByAgePhuDataClean">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\VaccinesByAgePhu\VaccinesByAgePhu">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
