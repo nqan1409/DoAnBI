@@ -11,21 +11,21 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{D6017565-2175-4E8F-A8E1-1F61512108CB}">
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{96B39CAF-BE83-4807-BBA9-4F22FE9F52A8}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[LocalHost.CleanData]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{DB3F93D2-20B1-42DD-834E-C76E96FC4F56}"
+      DTS:DTSID="{D2F1BCF8-B258-47A2-BD2D-458F36F047B2}"
       DTS:ObjectName="LocalHost.CleanData">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=.;Initial Catalog=CleanData;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{DB3F93D2-20B1-42DD-834E-C76E96FC4F56}LocalHost.CleanData;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=.;Initial Catalog=CleanData;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{D2F1BCF8-B258-47A2-BD2D-458F36F047B2}LocalHost.CleanData;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -172,7 +172,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="GET LSET, CET CasesReport"
-      DTS:ThreadHint="3">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -244,7 +244,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="GET LSET, CET PublicHealthUnit"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="3">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -347,7 +347,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT * FROM CasesReportDataClean WHERE (CreatDate &gt;= ? AND CreatDate &lt; ?) OR (UpdateDate &gt;= ? AND UpdateDate &lt; ?)</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -364,11 +364,11 @@
                   dataType="System.Int32"
                   description="Specifies the mode used to access the database."
                   name="AccessMode"
-                  typeConverter="AccessMode">0</property>
+                  typeConverter="AccessMode">2</property>
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
+                  name="ParameterMapping">"Parameter0:Input",{34C9A033-CC10-4D97-9ACE-74B7418ECEA3};"Parameter1:Input",{33D885A3-DE7D-445B-A2B7-68C23E0ABDCD};"Parameter2:Input",{34C9A033-CC10-4D97-9ACE-74B7418ECEA3};"Parameter3:Input",{33D885A3-DE7D-445B-A2B7-68C23E0ABDCD};</property>
               </properties>
               <connections>
                 <connection
@@ -537,6 +537,24 @@
                       lineageId="Package\Load CasesReport to Stage\CasesReport.Outputs[OLE DB Source Output].Columns[PHUPostalCode]"
                       name="PHUPostalCode"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CasesReport to Stage\CasesReport.Outputs[OLE DB Source Output].Columns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CasesReport to Stage\CasesReport.Outputs[OLE DB Source Output].ExternalColumns[CreatDate]"
+                      lineageId="Package\Load CasesReport to Stage\CasesReport.Outputs[OLE DB Source Output].Columns[CreatDate]"
+                      name="CreatDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CasesReport to Stage\CasesReport.Outputs[OLE DB Source Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CasesReport to Stage\CasesReport.Outputs[OLE DB Source Output].ExternalColumns[UpdateDate]"
+                      lineageId="Package\Load CasesReport to Stage\CasesReport.Outputs[OLE DB Source Output].Columns[UpdateDate]"
+                      name="UpdateDate"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -614,6 +632,14 @@
                       dataType="wstr"
                       length="255"
                       name="PHUPostalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load CasesReport to Stage\CasesReport.Outputs[OLE DB Source Output].ExternalColumns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load CasesReport to Stage\CasesReport.Outputs[OLE DB Source Output].ExternalColumns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      name="UpdateDate" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -711,6 +737,16 @@
                       length="255"
                       lineageId="Package\Load CasesReport to Stage\CasesReport.Outputs[OLE DB Source Error Output].Columns[PHUPostalCode]"
                       name="PHUPostalCode" />
+                    <outputColumn
+                      refId="Package\Load CasesReport to Stage\CasesReport.Outputs[OLE DB Source Error Output].Columns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load CasesReport to Stage\CasesReport.Outputs[OLE DB Source Error Output].Columns[CreatDate]"
+                      name="CreatDate" />
+                    <outputColumn
+                      refId="Package\Load CasesReport to Stage\CasesReport.Outputs[OLE DB Source Error Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load CasesReport to Stage\CasesReport.Outputs[OLE DB Source Error Output].Columns[UpdateDate]"
+                      name="UpdateDate" />
                     <outputColumn
                       refId="Package\Load CasesReport to Stage\CasesReport.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -1061,7 +1097,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT * FROM CompiledCOVID19CaseDetailsDataClean WHERE (CreatDate &gt;= ? AND CreatDate &lt; ?) OR (UpdateDate &gt;= ? AND UpdateDate &lt; ?)</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1078,11 +1114,11 @@
                   dataType="System.Int32"
                   description="Specifies the mode used to access the database."
                   name="AccessMode"
-                  typeConverter="AccessMode">0</property>
+                  typeConverter="AccessMode">2</property>
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
+                  name="ParameterMapping">"Parameter0:Input",{EF7B152B-7D5D-4777-A88A-383F39EAE883};"Parameter1:Input",{3C4FC97F-E990-4DAC-B8F9-3F9DE405AE20};"Parameter2:Input",{EF7B152B-7D5D-4777-A88A-383F39EAE883};"Parameter3:Input",{3C4FC97F-E990-4DAC-B8F9-3F9DE405AE20};</property>
               </properties>
               <connections>
                 <connection
@@ -1185,6 +1221,24 @@
                       lineageId="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails.Outputs[OLE DB Source Output].Columns[province]"
                       name="province"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails.Outputs[OLE DB Source Output].Columns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails.Outputs[OLE DB Source Output].ExternalColumns[CreatDate]"
+                      lineageId="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails.Outputs[OLE DB Source Output].Columns[CreatDate]"
+                      name="CreatDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails.Outputs[OLE DB Source Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails.Outputs[OLE DB Source Output].ExternalColumns[UpdateDate]"
+                      lineageId="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails.Outputs[OLE DB Source Output].Columns[UpdateDate]"
+                      name="UpdateDate"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1231,6 +1285,14 @@
                       dataType="wstr"
                       length="255"
                       name="province" />
+                    <externalMetadataColumn
+                      refId="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails.Outputs[OLE DB Source Output].ExternalColumns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails.Outputs[OLE DB Source Output].ExternalColumns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      name="UpdateDate" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1290,6 +1352,16 @@
                       length="255"
                       lineageId="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails.Outputs[OLE DB Source Error Output].Columns[province]"
                       name="province" />
+                    <outputColumn
+                      refId="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails.Outputs[OLE DB Source Error Output].Columns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails.Outputs[OLE DB Source Error Output].Columns[CreatDate]"
+                      name="CreatDate" />
+                    <outputColumn
+                      refId="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails.Outputs[OLE DB Source Error Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails.Outputs[OLE DB Source Error Output].Columns[UpdateDate]"
+                      name="UpdateDate" />
                     <outputColumn
                       refId="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -1563,7 +1635,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT * FROM OngoingOutbreaksPhuDataClean WHERE (CreatDate &gt;= ? AND CreatDate &lt; ?) OR (UpdateDate &gt;= ? AND UpdateDate &lt; ?)</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1580,11 +1652,11 @@
                   dataType="System.Int32"
                   description="Specifies the mode used to access the database."
                   name="AccessMode"
-                  typeConverter="AccessMode">0</property>
+                  typeConverter="AccessMode">2</property>
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
+                  name="ParameterMapping">"Parameter0:Input",{CC52D623-F59A-49A1-9638-C550903ED5A7};"Parameter1:Input",{4000BF3C-A908-496B-9EC9-C76A5DA01251};"Parameter2:Input",{CC52D623-F59A-49A1-9638-C550903ED5A7};"Parameter3:Input",{4000BF3C-A908-496B-9EC9-C76A5DA01251};</property>
               </properties>
               <connections>
                 <connection
@@ -1636,6 +1708,24 @@
                       lineageId="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu.Outputs[OLE DB Source Output].Columns[number_ongoing_outbreaks]"
                       name="number_ongoing_outbreaks"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu.Outputs[OLE DB Source Output].Columns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu.Outputs[OLE DB Source Output].ExternalColumns[CreatDate]"
+                      lineageId="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu.Outputs[OLE DB Source Output].Columns[CreatDate]"
+                      name="CreatDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu.Outputs[OLE DB Source Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu.Outputs[OLE DB Source Output].ExternalColumns[UpdateDate]"
+                      lineageId="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu.Outputs[OLE DB Source Output].Columns[UpdateDate]"
+                      name="UpdateDate"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1656,6 +1746,14 @@
                       refId="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu.Outputs[OLE DB Source Output].ExternalColumns[number_ongoing_outbreaks]"
                       dataType="i4"
                       name="number_ongoing_outbreaks" />
+                    <externalMetadataColumn
+                      refId="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu.Outputs[OLE DB Source Output].ExternalColumns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu.Outputs[OLE DB Source Output].ExternalColumns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      name="UpdateDate" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1684,6 +1782,16 @@
                       dataType="i4"
                       lineageId="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu.Outputs[OLE DB Source Error Output].Columns[number_ongoing_outbreaks]"
                       name="number_ongoing_outbreaks" />
+                    <outputColumn
+                      refId="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu.Outputs[OLE DB Source Error Output].Columns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu.Outputs[OLE DB Source Error Output].Columns[CreatDate]"
+                      name="CreatDate" />
+                    <outputColumn
+                      refId="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu.Outputs[OLE DB Source Error Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu.Outputs[OLE DB Source Error Output].Columns[UpdateDate]"
+                      name="UpdateDate" />
                     <outputColumn
                       refId="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -1896,7 +2004,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT * FROM PublicHealthUnitDataClean WHERE (CreatDate &gt;= ? AND CreatDate &lt; ?) OR (UpdateDate &gt;= ? AND UpdateDate &lt; ?)</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1913,11 +2021,11 @@
                   dataType="System.Int32"
                   description="Specifies the mode used to access the database."
                   name="AccessMode"
-                  typeConverter="AccessMode">0</property>
+                  typeConverter="AccessMode">2</property>
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
+                  name="ParameterMapping">"Parameter0:Input",{35281836-9EA7-4212-AAE9-016331D77FA5};"Parameter1:Input",{CC488587-A158-4547-B29B-B85FEA0CAD32};"Parameter2:Input",{35281836-9EA7-4212-AAE9-016331D77FA5};"Parameter3:Input",{CC488587-A158-4547-B29B-B85FEA0CAD32};</property>
               </properties>
               <connections>
                 <connection
@@ -2009,6 +2117,24 @@
                       lineageId="Package\Load PublicHealthUnit to Stage\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Longitude]"
                       name="Reporting_PHU_Longitude"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load PublicHealthUnit to Stage\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load PublicHealthUnit to Stage\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[CreatDate]"
+                      lineageId="Package\Load PublicHealthUnit to Stage\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[CreatDate]"
+                      name="CreatDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load PublicHealthUnit to Stage\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load PublicHealthUnit to Stage\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[UpdateDate]"
+                      lineageId="Package\Load PublicHealthUnit to Stage\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[UpdateDate]"
+                      name="UpdateDate"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -2049,6 +2175,14 @@
                       refId="Package\Load PublicHealthUnit to Stage\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[Reporting_PHU_Longitude]"
                       dataType="r8"
                       name="Reporting_PHU_Longitude" />
+                    <externalMetadataColumn
+                      refId="Package\Load PublicHealthUnit to Stage\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load PublicHealthUnit to Stage\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      name="UpdateDate" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -2101,6 +2235,16 @@
                       dataType="r8"
                       lineageId="Package\Load PublicHealthUnit to Stage\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[Reporting_PHU_Longitude]"
                       name="Reporting_PHU_Longitude" />
+                    <outputColumn
+                      refId="Package\Load PublicHealthUnit to Stage\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load PublicHealthUnit to Stage\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[CreatDate]"
+                      name="CreatDate" />
+                    <outputColumn
+                      refId="Package\Load PublicHealthUnit to Stage\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load PublicHealthUnit to Stage\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[UpdateDate]"
+                      name="UpdateDate" />
                     <outputColumn
                       refId="Package\Load PublicHealthUnit to Stage\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -2361,7 +2505,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT * FROM PublicHealthUnitsGROUPDataClean WHERE (CreatDate &gt;= ? AND CreatDate &lt; ?) OR (UpdateDate &gt;= ? AND UpdateDate &lt; ?)</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -2378,11 +2522,11 @@
                   dataType="System.Int32"
                   description="Specifies the mode used to access the database."
                   name="AccessMode"
-                  typeConverter="AccessMode">0</property>
+                  typeConverter="AccessMode">2</property>
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
+                  name="ParameterMapping">"Parameter0:Input",{1C53CE2B-A31E-4159-B022-E0E1025B1047};"Parameter1:Input",{EA7FE905-E57B-48B8-AC1C-F54FCBF7DBD6};"Parameter2:Input",{1C53CE2B-A31E-4159-B022-E0E1025B1047};"Parameter3:Input",{EA7FE905-E57B-48B8-AC1C-F54FCBF7DBD6};</property>
               </properties>
               <connections>
                 <connection
@@ -2427,6 +2571,24 @@
                       lineageId="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[PHU_region]"
                       name="PHU_region"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].ExternalColumns[CreatDate]"
+                      lineageId="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[CreatDate]"
+                      name="CreatDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].ExternalColumns[UpdateDate]"
+                      lineageId="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[UpdateDate]"
+                      name="UpdateDate"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -2445,6 +2607,14 @@
                       dataType="wstr"
                       length="255"
                       name="PHU_region" />
+                    <externalMetadataColumn
+                      refId="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].ExternalColumns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].ExternalColumns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      name="UpdateDate" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -2470,6 +2640,16 @@
                       length="255"
                       lineageId="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP.Outputs[OLE DB Source Error Output].Columns[PHU_region]"
                       name="PHU_region" />
+                    <outputColumn
+                      refId="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP.Outputs[OLE DB Source Error Output].Columns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP.Outputs[OLE DB Source Error Output].Columns[CreatDate]"
+                      name="CreatDate" />
+                    <outputColumn
+                      refId="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP.Outputs[OLE DB Source Error Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP.Outputs[OLE DB Source Error Output].Columns[UpdateDate]"
+                      name="UpdateDate" />
                     <outputColumn
                       refId="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -2676,7 +2856,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT * FROM VaccinesByAgePhuDataClean WHERE (CreatDate &gt;= ? AND CreatDate &lt; ?) OR (UpdateDate &gt;= ? AND UpdateDate &lt; ?)</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -2693,11 +2873,11 @@
                   dataType="System.Int32"
                   description="Specifies the mode used to access the database."
                   name="AccessMode"
-                  typeConverter="AccessMode">0</property>
+                  typeConverter="AccessMode">2</property>
                 <property
                   dataType="System.String"
                   description="The mappings between the parameters in the SQL command and variables."
-                  name="ParameterMapping"></property>
+                  name="ParameterMapping">"Parameter0:Input",{BC6640AE-C338-420E-8F27-41663556DD31};"Parameter1:Input",{52FB10A6-158F-4387-97FF-EAAF0B322D1E};"Parameter2:Input",{BC6640AE-C338-420E-8F27-41663556DD31};"Parameter3:Input",{52FB10A6-158F-4387-97FF-EAAF0B322D1E};</property>
               </properties>
               <connections>
                 <connection
@@ -2776,6 +2956,24 @@
                       lineageId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu.Outputs[OLE DB Source Output].Columns[third_dose_cumulative]"
                       name="third_dose_cumulative"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu.Outputs[OLE DB Source Output].Columns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu.Outputs[OLE DB Source Output].ExternalColumns[CreatDate]"
+                      lineageId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu.Outputs[OLE DB Source Output].Columns[CreatDate]"
+                      name="CreatDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu.Outputs[OLE DB Source Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu.Outputs[OLE DB Source Output].ExternalColumns[UpdateDate]"
+                      lineageId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu.Outputs[OLE DB Source Output].Columns[UpdateDate]"
+                      name="UpdateDate"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -2808,6 +3006,14 @@
                       refId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu.Outputs[OLE DB Source Output].ExternalColumns[third_dose_cumulative]"
                       dataType="i4"
                       name="third_dose_cumulative" />
+                    <externalMetadataColumn
+                      refId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu.Outputs[OLE DB Source Output].ExternalColumns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu.Outputs[OLE DB Source Output].ExternalColumns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      name="UpdateDate" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -2851,6 +3057,16 @@
                       dataType="i4"
                       lineageId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu.Outputs[OLE DB Source Error Output].Columns[third_dose_cumulative]"
                       name="third_dose_cumulative" />
+                    <outputColumn
+                      refId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu.Outputs[OLE DB Source Error Output].Columns[CreatDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu.Outputs[OLE DB Source Error Output].Columns[CreatDate]"
+                      name="CreatDate" />
+                    <outputColumn
+                      refId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu.Outputs[OLE DB Source Error Output].Columns[UpdateDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu.Outputs[OLE DB Source Error Output].Columns[UpdateDate]"
+                      name="UpdateDate" />
                     <outputColumn
                       refId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -3062,7 +3278,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET CET CasesReport"
-      DTS:ThreadHint="3">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3110,7 +3326,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET CET PublicHealthUnit"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="3">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3158,7 +3374,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET LSET CasesReport"
-      DTS:ThreadHint="3">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3190,7 +3406,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET LSET PublicHealthUnit"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="3">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3254,7 +3470,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="TRUNCATE CasesReport_Stage"
-      DTS:ThreadHint="3">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3318,7 +3534,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="TRUNCATE PublicHealthUnit_Stage"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="3">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3542,25 +3758,125 @@
       <GraphLayout
         Capacity="64" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="211.2,41.6"
+          Id="Package\GET LSET, CET CasesReport"
+          TopLeft="153.559843969418,286.988237181667" />
+        <NodeLayout
+          Size="293.6,41.6"
+          Id="Package\GET LSET, CET CompiledCOVID19CaseDetails"
+          TopLeft="449.358415443606,286.988237181667" />
+        <NodeLayout
+          Size="258.4,41.6"
+          Id="Package\GET LSET, CET OngoingOutbreaksPhu"
+          TopLeft="848.011591849449,286.988237181666" />
+        <NodeLayout
+          Size="229.6,41.6"
+          Id="Package\GET LSET, CET PublicHealthUnit"
+          TopLeft="1168.9733383458,288.687583610728" />
+        <NodeLayout
+          Size="268.8,41.6"
+          Id="Package\GET LSET, CET PublicHealthUnitsGROUP"
+          TopLeft="1481.70777991645,286.138563967136" />
+        <NodeLayout
+          Size="240.8,41.6"
+          Id="Package\GET LSET, CET VaccinesByAgePhu"
+          TopLeft="1835.62729976754,286.138563967136" />
+        <NodeLayout
           Size="205.6,41.6"
           Id="Package\Load CasesReport to Stage"
           TopLeft="156.359843969418,368.254413723306" />
+        <NodeLayout
+          Size="288,41.6"
+          Id="Package\Load CompiledCOVID19CaseDetails to Stage"
+          TopLeft="452.158415443606,368.254413723307" />
+        <NodeLayout
+          Size="252,41.6"
+          Id="Package\Load OngoingOutbreaksPhu to Stage"
+          TopLeft="851.211591849449,368.254413723306" />
+        <NodeLayout
+          Size="224,41.6"
+          Id="Package\Load PublicHealthUnit to Stage"
+          TopLeft="1171.7733383458,369.953760152368" />
+        <NodeLayout
+          Size="262.4,41.6"
+          Id="Package\Load PublicHealthUnitsGROUP to Stage"
+          TopLeft="1484.90777991645,367.404740508776" />
+        <NodeLayout
+          Size="235.2,41.6"
+          Id="Package\Load VaccinesByAgePhu to Stage"
+          TopLeft="1838.42729976754,366.312303518665" />
         <NodeLayout
           Size="180,41.6"
           Id="Package\SET CET CasesReport"
           TopLeft="169.159843969418,118.720589900306" />
         <NodeLayout
-          Size="224.8,41.6"
-          Id="Package\TRUNCATE CasesReport_Stage"
-          TopLeft="146.759843969418,201.898531174639" />
+          Size="262.4,41.6"
+          Id="Package\SET CET CompiledCOVID19CaseDetails"
+          TopLeft="464.958415443606,118.720589900306" />
         <NodeLayout
-          Size="211.2,41.6"
-          Id="Package\GET LSET, CET CasesReport"
-          TopLeft="153.559843969418,286.988237181667" />
+          Size="227.2,41.6"
+          Id="Package\SET CET OngoingOutbreaksPhu"
+          TopLeft="863.611591849449,118.720589900306" />
+        <NodeLayout
+          Size="198.4,41.6"
+          Id="Package\SET CET PublicHealthUnit"
+          TopLeft="1184.5733383458,120.419936329367" />
+        <NodeLayout
+          Size="237.6,41.6"
+          Id="Package\SET CET PublicHealthUnitsGROUP"
+          TopLeft="1497.30777991645,117.870916685775" />
+        <NodeLayout
+          Size="209.6,41.6"
+          Id="Package\SET CET VaccinesByAgePhu"
+          TopLeft="1851.22729976754,117.870916685775" />
         <NodeLayout
           Size="184.8,41.6"
           Id="Package\SET LSET CasesReport"
           TopLeft="166.759843969418,451.43235499764" />
+        <NodeLayout
+          Size="267.2,41.6"
+          Id="Package\SET LSET CompiledCOVID19CaseDetails"
+          TopLeft="462.558415443606,451.43235499764" />
+        <NodeLayout
+          Size="203.2,41.6"
+          Id="Package\SET LSET PublicHealthUnit"
+          TopLeft="1182.1733383458,453.131701426701" />
+        <NodeLayout
+          Size="242.4,41.6"
+          Id="Package\SET LSET PublicHealthUnitsGROUP"
+          TopLeft="1494.90777991645,450.582681783109" />
+        <NodeLayout
+          Size="214.4,41.6"
+          Id="Package\SET LSET VaccinesByAgePhu"
+          TopLeft="1848.82729976754,450.582681783109" />
+        <NodeLayout
+          Size="228.8,41.6"
+          Id="Package\SET LSETOngoingOutbreaksPhu"
+          TopLeft="862.811591849449,451.432354997639" />
+        <NodeLayout
+          Size="224.8,41.6"
+          Id="Package\TRUNCATE CasesReport_Stage"
+          TopLeft="146.759843969418,201.898531174639" />
+        <NodeLayout
+          Size="306.4,41.6"
+          Id="Package\TRUNCATE CompiledCOVID19CaseDetails_Stage"
+          TopLeft="442.958415443606,201.898531174639" />
+        <NodeLayout
+          Size="271.2,41.6"
+          Id="Package\TRUNCATE OngoingOutbreaksPhu_Stage"
+          TopLeft="841.611591849449,201.898531174639" />
+        <NodeLayout
+          Size="243.2,41.6"
+          Id="Package\TRUNCATE PublicHealthUnit_Stage"
+          TopLeft="1162.1733383458,203.597877603701" />
+        <NodeLayout
+          Size="281.6,41.6"
+          Id="Package\TRUNCATE PublicHealthUnitsGROUP_Stage"
+          TopLeft="1475.30777991645,201.048857960108" />
+        <NodeLayout
+          Size="254.4,41.6"
+          Id="Package\TRUNCATE VaccinesByAgePhu_Stage"
+          TopLeft="1828.82729976754,201.048857960108" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="259.159843969418,160.320589900306">
@@ -3606,92 +3922,6 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="259.159843969418,328.588237181667">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,39.6661765416394"
-              Start="0,0"
-              End="0,32.1661765416394">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,32.1661765416394" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="259.159843969418,409.854413723306">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,41.5779412743335"
-              Start="0,0"
-              End="0,34.0779412743335">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,34.0779412743335" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="288,41.6"
-          Id="Package\Load CompiledCOVID19CaseDetails to Stage"
-          TopLeft="452.158415443606,368.254413723307" />
-        <NodeLayout
-          Size="262.4,41.6"
-          Id="Package\SET CET CompiledCOVID19CaseDetails"
-          TopLeft="464.958415443606,118.720589900306" />
-        <NodeLayout
-          Size="306.4,41.6"
-          Id="Package\TRUNCATE CompiledCOVID19CaseDetails_Stage"
-          TopLeft="442.958415443606,201.898531174639" />
-        <NodeLayout
-          Size="293.6,41.6"
-          Id="Package\GET LSET, CET CompiledCOVID19CaseDetails"
-          TopLeft="449.358415443606,286.988237181667" />
-        <NodeLayout
-          Size="267.2,41.6"
-          Id="Package\SET LSET CompiledCOVID19CaseDetails"
-          TopLeft="462.558415443606,451.43235499764" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="596.158415443606,160.320589900306">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,41.5779412743335"
-              Start="0,0"
-              End="0,34.0779412743335">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,34.0779412743335" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1 1]"
           TopLeft="596.158415443606,243.498531174639">
           <EdgeLayout.Curve>
@@ -3705,92 +3935,6 @@
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,35.9897060070275" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 2 1]"
-          TopLeft="596.158415443606,328.588237181667">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,39.66617654164"
-              Start="0,0"
-              End="0,32.16617654164">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,32.16617654164" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 3 1]"
-          TopLeft="596.158415443606,409.854413723307">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,41.577941274333"
-              Start="0,0"
-              End="0,34.077941274333">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,34.077941274333" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="252,41.6"
-          Id="Package\Load OngoingOutbreaksPhu to Stage"
-          TopLeft="851.211591849449,368.254413723306" />
-        <NodeLayout
-          Size="227.2,41.6"
-          Id="Package\SET CET OngoingOutbreaksPhu"
-          TopLeft="863.611591849449,118.720589900306" />
-        <NodeLayout
-          Size="271.2,41.6"
-          Id="Package\TRUNCATE OngoingOutbreaksPhu_Stage"
-          TopLeft="841.611591849449,201.898531174639" />
-        <NodeLayout
-          Size="258.4,41.6"
-          Id="Package\GET LSET, CET OngoingOutbreaksPhu"
-          TopLeft="848.011591849449,286.988237181666" />
-        <NodeLayout
-          Size="228.8,41.6"
-          Id="Package\SET LSETOngoingOutbreaksPhu"
-          TopLeft="862.811591849449,451.432354997639" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="977.211591849449,160.320589900306">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,41.5779412743335"
-              Start="0,0"
-              End="0,34.0779412743335">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,34.0779412743335" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3822,92 +3966,6 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 2 2]"
-          TopLeft="977.211591849449,328.588237181667">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,39.66617654164"
-              Start="0,0"
-              End="0,32.16617654164">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,32.16617654164" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 3 2]"
-          TopLeft="977.211591849449,409.854413723306">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,41.5779412743329"
-              Start="0,0"
-              End="0,34.0779412743329">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,34.0779412743329" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="224,41.6"
-          Id="Package\Load PublicHealthUnit to Stage"
-          TopLeft="1171.7733383458,369.953760152368" />
-        <NodeLayout
-          Size="198.4,41.6"
-          Id="Package\SET CET PublicHealthUnit"
-          TopLeft="1184.5733383458,120.419936329367" />
-        <NodeLayout
-          Size="243.2,41.6"
-          Id="Package\TRUNCATE PublicHealthUnit_Stage"
-          TopLeft="1162.1733383458,203.597877603701" />
-        <NodeLayout
-          Size="229.6,41.6"
-          Id="Package\GET LSET, CET PublicHealthUnit"
-          TopLeft="1168.9733383458,288.687583610728" />
-        <NodeLayout
-          Size="203.2,41.6"
-          Id="Package\SET LSET PublicHealthUnit"
-          TopLeft="1182.1733383458,453.131701426701" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="1283.7733383458,162.019936329367">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,41.5779412743335"
-              Start="0,0"
-              End="0,34.0779412743335">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,34.0779412743335" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1 3]"
           TopLeft="1283.7733383458,245.197877603701">
           <EdgeLayout.Curve>
@@ -3921,92 +3979,6 @@
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,35.9897060070275" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 2 3]"
-          TopLeft="1283.7733383458,330.287583610728">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,39.66617654164"
-              Start="0,0"
-              End="0,32.16617654164">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,32.16617654164" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 3 3]"
-          TopLeft="1283.7733383458,411.553760152368">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,41.5779412743331"
-              Start="0,0"
-              End="0,34.0779412743331">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,34.0779412743331" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="262.4,41.6"
-          Id="Package\Load PublicHealthUnitsGROUP to Stage"
-          TopLeft="1484.90777991645,367.404740508776" />
-        <NodeLayout
-          Size="237.6,41.6"
-          Id="Package\SET CET PublicHealthUnitsGROUP"
-          TopLeft="1497.30777991645,117.870916685775" />
-        <NodeLayout
-          Size="281.6,41.6"
-          Id="Package\TRUNCATE PublicHealthUnitsGROUP_Stage"
-          TopLeft="1475.30777991645,201.048857960108" />
-        <NodeLayout
-          Size="268.8,41.6"
-          Id="Package\GET LSET, CET PublicHealthUnitsGROUP"
-          TopLeft="1481.70777991645,286.138563967136" />
-        <NodeLayout
-          Size="242.4,41.6"
-          Id="Package\SET LSET PublicHealthUnitsGROUP"
-          TopLeft="1494.90777991645,450.582681783109" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 7]"
-          TopLeft="1616.10777991645,159.470916685775">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,41.5779412743335"
-              Start="0,0"
-              End="0,34.0779412743335">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,34.0779412743335" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4038,8 +4010,52 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 2 4]"
-          TopLeft="1616.10777991645,327.738563967136">
+          Id="Package.PrecedenceConstraints[Constraint 1 4 1]"
+          TopLeft="1956.02729976754,242.648857960108">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43.4897060070275"
+              Start="0,0"
+              End="0,35.9897060070275">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.9897060070275" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="259.159843969418,328.588237181667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.6661765416394"
+              Start="0,0"
+              End="0,32.1661765416394">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.1661765416394" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2 1]"
+          TopLeft="596.158415443606,328.588237181667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4060,61 +4076,19 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 3 4]"
-          TopLeft="1616.10777991645,409.004740508776">
+          Id="Package.PrecedenceConstraints[Constraint 2 2]"
+          TopLeft="977.211591849449,328.588237181667">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,41.5779412743331"
+              EndConnector="0,39.66617654164"
               Start="0,0"
-              End="0,34.0779412743331">
+              End="0,32.16617654164">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,34.0779412743331" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="235.2,41.6"
-          Id="Package\Load VaccinesByAgePhu to Stage"
-          TopLeft="1838.42729976754,366.312303518665" />
-        <NodeLayout
-          Size="209.6,41.6"
-          Id="Package\SET CET VaccinesByAgePhu"
-          TopLeft="1851.22729976754,117.870916685775" />
-        <NodeLayout
-          Size="254.4,41.6"
-          Id="Package\TRUNCATE VaccinesByAgePhu_Stage"
-          TopLeft="1828.82729976754,201.048857960108" />
-        <NodeLayout
-          Size="240.8,41.6"
-          Id="Package\GET LSET, CET VaccinesByAgePhu"
-          TopLeft="1835.62729976754,286.138563967136" />
-        <NodeLayout
-          Size="214.4,41.6"
-          Id="Package\SET LSET VaccinesByAgePhu"
-          TopLeft="1848.82729976754,450.582681783109" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 7 1]"
-          TopLeft="1956.02729976754,159.470916685775">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,41.5779412743335"
-              Start="0,0"
-              End="0,34.0779412743335">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,34.0779412743335" />
+                    End="0,32.16617654164" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4124,19 +4098,41 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 1 4 1]"
-          TopLeft="1956.02729976754,242.648857960108">
+          Id="Package.PrecedenceConstraints[Constraint 2 3]"
+          TopLeft="1283.7733383458,330.287583610728">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,43.4897060070275"
+              EndConnector="0,39.66617654164"
               Start="0,0"
-              End="0,35.9897060070275">
+              End="0,32.16617654164">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,35.9897060070275" />
+                    End="0,32.16617654164" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2 4]"
+          TopLeft="1616.10777991645,327.738563967136">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.66617654164"
+              Start="0,0"
+              End="0,32.16617654164">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.16617654164" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4167,6 +4163,226 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="259.159843969418,409.854413723306">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.5779412743335"
+              Start="0,0"
+              End="0,34.0779412743335">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.0779412743335" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3 1]"
+          TopLeft="596.158415443606,409.854413723307">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.577941274333"
+              Start="0,0"
+              End="0,34.077941274333">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.077941274333" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3 2]"
+          TopLeft="977.211591849449,409.854413723306">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.5779412743329"
+              Start="0,0"
+              End="0,34.0779412743329">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.0779412743329" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3 3]"
+          TopLeft="1283.7733383458,411.553760152368">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.5779412743331"
+              Start="0,0"
+              End="0,34.0779412743331">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.0779412743331" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3 4]"
+          TopLeft="1616.10777991645,409.004740508776">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.5779412743331"
+              Start="0,0"
+              End="0,34.0779412743331">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.0779412743331" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="596.158415443606,160.320589900306">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.5779412743335"
+              Start="0,0"
+              End="0,34.0779412743335">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.0779412743335" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="977.211591849449,160.320589900306">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.5779412743335"
+              Start="0,0"
+              End="0,34.0779412743335">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.0779412743335" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="1283.7733383458,162.019936329367">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.5779412743335"
+              Start="0,0"
+              End="0,34.0779412743335">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.0779412743335" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="1616.10777991645,159.470916685775">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.5779412743335"
+              Start="0,0"
+              End="0,34.0779412743335">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.0779412743335" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7 1]"
+          TopLeft="1956.02729976754,159.470916685775">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41.5779412743335"
+              Start="0,0"
+              End="0,34.0779412743335">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.0779412743335" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -4176,206 +4392,16 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="136.8,41.6"
-          Id="Package\Load CasesReport to Stage\CasesReport"
-          TopLeft="457.7,51" />
-        <NodeLayout
           Size="169.6,41.6"
           Id="Package\Load CasesReport to Stage\CasesReport_Stage"
           TopLeft="447.3,209" />
+        <NodeLayout
+          Size="136.8,41.6"
+          Id="Package\Load CasesReport to Stage\CasesReport"
+          TopLeft="457.7,51" />
         <EdgeLayout
           Id="Package\Load CasesReport to Stage.Paths[OLE DB Source Output]"
           TopLeft="529.1,92.6">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,116.4"
-              Start="0,0"
-              End="0,108.9">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,108.9" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <TaskHost
-    design-time-name="Package\Load CompiledCOVID19CaseDetails to Stage">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="219.2,41.6"
-          Id="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails"
-          TopLeft="70.4,60" />
-        <NodeLayout
-          Size="251.2,41.6"
-          Id="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails_Stage"
-          TopLeft="60,218" />
-        <EdgeLayout
-          Id="Package\Load CompiledCOVID19CaseDetails to Stage.Paths[OLE DB Source Output]"
-          TopLeft="182.8,101.6">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,116.4"
-              Start="0,0"
-              End="0,108.9">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,108.9" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <TaskHost
-    design-time-name="Package\Load OngoingOutbreaksPhu to Stage">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="184,41.6"
-          Id="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu"
-          TopLeft="70.4,60" />
-        <NodeLayout
-          Size="216,41.6"
-          Id="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu_Stage"
-          TopLeft="60,218" />
-        <EdgeLayout
-          Id="Package\Load OngoingOutbreaksPhu to Stage.Paths[OLE DB Source Output]"
-          TopLeft="165.2,101.6">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,116.4"
-              Start="0,0"
-              End="0,108.9">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,108.9" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <TaskHost
-    design-time-name="Package\Load PublicHealthUnit to Stage">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="155.2,41.6"
-          Id="Package\Load PublicHealthUnit to Stage\PublicHealthUnit"
-          TopLeft="70.4,60" />
-        <NodeLayout
-          Size="188,41.6"
-          Id="Package\Load PublicHealthUnit to Stage\PublicHealthUnit_Stage"
-          TopLeft="60,218" />
-        <EdgeLayout
-          Id="Package\Load PublicHealthUnit to Stage.Paths[OLE DB Source Output]"
-          TopLeft="151,101.6">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,116.4"
-              Start="0,0"
-              End="0,108.9">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,108.9" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <TaskHost
-    design-time-name="Package\Load PublicHealthUnitsGROUP to Stage">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="194.4,41.6"
-          Id="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP"
-          TopLeft="70.4,60" />
-        <NodeLayout
-          Size="226.4,41.6"
-          Id="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP_Stage"
-          TopLeft="60,218" />
-        <EdgeLayout
-          Id="Package\Load PublicHealthUnitsGROUP to Stage.Paths[OLE DB Source Output]"
-          TopLeft="170.4,101.6">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,116.4"
-              Start="0,0"
-              End="0,108.9">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,108.9" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <TaskHost
-    design-time-name="Package\Load VaccinesByAgePhu to Stage">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="166.4,41.6"
-          Id="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu"
-          TopLeft="70.4,60" />
-        <NodeLayout
-          Size="198.4,41.6"
-          Id="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu_Stage"
-          TopLeft="60,218" />
-        <EdgeLayout
-          Id="Package\Load VaccinesByAgePhu to Stage.Paths[OLE DB Source Output]"
-          TopLeft="156.4,101.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4424,6 +4450,44 @@
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load CompiledCOVID19CaseDetails to Stage">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="251.2,41.6"
+          Id="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails_Stage"
+          TopLeft="60,218" />
+        <NodeLayout
+          Size="219.2,41.6"
+          Id="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails"
+          TopLeft="70.4,60" />
+        <EdgeLayout
+          Id="Package\Load CompiledCOVID19CaseDetails to Stage.Paths[OLE DB Source Output]"
+          TopLeft="182.8,101.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,116.4"
+              Start="0,0"
+              End="0,108.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,108.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
   <PipelineComponentMetadata
     design-time-name="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails">
     <Properties>
@@ -4450,6 +4514,44 @@
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load OngoingOutbreaksPhu to Stage">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="184,41.6"
+          Id="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu"
+          TopLeft="70.4,60" />
+        <NodeLayout
+          Size="216,41.6"
+          Id="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu_Stage"
+          TopLeft="60,218" />
+        <EdgeLayout
+          Id="Package\Load OngoingOutbreaksPhu to Stage.Paths[OLE DB Source Output]"
+          TopLeft="165.2,101.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,116.4"
+              Start="0,0"
+              End="0,108.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,108.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
   <PipelineComponentMetadata
     design-time-name="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu">
     <Properties>
@@ -4476,6 +4578,44 @@
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load PublicHealthUnit to Stage">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="188,41.6"
+          Id="Package\Load PublicHealthUnit to Stage\PublicHealthUnit_Stage"
+          TopLeft="60,218" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\Load PublicHealthUnit to Stage\PublicHealthUnit"
+          TopLeft="70.4,60" />
+        <EdgeLayout
+          Id="Package\Load PublicHealthUnit to Stage.Paths[OLE DB Source Output]"
+          TopLeft="151,101.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,116.4"
+              Start="0,0"
+              End="0,108.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,108.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
   <PipelineComponentMetadata
     design-time-name="Package\Load PublicHealthUnit to Stage\PublicHealthUnit">
     <Properties>
@@ -4502,6 +4642,44 @@
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load PublicHealthUnitsGROUP to Stage">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="226.4,41.6"
+          Id="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP_Stage"
+          TopLeft="60,218" />
+        <NodeLayout
+          Size="194.4,41.6"
+          Id="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP"
+          TopLeft="70.4,60" />
+        <EdgeLayout
+          Id="Package\Load PublicHealthUnitsGROUP to Stage.Paths[OLE DB Source Output]"
+          TopLeft="170.4,101.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,116.4"
+              Start="0,0"
+              End="0,108.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,108.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
   <PipelineComponentMetadata
     design-time-name="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP">
     <Properties>
@@ -4528,6 +4706,44 @@
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load VaccinesByAgePhu to Stage">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="198.4,41.6"
+          Id="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu_Stage"
+          TopLeft="60,218" />
+        <NodeLayout
+          Size="166.4,41.6"
+          Id="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu"
+          TopLeft="70.4,60" />
+        <EdgeLayout
+          Id="Package\Load VaccinesByAgePhu to Stage.Paths[OLE DB Source Output]"
+          TopLeft="156.4,101.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,116.4"
+              Start="0,0"
+              End="0,108.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,108.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
   <PipelineComponentMetadata
     design-time-name="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu">
     <Properties>
