@@ -7,50 +7,50 @@
   DTS:CreatorName="DESKTOP-LGAKUBU\ASUS"
   DTS:DTSID="{0FA5FD7C-3440-49D8-963C-8A9885C0F6E0}"
   DTS:ExecutableType="Microsoft.Package"
-  DTS:LastModifiedProductVersion="16.0.845.0"
+  DTS:LastModifiedProductVersion="16.0.948.0"
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="1"
-  DTS:VersionGUID="{287E3435-B028-4484-B529-2E59B4ED10E3}">
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{CADD6F28-5959-4845-80E2-4DC4A8128F03}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
-      DTS:CreationName="EXCEL"
-      DTS:DTSID="{B664BFC4-EE8A-4E5F-88D0-1606A6C1220C}"
-      DTS:ObjectName="Excel Connection Manager">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectRetryCount="0"
-          DTS:ConnectRetryInterval="0"
-          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\LENOVO\OneDrive - VNU-HCMUS\Tri tue kd\Ontario\Datasource\Cases Report.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[LocalHost.CleanData]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{620FE19F-C840-4872-90C9-9BD727832ADF}"
+      DTS:DTSID="{B66FFC6F-B5CE-48CC-800C-15870B7706F5}"
       DTS:ObjectName="LocalHost.CleanData">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=.;Initial Catalog=CleanData;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{620FE19F-C840-4872-90C9-9BD727832ADF}LocalHost.CleanData;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=.;Initial Catalog=CleanData;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{B66FFC6F-B5CE-48CC-800C-15870B7706F5}LocalHost.CleanData;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.ProfilingData]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{ABF3D0ED-86C8-4F29-9629-1ED998DE273E}"
+      DTS:ObjectName="LocalHost.ProfilingData">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=ProfilingData;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{ABF3D0ED-86C8-4F29-9629-1ED998DE273E}LocalHost.ProfilingData;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
-      DTS:refId="Package\CasesReport"
+      DTS:refId="Package\PublicHealthUnit"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Data Flow Task"
-      DTS:DTSID="{4FA54B70-9B85-4370-89D8-174170D34755}"
+      DTS:DTSID="{f790a679-66b5-40a3-b4f3-38c3b4b9712c}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
-      DTS:ObjectName="CasesReport"
+      DTS:ObjectName="PublicHealthUnit"
       DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
       <DTS:Variables />
       <DTS:ObjectData>
@@ -58,13 +58,142 @@
           version="1">
           <components>
             <component
-              refId="Package\CasesReport\CasesReport"
-              componentClassID="Microsoft.ExcelSource"
-              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
-              description="Excel Source"
-              name="CasesReport"
+              refId="Package\PublicHealthUnit\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\PublicHealthUnit\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\PublicHealthUnit\Conditional Split.Inputs[Conditional Split Input].Columns[PHU_ID]"
+                      cachedDataType="i4"
+                      cachedName="PHU_ID"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[PHU_ID]" />
+                    <inputColumn
+                      refId="Package\PublicHealthUnit\Conditional Split.Inputs[Conditional Split Input].Columns[Reporting_PHU]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Reporting_PHU"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU]" />
+                    <inputColumn
+                      refId="Package\PublicHealthUnit\Conditional Split.Inputs[Conditional Split Input].Columns[Reporting_PHU_Address]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Reporting_PHU_Address"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Address]" />
+                    <inputColumn
+                      refId="Package\PublicHealthUnit\Conditional Split.Inputs[Conditional Split Input].Columns[Reporting_PHU_City]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Reporting_PHU_City"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_City]" />
+                    <inputColumn
+                      refId="Package\PublicHealthUnit\Conditional Split.Inputs[Conditional Split Input].Columns[Reporting_PHU_Postal_Code]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Reporting_PHU_Postal_Code"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Postal_Code]" />
+                    <inputColumn
+                      refId="Package\PublicHealthUnit\Conditional Split.Inputs[Conditional Split Input].Columns[Reporting_PHU_Website]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Reporting_PHU_Website"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Website]" />
+                    <inputColumn
+                      refId="Package\PublicHealthUnit\Conditional Split.Inputs[Conditional Split Input].Columns[Reporting_PHU_Latitude]"
+                      cachedDataType="r8"
+                      cachedName="Reporting_PHU_Latitude"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Latitude]" />
+                    <inputColumn
+                      refId="Package\PublicHealthUnit\Conditional Split.Inputs[Conditional Split Input].Columns[Reporting_PHU_Longitude]"
+                      cachedDataType="r8"
+                      cachedName="Reporting_PHU_Longitude"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Longitude]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\PublicHealthUnit\Conditional Split.Outputs[DataNull]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="DataNull"
+                  synchronousInputId="Package\PublicHealthUnit\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[PHU_ID]}) || [ISNULL](#{Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU]}) || [ISNULL](#{Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Address]}) || [ISNULL](#{Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_City]}) || [ISNULL](#{Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Postal_Code]}) || [ISNULL](#{Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Website]}) || [ISNULL](#{Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Latitude]}) || [ISNULL](#{Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Longitude]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(PHU_ID) || ISNULL(Reporting_PHU) || ISNULL(Reporting_PHU_Address) || ISNULL(Reporting_PHU_City) || ISNULL(Reporting_PHU_Postal_Code) || ISNULL(Reporting_PHU_Website) || ISNULL(Reporting_PHU_Latitude) || ISNULL(Reporting_PHU_Longitude)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\PublicHealthUnit\Conditional Split.Outputs[DataNotNull]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="DataNotNull"
+                  synchronousInputId="Package\PublicHealthUnit\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\PublicHealthUnit\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\PublicHealthUnit\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PublicHealthUnit\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\PublicHealthUnit\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnit\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\PublicHealthUnit\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\PublicHealthUnit\PublicHealthUnit"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="PublicHealthUnit"
               usesDispositions="true"
-              version="1">
+              version="7">
               <properties>
                 <property
                   dataType="System.Int32"
@@ -73,7 +202,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">'Cases Report$'</property>
+                  name="OpenRowset">[dbo].[PublicHealthUnit]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -89,371 +218,214 @@
                   name="SqlCommandVariable"></property>
                 <property
                   dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
                   description="Specifies the mode used to access the database."
                   name="AccessMode"
                   typeConverter="AccessMode">0</property>
                 <property
                   dataType="System.String"
-                  description="The mapping from parameters in the SQL command to variables."
+                  description="The mappings between the parameters in the SQL command and variables."
                   name="ParameterMapping"></property>
               </properties>
               <connections>
                 <connection
-                  refId="Package\CasesReport\CasesReport.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
-                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  refId="Package\PublicHealthUnit\PublicHealthUnit.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.ProfilingData]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.ProfilingData]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
               <outputs>
                 <output
-                  refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output]"
-                  name="Excel Source Output">
+                  refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Outcome]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[PHU_ID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[PHU_ID]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[PHU_ID]"
+                      name="PHU_ID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[Outcome]"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[Reporting_PHU]"
                       length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Outcome]"
-                      name="Outcome"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU]"
+                      name="Reporting_PHU"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Age]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Address]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[Age]"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[Reporting_PHU_Address]"
                       length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Age]"
-                      name="Age"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Address]"
+                      name="Reporting_PHU_Address"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Gender]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_City]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[Gender]"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[Reporting_PHU_City]"
                       length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Gender]"
-                      name="Gender"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_City]"
+                      name="Reporting_PHU_City"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Reporting PHU]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Postal_Code]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[Reporting PHU]"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[Reporting_PHU_Postal_Code]"
                       length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Reporting PHU]"
-                      name="Reporting PHU"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Postal_Code]"
+                      name="Reporting_PHU_Postal_Code"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[SpecimenDate]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Website]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[SpecimenDate]"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[Reporting_PHU_Website]"
                       length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[SpecimenDate]"
-                      name="SpecimenDate"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Website]"
+                      name="Reporting_PHU_Website"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseReported Date]"
-                      dataType="date"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[CaseReported Date]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseReported Date]"
-                      name="CaseReported Date"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHUCity]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHUCity]"
-                      length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHUCity]"
-                      name="PHUCity"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[TestReported Date]"
-                      dataType="date"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[TestReported Date]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[TestReported Date]"
-                      name="TestReported Date"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseAcquisition info]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[CaseAcquisition info]"
-                      length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseAcquisition info]"
-                      name="CaseAcquisition info"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[AccurateEpisode Dt]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[AccurateEpisode Dt]"
-                      length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[AccurateEpisode Dt]"
-                      name="AccurateEpisode Dt"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Address]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHU Address]"
-                      length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Address]"
-                      name="PHU Address"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Website]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHU Website]"
-                      length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Website]"
-                      name="PHU Website"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[OutbreakRelated]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[OutbreakRelated]"
-                      length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[OutbreakRelated]"
-                      name="OutbreakRelated"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Latitude]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Latitude]"
                       dataType="r8"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHU Latitude]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Latitude]"
-                      name="PHU Latitude"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[Reporting_PHU_Latitude]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Latitude]"
+                      name="Reporting_PHU_Latitude"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Longitude]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Longitude]"
                       dataType="r8"
                       errorOrTruncationOperation="Conversion"
                       errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHU Longitude]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Longitude]"
-                      name="PHU Longitude"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Postal Code]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHU Postal Code]"
-                      length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Postal Code]"
-                      name="PHU Postal Code"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[Reporting_PHU_Longitude]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Longitude]"
+                      name="Reporting_PHU_Longitude"
                       truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[Outcome]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[PHU_ID]"
+                      dataType="i4"
+                      name="PHU_ID" />
+                    <externalMetadataColumn
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[Reporting_PHU]"
                       dataType="wstr"
                       length="255"
-                      name="Outcome" />
+                      name="Reporting_PHU" />
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[Age]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[Reporting_PHU_Address]"
                       dataType="wstr"
                       length="255"
-                      name="Age" />
+                      name="Reporting_PHU_Address" />
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[Gender]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[Reporting_PHU_City]"
                       dataType="wstr"
                       length="255"
-                      name="Gender" />
+                      name="Reporting_PHU_City" />
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[Reporting PHU]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[Reporting_PHU_Postal_Code]"
                       dataType="wstr"
                       length="255"
-                      name="Reporting PHU" />
+                      name="Reporting_PHU_Postal_Code" />
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[SpecimenDate]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[Reporting_PHU_Website]"
                       dataType="wstr"
                       length="255"
-                      name="SpecimenDate" />
+                      name="Reporting_PHU_Website" />
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[CaseReported Date]"
-                      dataType="date"
-                      name="CaseReported Date" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHUCity]"
-                      dataType="wstr"
-                      length="255"
-                      name="PHUCity" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[TestReported Date]"
-                      dataType="date"
-                      name="TestReported Date" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[CaseAcquisition info]"
-                      dataType="wstr"
-                      length="255"
-                      name="CaseAcquisition info" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[AccurateEpisode Dt]"
-                      dataType="wstr"
-                      length="255"
-                      name="AccurateEpisode Dt" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHU Address]"
-                      dataType="wstr"
-                      length="255"
-                      name="PHU Address" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHU Website]"
-                      dataType="wstr"
-                      length="255"
-                      name="PHU Website" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[OutbreakRelated]"
-                      dataType="wstr"
-                      length="255"
-                      name="OutbreakRelated" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHU Latitude]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[Reporting_PHU_Latitude]"
                       dataType="r8"
-                      name="PHU Latitude" />
+                      name="Reporting_PHU_Latitude" />
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHU Longitude]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].ExternalColumns[Reporting_PHU_Longitude]"
                       dataType="r8"
-                      name="PHU Longitude" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].ExternalColumns[PHU Postal Code]"
-                      dataType="wstr"
-                      length="255"
-                      name="PHU Postal Code" />
+                      name="Reporting_PHU_Longitude" />
                   </externalMetadataColumns>
                 </output>
                 <output
-                  refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output]"
+                  refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output]"
                   isErrorOut="true"
-                  name="Excel Source Error Output">
+                  name="OLE DB Source Error Output">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[Outcome]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[Outcome]"
-                      name="Outcome" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[Age]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[Age]"
-                      name="Age" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[Gender]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[Gender]"
-                      name="Gender" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[Reporting PHU]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[Reporting PHU]"
-                      name="Reporting PHU" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[SpecimenDate]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[SpecimenDate]"
-                      name="SpecimenDate" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[CaseReported Date]"
-                      dataType="date"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[CaseReported Date]"
-                      name="CaseReported Date" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHUCity]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHUCity]"
-                      name="PHUCity" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[TestReported Date]"
-                      dataType="date"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[TestReported Date]"
-                      name="TestReported Date" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[CaseAcquisition info]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[CaseAcquisition info]"
-                      name="CaseAcquisition info" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[AccurateEpisode Dt]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[AccurateEpisode Dt]"
-                      name="AccurateEpisode Dt" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHU Address]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHU Address]"
-                      name="PHU Address" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHU Website]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHU Website]"
-                      name="PHU Website" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[OutbreakRelated]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[OutbreakRelated]"
-                      name="OutbreakRelated" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHU Latitude]"
-                      dataType="r8"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHU Latitude]"
-                      name="PHU Latitude" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHU Longitude]"
-                      dataType="r8"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHU Longitude]"
-                      name="PHU Longitude" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHU Postal Code]"
-                      dataType="wstr"
-                      length="255"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[PHU Postal Code]"
-                      name="PHU Postal Code" />
-                    <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[PHU_ID]"
                       dataType="i4"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[PHU_ID]"
+                      name="PHU_ID" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[Reporting_PHU]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[Reporting_PHU]"
+                      name="Reporting_PHU" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[Reporting_PHU_Address]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[Reporting_PHU_Address]"
+                      name="Reporting_PHU_Address" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[Reporting_PHU_City]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[Reporting_PHU_City]"
+                      name="Reporting_PHU_City" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[Reporting_PHU_Postal_Code]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[Reporting_PHU_Postal_Code]"
+                      name="Reporting_PHU_Postal_Code" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[Reporting_PHU_Website]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[Reporting_PHU_Website]"
+                      name="Reporting_PHU_Website" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[Reporting_PHU_Latitude]"
+                      dataType="r8"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[Reporting_PHU_Latitude]"
+                      name="Reporting_PHU_Latitude" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[Reporting_PHU_Longitude]"
+                      dataType="r8"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[Reporting_PHU_Longitude]"
+                      name="Reporting_PHU_Longitude" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -462,11 +434,11 @@
               </outputs>
             </component>
             <component
-              refId="Package\CasesReport\CasesReportDataClean"
+              refId="Package\PublicHealthUnit\PublicHealthUnitDataClean"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
-              name="CasesReportDataClean"
+              name="PublicHealthUnitDataClean"
               usesDispositions="true"
               version="4">
               <properties>
@@ -477,7 +449,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[CasesReportDataClean]</property>
+                  name="OpenRowset">[dbo].[PublicHealthUnitDataClean]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -519,7 +491,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\CasesReport\CasesReportDataClean.Connections[OleDbConnection]"
+                  refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[LocalHost.CleanData]"
                   connectionManagerRefId="Package.ConnectionManagers[LocalHost.CleanData]"
                   description="The OLE DB runtime connection used to access the database."
@@ -527,218 +499,126 @@
               </connections>
               <inputs>
                 <input
-                  refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input]"
+                  refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[Outcome]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].Columns[PHU_ID]"
+                      cachedDataType="i4"
+                      cachedName="PHU_ID"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHU_ID]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[PHU_ID]" />
+                    <inputColumn
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].Columns[Reporting_PHU]"
                       cachedDataType="wstr"
                       cachedLength="255"
-                      cachedName="Outcome"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Outcome]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Outcome]" />
+                      cachedName="Reporting_PHU"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU]" />
                     <inputColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[Age]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].Columns[Reporting_PHU_Address]"
                       cachedDataType="wstr"
                       cachedLength="255"
-                      cachedName="Age"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Age]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Age]" />
+                      cachedName="Reporting_PHU_Address"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Address]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Address]" />
                     <inputColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].Columns[Reporting_PHU_City]"
                       cachedDataType="wstr"
                       cachedLength="255"
-                      cachedName="Gender"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Gender]" />
+                      cachedName="Reporting_PHU_City"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_City]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_City]" />
                     <inputColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[SpecimenDate]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].Columns[Reporting_PHU_Postal_Code]"
                       cachedDataType="wstr"
                       cachedLength="255"
-                      cachedName="SpecimenDate"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[SpecimenDate]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[SpecimenDate]" />
+                      cachedName="Reporting_PHU_Postal_Code"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Postal_Code]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Postal_Code]" />
                     <inputColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[PHUCity]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].Columns[Reporting_PHU_Website]"
                       cachedDataType="wstr"
                       cachedLength="255"
-                      cachedName="PHUCity"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHUCity]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHUCity]" />
+                      cachedName="Reporting_PHU_Website"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Website]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Website]" />
                     <inputColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[Reporting PHU]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="Reporting PHU"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[ReportingPHU]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Reporting PHU]" />
-                    <inputColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[CaseReported Date]"
-                      cachedDataType="date"
-                      cachedName="CaseReported Date"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[CaseReportedDate]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseReported Date]" />
-                    <inputColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[TestReported Date]"
-                      cachedDataType="date"
-                      cachedName="TestReported Date"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[TestReportedDate]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[TestReported Date]" />
-                    <inputColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[CaseAcquisition info]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="CaseAcquisition info"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[CaseAcquisitionInfo]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseAcquisition info]" />
-                    <inputColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[AccurateEpisode Dt]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="AccurateEpisode Dt"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[AccurateEpisodeDate]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[AccurateEpisode Dt]" />
-                    <inputColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[PHU Address]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="PHU Address"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHUAddress]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Address]" />
-                    <inputColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[PHU Website]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="PHU Website"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHUWebsite]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Website]" />
-                    <inputColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[OutbreakRelated]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="OutbreakRelated"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[OutbreakRelated]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[OutbreakRelated]" />
-                    <inputColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[PHU Latitude]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].Columns[Reporting_PHU_Latitude]"
                       cachedDataType="r8"
-                      cachedName="PHU Latitude"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHULatitude]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Latitude]" />
+                      cachedName="Reporting_PHU_Latitude"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Latitude]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Latitude]" />
                     <inputColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[PHU Longitude]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].Columns[Reporting_PHU_Longitude]"
                       cachedDataType="r8"
-                      cachedName="PHU Longitude"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHULongitude]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Longitude]" />
-                    <inputColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].Columns[PHU Postal Code]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="PHU Postal Code"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHUPostalCode]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Postal Code]" />
+                      cachedName="Reporting_PHU_Longitude"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Longitude]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Longitude]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Outcome]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHU_ID]"
+                      dataType="i4"
+                      name="PHU_ID" />
+                    <externalMetadataColumn
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU]"
                       dataType="wstr"
                       length="255"
-                      name="Outcome" />
+                      name="Reporting_PHU" />
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Age]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Address]"
                       dataType="wstr"
                       length="255"
-                      name="Age" />
+                      name="Reporting_PHU_Address" />
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_City]"
                       dataType="wstr"
                       length="255"
-                      name="Gender" />
+                      name="Reporting_PHU_City" />
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[ReportingPHU]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Postal_Code]"
                       dataType="wstr"
                       length="255"
-                      name="ReportingPHU" />
+                      name="Reporting_PHU_Postal_Code" />
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[SpecimenDate]"
-                      dataType="dbDate"
-                      name="SpecimenDate" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[CaseReportedDate]"
-                      dataType="dbDate"
-                      name="CaseReportedDate" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHUCity]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Website]"
                       dataType="wstr"
                       length="255"
-                      name="PHUCity" />
+                      name="Reporting_PHU_Website" />
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[TestReportedDate]"
-                      dataType="dbDate"
-                      name="TestReportedDate" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[CaseAcquisitionInfo]"
-                      dataType="wstr"
-                      length="255"
-                      name="CaseAcquisitionInfo" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[AccurateEpisodeDate]"
-                      dataType="dbDate"
-                      name="AccurateEpisodeDate" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHUAddress]"
-                      dataType="wstr"
-                      length="255"
-                      name="PHUAddress" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHUWebsite]"
-                      dataType="wstr"
-                      length="255"
-                      name="PHUWebsite" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[OutbreakRelated]"
-                      dataType="wstr"
-                      length="255"
-                      name="OutbreakRelated" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHULatitude]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Latitude]"
                       dataType="r8"
-                      name="PHULatitude" />
+                      name="Reporting_PHU_Latitude" />
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHULongitude]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Longitude]"
                       dataType="r8"
-                      name="PHULongitude" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHUPostalCode]"
-                      dataType="wstr"
-                      length="255"
-                      name="PHUPostalCode" />
+                      name="Reporting_PHU_Longitude" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\CasesReport\CasesReportDataClean.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\CasesReport\CasesReportDataClean.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\CasesReport\CasesReportDataClean.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\CasesReport\CasesReportDataClean.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -747,11 +627,11 @@
               </outputs>
             </component>
             <component
-              refId="Package\CasesReport\CasesReportDataNull"
+              refId="Package\PublicHealthUnit\PublicHealthUnitDataNull"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
               description="OLE DB Destination"
-              name="CasesReportDataNull"
+              name="PublicHealthUnitDataNull"
               usesDispositions="true"
               version="4">
               <properties>
@@ -762,7 +642,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[CasesReportDataNull]</property>
+                  name="OpenRowset">[dbo].[PublicHealthUnitDataNull]</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -784,7 +664,7 @@
                   dataType="System.Int32"
                   description="Specifies the mode used to access the database."
                   name="AccessMode"
-                  typeConverter="AccessMode">0</property>
+                  typeConverter="AccessMode">3</property>
                 <property
                   dataType="System.Boolean"
                   description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
@@ -796,7 +676,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
-                  name="FastLoadOptions"></property>
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
@@ -804,7 +684,7 @@
               </properties>
               <connections>
                 <connection
-                  refId="Package\CasesReport\CasesReportDataNull.Connections[OleDbConnection]"
+                  refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Connections[OleDbConnection]"
                   connectionManagerID="Package.ConnectionManagers[LocalHost.CleanData]"
                   connectionManagerRefId="Package.ConnectionManagers[LocalHost.CleanData]"
                   description="The OLE DB runtime connection used to access the database."
@@ -812,394 +692,126 @@
               </connections>
               <inputs>
                 <input
-                  refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input]"
+                  refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input]"
                   errorOrTruncationOperation="Insert"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
                   name="OLE DB Destination Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[Outcome]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].Columns[PHU_ID]"
+                      cachedDataType="i4"
+                      cachedName="PHU_ID"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHU_ID]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[PHU_ID]" />
+                    <inputColumn
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].Columns[Reporting_PHU]"
                       cachedDataType="wstr"
                       cachedLength="255"
-                      cachedName="Outcome"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Outcome]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Outcome]" />
+                      cachedName="Reporting_PHU"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU]" />
                     <inputColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[Age]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].Columns[Reporting_PHU_Address]"
                       cachedDataType="wstr"
                       cachedLength="255"
-                      cachedName="Age"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Age]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Age]" />
+                      cachedName="Reporting_PHU_Address"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Address]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Address]" />
                     <inputColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].Columns[Reporting_PHU_City]"
                       cachedDataType="wstr"
                       cachedLength="255"
-                      cachedName="Gender"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Gender]" />
+                      cachedName="Reporting_PHU_City"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_City]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_City]" />
                     <inputColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[SpecimenDate]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].Columns[Reporting_PHU_Postal_Code]"
                       cachedDataType="wstr"
                       cachedLength="255"
-                      cachedName="SpecimenDate"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[SpecimenDate]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[SpecimenDate]" />
+                      cachedName="Reporting_PHU_Postal_Code"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Postal_Code]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Postal_Code]" />
                     <inputColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[PHUCity]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].Columns[Reporting_PHU_Website]"
                       cachedDataType="wstr"
                       cachedLength="255"
-                      cachedName="PHUCity"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHUCity]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHUCity]" />
+                      cachedName="Reporting_PHU_Website"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Website]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Website]" />
                     <inputColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[OutbreakRelated]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="OutbreakRelated"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[OutbreakRelated]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[OutbreakRelated]" />
-                    <inputColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[Reporting PHU]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="Reporting PHU"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[ReportingPHU]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Reporting PHU]" />
-                    <inputColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[CaseReported Date]"
-                      cachedDataType="date"
-                      cachedName="CaseReported Date"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[CaseReportedDate]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseReported Date]" />
-                    <inputColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[TestReported Date]"
-                      cachedDataType="date"
-                      cachedName="TestReported Date"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[TestReportedDate]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[TestReported Date]" />
-                    <inputColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[CaseAcquisition info]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="CaseAcquisition info"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[CaseAcquisitionInfo]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseAcquisition info]" />
-                    <inputColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[AccurateEpisode Dt]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="AccurateEpisode Dt"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[AccurateEpisodeDate]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[AccurateEpisode Dt]" />
-                    <inputColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[PHU Address]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="PHU Address"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHUAddress]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Address]" />
-                    <inputColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[PHU Website]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="PHU Website"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHUWebsite]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Website]" />
-                    <inputColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[PHU Postal Code]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="PHU Postal Code"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHULatitude]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Postal Code]" />
-                    <inputColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[PHU Latitude]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].Columns[Reporting_PHU_Latitude]"
                       cachedDataType="r8"
-                      cachedName="PHU Latitude"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHULongitude]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Latitude]" />
+                      cachedName="Reporting_PHU_Latitude"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Latitude]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Latitude]" />
                     <inputColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].Columns[PHU Longitude]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].Columns[Reporting_PHU_Longitude]"
                       cachedDataType="r8"
-                      cachedName="PHU Longitude"
-                      externalMetadataColumnId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHUPostalCode]"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Longitude]" />
+                      cachedName="Reporting_PHU_Longitude"
+                      externalMetadataColumnId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Longitude]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output].Columns[Reporting_PHU_Longitude]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Outcome]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHU_ID]"
+                      dataType="i4"
+                      name="PHU_ID" />
+                    <externalMetadataColumn
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU]"
                       dataType="wstr"
                       length="255"
-                      name="Outcome" />
+                      name="Reporting_PHU" />
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Age]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Address]"
                       dataType="wstr"
                       length="255"
-                      name="Age" />
+                      name="Reporting_PHU_Address" />
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_City]"
                       dataType="wstr"
                       length="255"
-                      name="Gender" />
+                      name="Reporting_PHU_City" />
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[ReportingPHU]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Postal_Code]"
                       dataType="wstr"
                       length="255"
-                      name="ReportingPHU" />
+                      name="Reporting_PHU_Postal_Code" />
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[SpecimenDate]"
-                      dataType="dbDate"
-                      name="SpecimenDate" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[CaseReportedDate]"
-                      dataType="dbDate"
-                      name="CaseReportedDate" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHUCity]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Website]"
                       dataType="wstr"
                       length="255"
-                      name="PHUCity" />
+                      name="Reporting_PHU_Website" />
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[TestReportedDate]"
-                      dataType="dbDate"
-                      name="TestReportedDate" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[CaseAcquisitionInfo]"
-                      dataType="wstr"
-                      length="255"
-                      name="CaseAcquisitionInfo" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[AccurateEpisodeDate]"
-                      dataType="dbDate"
-                      name="AccurateEpisodeDate" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHUAddress]"
-                      dataType="wstr"
-                      length="255"
-                      name="PHUAddress" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHUWebsite]"
-                      dataType="wstr"
-                      length="255"
-                      name="PHUWebsite" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[OutbreakRelated]"
-                      dataType="wstr"
-                      length="255"
-                      name="OutbreakRelated" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHULatitude]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Latitude]"
                       dataType="r8"
-                      name="PHULatitude" />
+                      name="Reporting_PHU_Latitude" />
                     <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHULongitude]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input].ExternalColumns[Reporting_PHU_Longitude]"
                       dataType="r8"
-                      name="PHULongitude" />
-                    <externalMetadataColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHUPostalCode]"
-                      dataType="wstr"
-                      length="255"
-                      name="PHUPostalCode" />
+                      name="Reporting_PHU_Longitude" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\CasesReport\CasesReportDataNull.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Outputs[OLE DB Destination Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
                   name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input]">
+                  synchronousInputId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\CasesReport\CasesReportDataNull.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\CasesReport\CasesReportDataNull.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\CasesReport\CasesReportDataNull.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\CasesReport\Conditional Split"
-              componentClassID="Microsoft.ConditionalSplit"
-              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
-              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
-              name="Conditional Split"
-              usesDispositions="true">
-              <inputs>
-                <input
-                  refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input]"
-                  description="Input to the Conditional Split Transformation"
-                  name="Conditional Split Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[Outcome]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="Outcome"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Outcome]" />
-                    <inputColumn
-                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[Age]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="Age"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Age]" />
-                    <inputColumn
-                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[Gender]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="Gender"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Gender]" />
-                    <inputColumn
-                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[Reporting PHU]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="Reporting PHU"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Reporting PHU]" />
-                    <inputColumn
-                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[SpecimenDate]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="SpecimenDate"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[SpecimenDate]" />
-                    <inputColumn
-                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[CaseReported Date]"
-                      cachedDataType="date"
-                      cachedName="CaseReported Date"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseReported Date]" />
-                    <inputColumn
-                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[PHUCity]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="PHUCity"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHUCity]" />
-                    <inputColumn
-                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[TestReported Date]"
-                      cachedDataType="date"
-                      cachedName="TestReported Date"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[TestReported Date]" />
-                    <inputColumn
-                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[CaseAcquisition info]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="CaseAcquisition info"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseAcquisition info]" />
-                    <inputColumn
-                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[AccurateEpisode Dt]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="AccurateEpisode Dt"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[AccurateEpisode Dt]" />
-                    <inputColumn
-                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[PHU Address]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="PHU Address"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Address]" />
-                    <inputColumn
-                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[PHU Website]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="PHU Website"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Website]" />
-                    <inputColumn
-                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[OutbreakRelated]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="OutbreakRelated"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[OutbreakRelated]" />
-                    <inputColumn
-                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[PHU Latitude]"
-                      cachedDataType="r8"
-                      cachedName="PHU Latitude"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Latitude]" />
-                    <inputColumn
-                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[PHU Longitude]"
-                      cachedDataType="r8"
-                      cachedName="PHU Longitude"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Longitude]" />
-                    <inputColumn
-                      refId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input].Columns[PHU Postal Code]"
-                      cachedDataType="wstr"
-                      cachedLength="255"
-                      cachedName="PHU Postal Code"
-                      lineageId="Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Postal Code]" />
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\CasesReport\Conditional Split.Outputs[DataNull]"
-                  description="Output 1 of the Conditional Split Transformation"
-                  errorOrTruncationOperation="Computation"
-                  errorRowDisposition="FailComponent"
-                  exclusionGroup="1"
-                  name="DataNull"
-                  synchronousInputId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input]"
-                  truncationRowDisposition="FailComponent">
-                  <properties>
-                    <property
-                      containsID="true"
-                      dataType="System.String"
-                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">[ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Outcome]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Age]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Gender]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[Reporting PHU]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[SpecimenDate]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseReported Date]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHUCity]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[TestReported Date]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[CaseAcquisition info]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[AccurateEpisode Dt]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Address]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Website]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[OutbreakRelated]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Latitude]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Longitude]}) || [ISNULL](#{Package\CasesReport\CasesReport.Outputs[Excel Source Output].Columns[PHU Postal Code]})</property>
-                    <property
-                      containsID="true"
-                      dataType="System.String"
-                      description="Specifies the friendly version of the expression. This expression version uses column names."
-                      expressionType="Notify"
-                      name="FriendlyExpression">ISNULL(Outcome) || ISNULL(Age) || ISNULL(Gender) || ISNULL([Reporting PHU]) || ISNULL(SpecimenDate) || ISNULL([CaseReported Date]) || ISNULL(PHUCity) || ISNULL([TestReported Date]) || ISNULL([CaseAcquisition info]) || ISNULL([AccurateEpisode Dt]) || ISNULL([PHU Address]) || ISNULL([PHU Website]) || ISNULL(OutbreakRelated) || ISNULL([PHU Latitude]) || ISNULL([PHU Longitude]) || ISNULL([PHU Postal Code])</property>
-                    <property
-                      dataType="System.Int32"
-                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
-                      name="EvaluationOrder">0</property>
-                  </properties>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\CasesReport\Conditional Split.Outputs[DataNotNull]"
-                  description="Default Output of the Conditional Split Transformation"
-                  exclusionGroup="1"
-                  name="DataNotNull"
-                  synchronousInputId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input]">
-                  <properties>
-                    <property
-                      dataType="System.Boolean"
-                      name="IsDefaultOut">true</property>
-                  </properties>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\CasesReport\Conditional Split.Outputs[Conditional Split Error Output]"
-                  description="Error Output of the Conditional Split Transformation"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Conditional Split Error Output"
-                  synchronousInputId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\CasesReport\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\CasesReport\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\CasesReport\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\CasesReport\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -1210,67 +822,22 @@
           </components>
           <paths>
             <path
-              refId="Package\CasesReport.Paths[DataNotNull]"
-              endId="Package\CasesReport\CasesReportDataClean.Inputs[OLE DB Destination Input]"
+              refId="Package\PublicHealthUnit.Paths[DataNotNull]"
+              endId="Package\PublicHealthUnit\PublicHealthUnitDataClean.Inputs[OLE DB Destination Input]"
               name="DataNotNull"
-              startId="Package\CasesReport\Conditional Split.Outputs[DataNotNull]" />
+              startId="Package\PublicHealthUnit\Conditional Split.Outputs[DataNotNull]" />
             <path
-              refId="Package\CasesReport.Paths[DataNull]"
-              endId="Package\CasesReport\CasesReportDataNull.Inputs[OLE DB Destination Input]"
+              refId="Package\PublicHealthUnit.Paths[DataNull]"
+              endId="Package\PublicHealthUnit\PublicHealthUnitDataNull.Inputs[OLE DB Destination Input]"
               name="DataNull"
-              startId="Package\CasesReport\Conditional Split.Outputs[DataNull]" />
+              startId="Package\PublicHealthUnit\Conditional Split.Outputs[DataNull]" />
             <path
-              refId="Package\CasesReport.Paths[Excel Source Output]"
-              endId="Package\CasesReport\Conditional Split.Inputs[Conditional Split Input]"
-              name="Excel Source Output"
-              startId="Package\CasesReport\CasesReport.Outputs[Excel Source Output]" />
+              refId="Package\PublicHealthUnit.Paths[OLE DB Source Output]"
+              endId="Package\PublicHealthUnit\Conditional Split.Inputs[Conditional Split Input]"
+              name="OLE DB Source Output"
+              startId="Package\PublicHealthUnit\PublicHealthUnit.Outputs[OLE DB Source Output]" />
           </paths>
         </pipeline>
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\CompiledCOVID19CaseDetails"
-      DTS:CreationName="Microsoft.Pipeline"
-      DTS:Description="Data Flow Task"
-      DTS:DTSID="{074a8f04-9a9f-43dc-9786-af0a47227fff}"
-      DTS:ExecutableType="Microsoft.Pipeline"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="CompiledCOVID19CaseDetails"
-      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <pipeline
-          version="1" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\OngoingOutbreaksPhu"
-      DTS:CreationName="Microsoft.Pipeline"
-      DTS:Description="Data Flow Task"
-      DTS:DTSID="{ea7b02a5-d5d6-4d8a-800b-467ab94dc5e7}"
-      DTS:ExecutableType="Microsoft.Pipeline"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="OngoingOutbreaksPhu"
-      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <pipeline
-          version="1" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\PublicHealthUnit"
-      DTS:CreationName="Microsoft.Pipeline"
-      DTS:Description="Data Flow Task"
-      DTS:DTSID="{f790a679-66b5-40a3-b4f3-38c3b4b9712c}"
-      DTS:ExecutableType="Microsoft.Pipeline"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="PublicHealthUnit"
-      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <pipeline
-          version="1" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -1285,22 +852,558 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <pipeline
-          version="1" />
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\VaccinesByAgePhu"
-      DTS:CreationName="Microsoft.Pipeline"
-      DTS:Description="Data Flow Task"
-      DTS:DTSID="{31bbc92b-c423-4ebf-8027-300702878735}"
-      DTS:ExecutableType="Microsoft.Pipeline"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="VaccinesByAgePhu"
-      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <pipeline
-          version="1" />
+          version="1">
+          <components>
+            <component
+              refId="Package\PublicHealthUnitsGROUP\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\PublicHealthUnitsGROUP\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\PublicHealthUnitsGROUP\Conditional Split.Inputs[Conditional Split Input].Columns[PHU_Group]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHU_Group"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[PHU_Group]" />
+                    <inputColumn
+                      refId="Package\PublicHealthUnitsGROUP\Conditional Split.Inputs[Conditional Split Input].Columns[PHU_City]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHU_City"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[PHU_City]" />
+                    <inputColumn
+                      refId="Package\PublicHealthUnitsGROUP\Conditional Split.Inputs[Conditional Split Input].Columns[PHU_region]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHU_region"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[PHU_region]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\PublicHealthUnitsGROUP\Conditional Split.Outputs[DataNull]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="DataNull"
+                  synchronousInputId="Package\PublicHealthUnitsGROUP\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[PHU_Group]}) || [ISNULL](#{Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[PHU_City]}) || [ISNULL](#{Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[PHU_region]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(PHU_Group) || ISNULL(PHU_City) || ISNULL(PHU_region)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\PublicHealthUnitsGROUP\Conditional Split.Outputs[DataNotNull]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="DataNotNull"
+                  synchronousInputId="Package\PublicHealthUnitsGROUP\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\PublicHealthUnitsGROUP\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\PublicHealthUnitsGROUP\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PublicHealthUnitsGROUP\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\PublicHealthUnitsGROUP\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnitsGROUP\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\PublicHealthUnitsGROUP\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="PublicHealthUnitsGROUP"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[PublicHealthUnitsGROUP]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.ProfilingData]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.ProfilingData]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[PHU_Group]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].ExternalColumns[PHU_Group]"
+                      length="255"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[PHU_Group]"
+                      name="PHU_Group"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[PHU_City]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].ExternalColumns[PHU_City]"
+                      length="255"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[PHU_City]"
+                      name="PHU_City"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[PHU_region]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].ExternalColumns[PHU_region]"
+                      length="255"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[PHU_region]"
+                      name="PHU_region"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].ExternalColumns[PHU_Group]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHU_Group" />
+                    <externalMetadataColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].ExternalColumns[PHU_City]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHU_City" />
+                    <externalMetadataColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].ExternalColumns[PHU_region]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHU_region" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Error Output].Columns[PHU_Group]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Error Output].Columns[PHU_Group]"
+                      name="PHU_Group" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Error Output].Columns[PHU_City]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Error Output].Columns[PHU_City]"
+                      name="PHU_City" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Error Output].Columns[PHU_region]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Error Output].Columns[PHU_region]"
+                      name="PHU_region" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="PublicHealthUnitsGROUPDataClean"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[PublicHealthUnitsGROUPDataClean]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.CleanData]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.CleanData]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input].Columns[PHU_Group]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHU_Group"
+                      externalMetadataColumnId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHU_Group]"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[PHU_Group]" />
+                    <inputColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input].Columns[PHU_City]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHU_City"
+                      externalMetadataColumnId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHU_City]"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[PHU_City]" />
+                    <inputColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input].Columns[PHU_region]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHU_region"
+                      externalMetadataColumnId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHU_region]"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[PHU_region]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHU_Group]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHU_Group" />
+                    <externalMetadataColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHU_City]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHU_City" />
+                    <externalMetadataColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input].ExternalColumns[PHU_region]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHU_region" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="PublicHealthUnitsGROUPDataNull"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[PublicHealthUnitsGROUPDataNull]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.CleanData]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.CleanData]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull.Inputs[OLE DB Destination Input].Columns[PHU_Group]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHU_Group"
+                      externalMetadataColumnId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHU_Group]"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[PHU_Group]" />
+                    <inputColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull.Inputs[OLE DB Destination Input].Columns[PHU_City]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHU_City"
+                      externalMetadataColumnId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHU_City]"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[PHU_City]" />
+                    <inputColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull.Inputs[OLE DB Destination Input].Columns[PHU_region]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="PHU_region"
+                      externalMetadataColumnId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHU_region]"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output].Columns[PHU_region]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHU_Group]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHU_Group" />
+                    <externalMetadataColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHU_City]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHU_City" />
+                    <externalMetadataColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull.Inputs[OLE DB Destination Input].ExternalColumns[PHU_region]"
+                      dataType="wstr"
+                      length="255"
+                      name="PHU_region" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\PublicHealthUnitsGROUP.Paths[DataNotNull]"
+              endId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean.Inputs[OLE DB Destination Input]"
+              name="DataNotNull"
+              startId="Package\PublicHealthUnitsGROUP\Conditional Split.Outputs[DataNotNull]" />
+            <path
+              refId="Package\PublicHealthUnitsGROUP.Paths[DataNull]"
+              endId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull.Inputs[OLE DB Destination Input]"
+              name="DataNull"
+              startId="Package\PublicHealthUnitsGROUP\Conditional Split.Outputs[DataNull]" />
+            <path
+              refId="Package\PublicHealthUnitsGROUP.Paths[OLE DB Source Output]"
+              endId="Package\PublicHealthUnitsGROUP\Conditional Split.Inputs[Conditional Split Input]"
+              name="OLE DB Source Output"
+              startId="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
   </DTS:Executables>
@@ -1315,61 +1418,53 @@
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
         <NodeLayout
-          Size="138,42.6666666666667"
-          Id="Package\CasesReport"
-          TopLeft="120.930554074753,38.3000020688772" />
-        <NodeLayout
-          Size="220,42.6666666666667"
-          Id="Package\CompiledCOVID19CaseDetails"
-          TopLeft="79.9305540747527,140.966668735544" />
-        <NodeLayout
-          Size="185.333333333334,42.6666666666667"
-          Id="Package\OngoingOutbreaksPhu"
-          TopLeft="97.263887408086,243.633335402211" />
-        <NodeLayout
-          Size="156,42.6666666666667"
+          Size="156,42.4"
           Id="Package\PublicHealthUnit"
-          TopLeft="366.791661330188,38.3000020688772" />
+          TopLeft="124.648800063663,138.57451255918" />
         <NodeLayout
-          Size="196,42.6666666666667"
+          Size="196,42.4"
           Id="Package\PublicHealthUnitsGROUP"
-          TopLeft="346.791661330188,140.966668735544" />
-        <NodeLayout
-          Size="168,42.6666666666667"
-          Id="Package\VaccinesByAgePhu"
-          TopLeft="360.791661330188,243.633335402211" />
+          TopLeft="346.791661330188,138.57451255918" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\CasesReport">
+    design-time-name="Package\PublicHealthUnit">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="138,42.6666666666667"
-          Id="Package\CasesReport\CasesReport"
-          TopLeft="329.499995157123,11.5374997936934" />
+          Size="154.4,41.6"
+          Id="Package\PublicHealthUnit\Conditional Split"
+          TopLeft="543.2,146" />
         <NodeLayout
-          Size="156,42.6666666666667"
-          Id="Package\CasesReport\Conditional Split"
-          TopLeft="320.499995157123,112.287497992143" />
+          Size="155.2,41.6"
+          Id="Package\PublicHealthUnit\PublicHealthUnit"
+          TopLeft="542.8,45" />
+        <NodeLayout
+          Size="195.2,41.6"
+          Id="Package\PublicHealthUnit\PublicHealthUnitDataNull"
+          TopLeft="274,252.5" />
+        <NodeLayout
+          Size="203.2,41.6"
+          Id="Package\PublicHealthUnit\PublicHealthUnitDataClean"
+          TopLeft="760,252.5" />
         <EdgeLayout
-          Id="Package\CasesReport.Paths[Excel Source Output]"
-          TopLeft="398.499995157123,54.2041664603601">
+          Id="Package\PublicHealthUnit.Paths[OLE DB Source Output]"
+          TopLeft="620.4,86.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,58.083331531783"
+              EndConnector="0,59.4"
               Start="0,0"
-              End="0,50.583331531783">
+              End="0,51.9">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,50.583331531783" />
+                    End="0,51.9" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1378,83 +1473,193 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="178.666666666667,42.6666666666667"
-          Id="Package\CasesReport\CasesReportDataNull"
-          TopLeft="138.281247939449,190.1249966003" />
-        <NodeLayout
-          Size="186.666666666667,42.6666666666667"
-          Id="Package\CasesReport\CasesReportDataClean"
-          TopLeft="493.749992642552,185.249996687472" />
         <EdgeLayout
-          Id="Package\CasesReport.Paths[DataNull]"
-          TopLeft="398.499995157123,154.95416465881">
+          Id="Package\PublicHealthUnit.Paths[DataNull]"
+          TopLeft="620.4,187.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-170.88541388434,35.1708319414905"
+              EndConnector="-248.8,64.9"
               Start="0,0"
-              End="-170.88541388434,27.6708319414905">
+              End="-248.8,57.4">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,13.5854159707452" />
+                    End="0,28.45" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,13.5854159707452"
-                    Point2="0,17.5854159707452"
-                    Point3="-4,17.5854159707452" />
+                    Point1="0,28.45"
+                    Point2="0,32.45"
+                    Point3="-4,32.45" />
                   <mssgle:LineSegment
-                    End="-166.88541388434,17.5854159707452" />
+                    End="-244.8,32.45" />
                   <mssgle:CubicBezierSegment
-                    Point1="-166.88541388434,17.5854159707452"
-                    Point2="-170.88541388434,17.5854159707452"
-                    Point3="-170.88541388434,21.5854159707452" />
+                    Point1="-244.8,32.45"
+                    Point2="-248.8,32.45"
+                    Point3="-248.8,36.45" />
                   <mssgle:LineSegment
-                    End="-170.88541388434,27.6708319414905" />
+                    End="-248.8,57.4" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-104.45483584842,22.5854159707452,38.0242578125,9.7490234375"
+              BoundingBox="-143.41212890625,37.45,38.0242578125,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\CasesReport.Paths[DataNotNull]"
-          TopLeft="423.166661823789,154.95416465881">
+          Id="Package\PublicHealthUnit.Paths[DataNotNull]"
+          TopLeft="644.8,187.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="163.916664152096,30.2958320286622"
+              EndConnector="216.8,64.9"
               Start="0,0"
-              End="163.916664152096,22.7958320286622">
+              End="216.8,57.4">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,8.30287595072578" />
+                    End="0,22.3593846153846" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,8.30287595072578"
-                    Point2="0,12.3028759507258"
-                    Point3="4,12.3028759507258" />
+                    Point1="0,22.3593846153846"
+                    Point2="0,26.3593846153846"
+                    Point3="4,26.3593846153846" />
                   <mssgle:LineSegment
-                    End="159.916664152096,12.3028759507258" />
+                    End="212.8,26.3593846153846" />
                   <mssgle:CubicBezierSegment
-                    Point1="159.916664152096,12.3028759507258"
-                    Point2="163.916664152096,12.3028759507258"
-                    Point3="163.916664152096,16.3028759507258" />
+                    Point1="212.8,26.3593846153846"
+                    Point2="216.8,26.3593846153846"
+                    Point3="216.8,30.3593846153846" />
                   <mssgle:LineSegment
-                    End="163.916664152096,22.7958320286622" />
+                    End="216.8,57.4" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="55.2262031697978,17.3028759507258,53.4642578125,9.7490234375"
+              BoundingBox="81.66787109375,31.3593846153846,53.4642578125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\PublicHealthUnitsGROUP">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\PublicHealthUnitsGROUP\Conditional Split"
+          TopLeft="407.833333333333,139.666666666667" />
+        <NodeLayout
+          Size="194.4,41.6"
+          Id="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP"
+          TopLeft="387.833333333333,38.6666666666667" />
+        <NodeLayout
+          Size="234.4,41.6"
+          Id="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull"
+          TopLeft="128.833333333333,246.166666666667" />
+        <NodeLayout
+          Size="242.4,41.6"
+          Id="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean"
+          TopLeft="614.833333333333,246.166666666667" />
+        <EdgeLayout
+          Id="Package\PublicHealthUnitsGROUP.Paths[OLE DB Source Output]"
+          TopLeft="485.033333333333,80.2666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.4"
+              Start="0,0"
+              End="0,51.9">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.9" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\PublicHealthUnitsGROUP.Paths[DataNull]"
+          TopLeft="485.033333333333,181.266666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-239,64.9"
+              Start="0,0"
+              End="-239,57.4">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.45" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.45"
+                    Point2="0,32.45"
+                    Point3="-4,32.45" />
+                  <mssgle:LineSegment
+                    End="-235,32.45" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-235,32.45"
+                    Point2="-239,32.45"
+                    Point3="-239,36.45" />
+                  <mssgle:LineSegment
+                    End="-239,57.4" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-138.51212890625,37.45,38.0242578125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\PublicHealthUnitsGROUP.Paths[DataNotNull]"
+          TopLeft="509.433333333333,181.266666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="226.6,64.9"
+              Start="0,0"
+              End="226.6,57.4">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.3593846153846" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.3593846153846"
+                    Point2="0,26.3593846153846"
+                    Point3="4,26.3593846153846" />
+                  <mssgle:LineSegment
+                    End="222.6,26.3593846153846" />
+                  <mssgle:CubicBezierSegment
+                    Point1="222.6,26.3593846153846"
+                    Point2="226.6,26.3593846153846"
+                    Point3="226.6,30.3593846153846" />
+                  <mssgle:LineSegment
+                    End="226.6,57.4" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="86.5678710937499,31.3593846153846,53.4642578125,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1462,7 +1667,7 @@
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\CasesReport\CasesReport">
+    design-time-name="Package\PublicHealthUnit\PublicHealthUnit">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1475,7 +1680,7 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\CasesReport\CasesReportDataNull">
+    design-time-name="Package\PublicHealthUnit\PublicHealthUnitDataNull">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1488,7 +1693,46 @@
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\CasesReport\CasesReportDataClean">
+    design-time-name="Package\PublicHealthUnit\PublicHealthUnitDataClean">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUP">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataNull">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\PublicHealthUnitsGROUP\PublicHealthUnitsGROUPDataClean">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
