@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{6100610C-F749-4ED9-A276-2C47462CC38E}">
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{8BF6F240-0153-4226-B0CB-8025C2FC1E0D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -4115,6 +4115,10 @@
           Id="Package\AgeGroup"
           TopLeft="146.666669164385,49.3211318839196" />
         <NodeLayout
+          Size="173.6,41.6"
+          Id="Package\Outgoing_outbreaks"
+          TopLeft="720.873028149411,178.445747230897" />
+        <NodeLayout
           Size="132.8,41.6"
           Id="Package\PHU_Group"
           TopLeft="390.404768621435,49.3211318839196" />
@@ -4123,21 +4127,17 @@
           Id="Package\PostalCode"
           TopLeft="601.666676912989,49.3211318839196" />
         <NodeLayout
-          Size="144,41.6"
-          Id="Package\VaccineByAge"
-          TopLeft="20.6349209863313,178.445747230897" />
-        <NodeLayout
           Size="155.2,41.6"
           Id="Package\PublicHealthUnit"
           TopLeft="481.326992428384,178.445747230897" />
         <NodeLayout
-          Size="173.6,41.6"
-          Id="Package\Outgoing_outbreaks"
-          TopLeft="720.873028149411,178.445747230897" />
-        <NodeLayout
           Size="148,41.6"
           Id="Package\ReportedCases"
           TopLeft="248.980956707358,178.445747230897" />
+        <NodeLayout
+          Size="144,41.6"
+          Id="Package\VaccineByAge"
+          TopLeft="20.6349209863313,178.445747230897" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="189.600002497718,90.9211318839196">
@@ -4449,38 +4449,54 @@
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\AgeGroup\CompiledCOVID19CaseDetails">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\AgeGroup\CasesReport">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
-    design-time-name="Package\PHU_Group">
+    design-time-name="Package\Outgoing_outbreaks">
     <LayoutInfo>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="194.4,41.6"
-          Id="Package\PHU_Group\PublicHealthUnitsGROUP"
-          TopLeft="278,60" />
+          Size="184,41.6"
+          Id="Package\Outgoing_outbreaks\OngoingOutbreaksPhu"
+          TopLeft="268,60" />
         <NodeLayout
-          Size="132.8,41.6"
-          Id="Package\PHU_Group\PHU_Group"
-          TopLeft="469,374.5" />
+          Size="173.6,41.6"
+          Id="Package\Outgoing_outbreaks\Outgoing_outbreaks"
+          TopLeft="505,377.5" />
         <NodeLayout
           Size="112.8,41.6"
-          Id="Package\PHU_Group\Lookup"
-          TopLeft="315,162.85" />
+          Id="Package\Outgoing_outbreaks\Lookup"
+          TopLeft="301,162.85" />
         <NodeLayout
           Size="155.2,41.6"
-          Id="Package\PHU_Group\Add UpdateDate"
+          Id="Package\Outgoing_outbreaks\Add UpdateDate"
           TopLeft="83.0000000000001,265.7" />
         <NodeLayout
           Size="214.4,41.6"
-          Id="Package\PHU_Group\Add CreateDate, UpdateDate"
+          Id="Package\Outgoing_outbreaks\Add CreateDate, UpdateDate"
           TopLeft="485,265.7" />
         <NodeLayout
-          Size="169.6,41.6"
-          Id="Package\PHU_Group\Update PHU_Group"
+          Size="210.4,41.6"
+          Id="Package\Outgoing_outbreaks\Update Outgoing_outbreaks"
           TopLeft="60,374.5" />
         <EdgeLayout
-          Id="Package\PHU_Group.Paths[OLE DB Source Output]"
-          TopLeft="373.3,101.6">
+          Id="Package\Outgoing_outbreaks.Paths[OLE DB Source Output]"
+          TopLeft="358.7,101.6">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4501,14 +4517,14 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\PHU_Group.Paths[Lookup Match Output]"
-          TopLeft="353.933333333333,204.45">
+          Id="Package\Outgoing_outbreaks.Paths[Lookup Match Output]"
+          TopLeft="339.933333333333,204.45">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-193.333333333333,61.25"
+              EndConnector="-179.333333333333,61.25"
               Start="0,0"
-              End="-193.333333333333,53.75">
+              End="-179.333333333333,53.75">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
@@ -4519,21 +4535,155 @@
                     Point2="0,25.013986013986"
                     Point3="-4,25.013986013986" />
                   <mssgle:LineSegment
-                    End="-189.333333333333,25.013986013986" />
+                    End="-175.333333333333,25.013986013986" />
                   <mssgle:CubicBezierSegment
-                    Point1="-189.333333333333,25.013986013986"
-                    Point2="-193.333333333333,25.013986013986"
-                    Point3="-193.333333333333,29.013986013986" />
+                    Point1="-175.333333333333,25.013986013986"
+                    Point2="-179.333333333333,25.013986013986"
+                    Point3="-179.333333333333,29.013986013986" />
                   <mssgle:LineSegment
-                    End="-193.333333333333,53.75" />
+                    End="-179.333333333333,53.75" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-144.858053385417,30.013986013986,96.3827734375,11.609375"
+              BoundingBox="-137.858053385417,30.013986013986,96.3827734375,11.609375"
               RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Outgoing_outbreaks.Paths[Lookup No Match Output]"
+          TopLeft="374.866666666667,204.45">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="217.333333333333,61.25"
+              Start="0,0"
+              End="217.333333333333,53.75">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.013986013986" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.013986013986"
+                    Point2="0,25.013986013986"
+                    Point3="4,25.013986013986" />
+                  <mssgle:LineSegment
+                    End="213.333333333333,25.013986013986" />
+                  <mssgle:CubicBezierSegment
+                    Point1="213.333333333333,25.013986013986"
+                    Point2="217.333333333333,25.013986013986"
+                    Point3="217.333333333333,29.013986013986" />
+                  <mssgle:LineSegment
+                    End="217.333333333333,53.75" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="52.8602799479167,30.013986013986,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Outgoing_outbreaks.Paths[Derived Column Output]"
+          TopLeft="162.9,307.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,67.2"
+              Start="0,0"
+              End="0,59.7">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.7" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Outgoing_outbreaks.Paths[Derived Column Output1]"
+          TopLeft="592,307.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,70.1999999999999"
+              Start="0,0"
+              End="0,62.6999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,62.6999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\PHU_Group">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="112.8,41.6"
+          Id="Package\PHU_Group\Lookup"
+          TopLeft="315,162.85" />
+        <NodeLayout
+          Size="132.8,41.6"
+          Id="Package\PHU_Group\PHU_Group"
+          TopLeft="529.714286748244,370.676470534612" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\PHU_Group\Add UpdateDate"
+          TopLeft="83.0000000000001,265.7" />
+        <NodeLayout
+          Size="169.6,41.6"
+          Id="Package\PHU_Group\Update PHU_Group"
+          TopLeft="72.8571430760987,375.264705893078" />
+        <NodeLayout
+          Size="214.4,41.6"
+          Id="Package\PHU_Group\Add CreateDate, UpdateDate"
+          TopLeft="485,265.7" />
+        <NodeLayout
+          Size="194.4,41.6"
+          Id="Package\PHU_Group\PublicHealthUnitsGROUP"
+          TopLeft="278,60" />
+        <EdgeLayout
+          Id="Package\PHU_Group.Paths[OLE DB Source Output]"
+          TopLeft="373.3,101.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61.25"
+              Start="0,0"
+              End="0,53.75">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.75" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -4573,31 +4723,55 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\PHU_Group.Paths[Derived Column Output]"
-          TopLeft="160.6,307.3">
+          Id="Package\PHU_Group.Paths[Lookup Match Output]"
+          TopLeft="353.933333333333,204.45">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-15.8000000000001,67.2"
+              EndConnector="-193.333333333333,61.25"
               Start="0,0"
-              End="-15.8000000000001,59.7">
+              End="-193.333333333333,53.75">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,29.6" />
+                    End="0,21.013986013986" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,29.6"
-                    Point2="0,33.6"
-                    Point3="-4,33.6" />
+                    Point1="0,21.013986013986"
+                    Point2="0,25.013986013986"
+                    Point3="-4,25.013986013986" />
                   <mssgle:LineSegment
-                    End="-11.8000000000001,33.6" />
+                    End="-189.333333333333,25.013986013986" />
                   <mssgle:CubicBezierSegment
-                    Point1="-11.8000000000001,33.6"
-                    Point2="-15.8000000000001,33.6"
-                    Point3="-15.8000000000001,37.6" />
+                    Point1="-189.333333333333,25.013986013986"
+                    Point2="-193.333333333333,25.013986013986"
+                    Point3="-193.333333333333,29.013986013986" />
                   <mssgle:LineSegment
-                    End="-15.8000000000001,59.7" />
+                    End="-193.333333333333,53.75" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-144.858053385417,30.013986013986,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\PHU_Group.Paths[Derived Column Output1]"
+          TopLeft="594.157143374122,307.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63.3764705346118"
+              Start="0,0"
+              End="0,55.8764705346118">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55.8764705346118" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4607,31 +4781,19 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\PHU_Group.Paths[Derived Column Output1]"
-          TopLeft="592.2,307.3">
+          Id="Package\PHU_Group.Paths[Derived Column Output]"
+          TopLeft="159.128571538049,307.3">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-56.8,67.2"
+              EndConnector="0,67.9647058930776"
               Start="0,0"
-              End="-56.8,59.7">
+              End="0,60.4647058930776">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,29.6" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,29.6"
-                    Point2="0,33.6"
-                    Point3="-4,33.6" />
-                  <mssgle:LineSegment
-                    End="-52.8,33.6" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-52.8,33.6"
-                    Point2="-56.8,33.6"
-                    Point3="-56.8,37.6" />
-                  <mssgle:LineSegment
-                    End="-56.8,59.7" />
+                    End="0,60.4647058930776" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4643,23 +4805,36 @@
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\PHU_Group\PublicHealthUnitsGROUP">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\PostalCode">
     <LayoutInfo>
       <GraphLayout
         Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="155.2,41.6"
-          Id="Package\PostalCode\PublicHealthUnit"
-          TopLeft="278,60" />
-        <NodeLayout
-          Size="128.8,41.6"
-          Id="Package\PostalCode\Postalcode"
-          TopLeft="526,383.5" />
+          Size="165.6,41.6"
+          Id="Package\PostalCode\Update Postalcode"
+          TopLeft="60,374.5" />
         <NodeLayout
           Size="112.8,41.6"
           Id="Package\PostalCode\Lookup"
           TopLeft="301,162.85" />
+        <NodeLayout
+          Size="128.8,41.6"
+          Id="Package\PostalCode\Postalcode"
+          TopLeft="526,383.5" />
         <NodeLayout
           Size="155.2,41.6"
           Id="Package\PostalCode\Add UpdateDate"
@@ -4669,9 +4844,9 @@
           Id="Package\PostalCode\Add CreateDate, UpdateDate"
           TopLeft="485,265.7" />
         <NodeLayout
-          Size="165.6,41.6"
-          Id="Package\PostalCode\Update Postalcode"
-          TopLeft="60,374.5" />
+          Size="155.2,41.6"
+          Id="Package\PostalCode\PublicHealthUnit"
+          TopLeft="278,60" />
         <EdgeLayout
           Id="Package\PostalCode.Paths[OLE DB Source Output]"
           TopLeft="356.5,101.6">
@@ -4692,42 +4867,6 @@
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\PostalCode.Paths[Lookup Match Output]"
-          TopLeft="339.933333333333,204.45">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-195.333333333333,67.25"
-              Start="0,0"
-              End="-195.333333333333,59.75">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,23.4643356643357" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,23.4643356643357"
-                    Point2="0,27.4643356643357"
-                    Point3="-4,27.4643356643357" />
-                  <mssgle:LineSegment
-                    End="-191.333333333333,27.4643356643357" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-191.333333333333,27.4643356643357"
-                    Point2="-195.333333333333,27.4643356643357"
-                    Point3="-195.333333333333,31.4643356643357" />
-                  <mssgle:LineSegment
-                    End="-195.333333333333,59.75" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-145.858053385417,32.4643356643357,96.3827734375,11.609375"
-              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -4767,25 +4906,39 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\PostalCode.Paths[Derived Column Output]"
-          TopLeft="143.7,313.3">
+          Id="Package\PostalCode.Paths[Lookup Match Output]"
+          TopLeft="339.933333333333,204.45">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,61.2"
+              EndConnector="-195.333333333333,67.25"
               Start="0,0"
-              End="0,53.7">
+              End="-195.333333333333,59.75">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,53.7" />
+                    End="0,23.4643356643357" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.4643356643357"
+                    Point2="0,27.4643356643357"
+                    Point3="-4,27.4643356643357" />
+                  <mssgle:LineSegment
+                    End="-191.333333333333,27.4643356643357" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-191.333333333333,27.4643356643357"
+                    Point2="-195.333333333333,27.4643356643357"
+                    Point3="-195.333333333333,31.4643356643357" />
+                  <mssgle:LineSegment
+                    End="-195.333333333333,59.75" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-145.858053385417,32.4643356643357,96.3827734375,11.609375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -4810,168 +4963,20 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <TaskHost
-    design-time-name="Package\VaccineByAge">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="166.4,41.6"
-          Id="Package\VaccineByAge\VaccinesByAgePhu"
-          TopLeft="278,60" />
-        <NodeLayout
-          Size="144,41.6"
-          Id="Package\VaccineByAge\VaccineByAge"
-          TopLeft="524,375.5" />
-        <NodeLayout
-          Size="112.8,41.6"
-          Id="Package\VaccineByAge\Lookup"
-          TopLeft="301,162.85" />
-        <NodeLayout
-          Size="155.2,41.6"
-          Id="Package\VaccineByAge\Add UpdateDate"
-          TopLeft="83.0000000000001,265.7" />
-        <NodeLayout
-          Size="214.4,41.6"
-          Id="Package\VaccineByAge\Add CreateDate, UpdateDate"
-          TopLeft="485,265.7" />
-        <NodeLayout
-          Size="180.8,41.6"
-          Id="Package\VaccineByAge\Update VaccineByAge"
-          TopLeft="74,373.5" />
         <EdgeLayout
-          Id="Package\VaccineByAge.Paths[OLE DB Source Output]"
-          TopLeft="359.3,101.6">
+          Id="Package\PostalCode.Paths[Derived Column Output]"
+          TopLeft="143.7,313.3">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,61.25"
+              EndConnector="0,61.2"
               Start="0,0"
-              End="0,53.75">
+              End="0,53.7">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,53.75" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\VaccineByAge.Paths[Lookup Match Output]"
-          TopLeft="339.933333333333,204.45">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-179.333333333333,61.25"
-              Start="0,0"
-              End="-179.333333333333,53.75">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,21.013986013986" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,21.013986013986"
-                    Point2="0,25.013986013986"
-                    Point3="-4,25.013986013986" />
-                  <mssgle:LineSegment
-                    End="-175.333333333333,25.013986013986" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-175.333333333333,25.013986013986"
-                    Point2="-179.333333333333,25.013986013986"
-                    Point3="-179.333333333333,29.013986013986" />
-                  <mssgle:LineSegment
-                    End="-179.333333333333,53.75" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-137.858053385417,30.013986013986,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\VaccineByAge.Paths[Lookup No Match Output]"
-          TopLeft="374.866666666667,204.45">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="217.333333333333,61.25"
-              Start="0,0"
-              End="217.333333333333,53.75">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,21.013986013986" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,21.013986013986"
-                    Point2="0,25.013986013986"
-                    Point3="4,25.013986013986" />
-                  <mssgle:LineSegment
-                    End="213.333333333333,25.013986013986" />
-                  <mssgle:CubicBezierSegment
-                    Point1="213.333333333333,25.013986013986"
-                    Point2="217.333333333333,25.013986013986"
-                    Point3="217.333333333333,29.013986013986" />
-                  <mssgle:LineSegment
-                    End="217.333333333333,53.75" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="52.8602799479167,30.013986013986,111.6127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\VaccineByAge.Paths[Derived Column Output]"
-          TopLeft="162.5,307.3">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,66.2"
-              Start="0,0"
-              End="0,58.7">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,58.7" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\VaccineByAge.Paths[Derived Column Output1]"
-          TopLeft="594.1,307.3">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,68.2"
-              Start="0,0"
-              End="0,60.7">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,60.7" />
+                    End="0,53.7" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -5154,176 +5159,6 @@
     </LayoutInfo>
   </TaskHost>
   <TaskHost
-    design-time-name="Package\Outgoing_outbreaks">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="184,41.6"
-          Id="Package\Outgoing_outbreaks\OngoingOutbreaksPhu"
-          TopLeft="268,60" />
-        <NodeLayout
-          Size="173.6,41.6"
-          Id="Package\Outgoing_outbreaks\Outgoing_outbreaks"
-          TopLeft="505,377.5" />
-        <NodeLayout
-          Size="112.8,41.6"
-          Id="Package\Outgoing_outbreaks\Lookup"
-          TopLeft="301,162.85" />
-        <NodeLayout
-          Size="155.2,41.6"
-          Id="Package\Outgoing_outbreaks\Add UpdateDate"
-          TopLeft="83.0000000000001,265.7" />
-        <NodeLayout
-          Size="214.4,41.6"
-          Id="Package\Outgoing_outbreaks\Add CreateDate, UpdateDate"
-          TopLeft="485,265.7" />
-        <NodeLayout
-          Size="210.4,41.6"
-          Id="Package\Outgoing_outbreaks\Update Outgoing_outbreaks"
-          TopLeft="60,374.5" />
-        <EdgeLayout
-          Id="Package\Outgoing_outbreaks.Paths[OLE DB Source Output]"
-          TopLeft="358.7,101.6">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,61.25"
-              Start="0,0"
-              End="0,53.75">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,53.75" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Outgoing_outbreaks.Paths[Lookup Match Output]"
-          TopLeft="339.933333333333,204.45">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-179.333333333333,61.25"
-              Start="0,0"
-              End="-179.333333333333,53.75">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,21.013986013986" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,21.013986013986"
-                    Point2="0,25.013986013986"
-                    Point3="-4,25.013986013986" />
-                  <mssgle:LineSegment
-                    End="-175.333333333333,25.013986013986" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-175.333333333333,25.013986013986"
-                    Point2="-179.333333333333,25.013986013986"
-                    Point3="-179.333333333333,29.013986013986" />
-                  <mssgle:LineSegment
-                    End="-179.333333333333,53.75" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-137.858053385417,30.013986013986,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Outgoing_outbreaks.Paths[Lookup No Match Output]"
-          TopLeft="374.866666666667,204.45">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="217.333333333333,61.25"
-              Start="0,0"
-              End="217.333333333333,53.75">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,21.013986013986" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,21.013986013986"
-                    Point2="0,25.013986013986"
-                    Point3="4,25.013986013986" />
-                  <mssgle:LineSegment
-                    End="213.333333333333,25.013986013986" />
-                  <mssgle:CubicBezierSegment
-                    Point1="213.333333333333,25.013986013986"
-                    Point2="217.333333333333,25.013986013986"
-                    Point3="217.333333333333,29.013986013986" />
-                  <mssgle:LineSegment
-                    End="217.333333333333,53.75" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="52.8602799479167,30.013986013986,111.6127734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Outgoing_outbreaks.Paths[Derived Column Output]"
-          TopLeft="162.9,307.3">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,67.2"
-              Start="0,0"
-              End="0,59.7">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,59.7" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Outgoing_outbreaks.Paths[Derived Column Output1]"
-          TopLeft="592,307.3">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,70.1999999999999"
-              Start="0,0"
-              End="0,62.6999999999999">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,62.6999999999999" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <TaskHost
     design-time-name="Package\ReportedCases">
     <LayoutInfo>
       <GraphLayout
@@ -5451,34 +5286,175 @@
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\AgeGroup\CasesReport">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\PHU_Group\PublicHealthUnitsGROUP">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\AgeGroup\CompiledCOVID19CaseDetails">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\VaccineByAge">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="166.4,41.6"
+          Id="Package\VaccineByAge\VaccinesByAgePhu"
+          TopLeft="278,60" />
+        <NodeLayout
+          Size="144,41.6"
+          Id="Package\VaccineByAge\VaccineByAge"
+          TopLeft="524,375.5" />
+        <NodeLayout
+          Size="112.8,41.6"
+          Id="Package\VaccineByAge\Lookup"
+          TopLeft="301,162.85" />
+        <NodeLayout
+          Size="155.2,41.6"
+          Id="Package\VaccineByAge\Add UpdateDate"
+          TopLeft="83.0000000000001,265.7" />
+        <NodeLayout
+          Size="214.4,41.6"
+          Id="Package\VaccineByAge\Add CreateDate, UpdateDate"
+          TopLeft="485,265.7" />
+        <NodeLayout
+          Size="180.8,41.6"
+          Id="Package\VaccineByAge\Update VaccineByAge"
+          TopLeft="74,373.5" />
+        <EdgeLayout
+          Id="Package\VaccineByAge.Paths[OLE DB Source Output]"
+          TopLeft="359.3,101.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61.25"
+              Start="0,0"
+              End="0,53.75">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.75" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\VaccineByAge.Paths[Lookup Match Output]"
+          TopLeft="339.933333333333,204.45">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-179.333333333333,61.25"
+              Start="0,0"
+              End="-179.333333333333,53.75">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.013986013986" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.013986013986"
+                    Point2="0,25.013986013986"
+                    Point3="-4,25.013986013986" />
+                  <mssgle:LineSegment
+                    End="-175.333333333333,25.013986013986" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-175.333333333333,25.013986013986"
+                    Point2="-179.333333333333,25.013986013986"
+                    Point3="-179.333333333333,29.013986013986" />
+                  <mssgle:LineSegment
+                    End="-179.333333333333,53.75" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-137.858053385417,30.013986013986,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\VaccineByAge.Paths[Lookup No Match Output]"
+          TopLeft="374.866666666667,204.45">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="217.333333333333,61.25"
+              Start="0,0"
+              End="217.333333333333,53.75">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.013986013986" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.013986013986"
+                    Point2="0,25.013986013986"
+                    Point3="4,25.013986013986" />
+                  <mssgle:LineSegment
+                    End="213.333333333333,25.013986013986" />
+                  <mssgle:CubicBezierSegment
+                    Point1="213.333333333333,25.013986013986"
+                    Point2="217.333333333333,25.013986013986"
+                    Point3="217.333333333333,29.013986013986" />
+                  <mssgle:LineSegment
+                    End="217.333333333333,53.75" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="52.8602799479167,30.013986013986,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\VaccineByAge.Paths[Derived Column Output]"
+          TopLeft="162.5,307.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,66.2"
+              Start="0,0"
+              End="0,58.7">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,58.7" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\VaccineByAge.Paths[Derived Column Output1]"
+          TopLeft="594.1,307.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,68.2"
+              Start="0,0"
+              End="0,60.7">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,60.7" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
