@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="5"
-  DTS:VersionGUID="{019F04BE-E2E8-460A-AA73-C45CBE1ED708}">
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{C32BCD13-EEE1-4AA8-897D-95FC8BB6BE76}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -43,25 +43,13 @@
     <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[LocalHost.Ontario_Covid_Stage]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{C3FDD2CD-2699-42D1-B595-2C759833A693}"
+      DTS:DTSID="{8D5D2F90-E0A3-40E2-8CC3-22B0577965C6}"
       DTS:ObjectName="LocalHost.Ontario_Covid_Stage">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=.;Initial Catalog=Ontario_Covid_Stage;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{C3FDD2CD-2699-42D1-B595-2C759833A693}LocalHost.Ontario_Covid_Stage;Auto Translate=False;" />
-      </DTS:ObjectData>
-    </DTS:ConnectionManager>
-    <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[LocalHost.Stage]"
-      DTS:CreationName="OLEDB"
-      DTS:DTSID="{42C1977B-E8C4-427D-851B-196D55A03517}"
-      DTS:ObjectName="LocalHost.Stage">
-      <DTS:ObjectData>
-        <DTS:ConnectionManager
-          DTS:ConnectRetryCount="1"
-          DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=.;Initial Catalog=Stage;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{42C1977B-E8C4-427D-851B-196D55A03517}LocalHost.Stage;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=.;Initial Catalog=Ontario_Covid_Stage;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{8D5D2F90-E0A3-40E2-8CC3-22B0577965C6}LocalHost.Ontario_Covid_Stage;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -184,7 +172,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="GET LSET, CET CasesReport"
-      DTS:ThreadHint="5">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -208,7 +196,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="GET LSET, CET CompiledCOVID19CaseDetails"
-      DTS:ThreadHint="3">
+      DTS:ThreadHint="4">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -232,7 +220,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="GET LSET, CET OngoingOutbreaksPhu"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="5">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -256,7 +244,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="GET LSET, CET PublicHealthUnit"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="2">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -280,7 +268,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="GET LSET, CET PublicHealthUnitsGROUP"
-      DTS:ThreadHint="2">
+      DTS:ThreadHint="3">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -304,7 +292,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="GET LSET, CET VaccinesByAgePhu"
-      DTS:ThreadHint="4">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -1541,7 +1529,7 @@
                       name="row_id" />
                     <externalMetadataColumn
                       refId="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails_Stage.Inputs[OLE DB Destination Input].ExternalColumns[date_reported]"
-                      dataType="dbTimeStamp"
+                      dataType="dbDate"
                       name="date_reported" />
                     <externalMetadataColumn
                       refId="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails_Stage.Inputs[OLE DB Destination Input].ExternalColumns[health_region]"
@@ -3247,6 +3235,10 @@
                       refId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu_Stage.Inputs[OLE DB Destination Input].ExternalColumns[third_dose_cumulative]"
                       dataType="i4"
                       name="third_dose_cumulative" />
+                    <externalMetadataColumn
+                      refId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu_Stage.Inputs[OLE DB Destination Input].ExternalColumns[Id]"
+                      dataType="i4"
+                      name="Id" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -3294,7 +3286,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET CET CasesReport"
-      DTS:ThreadHint="5">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3310,7 +3302,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET CET CompiledCOVID19CaseDetails"
-      DTS:ThreadHint="3">
+      DTS:ThreadHint="4">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3326,7 +3318,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET CET OngoingOutbreaksPhu"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="5">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3342,7 +3334,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET CET PublicHealthUnit"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="2">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3358,7 +3350,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET CET PublicHealthUnitsGROUP"
-      DTS:ThreadHint="2">
+      DTS:ThreadHint="3">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3374,7 +3366,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET CET VaccinesByAgePhu"
-      DTS:ThreadHint="4">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3390,7 +3382,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET LSET CasesReport"
-      DTS:ThreadHint="5">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3406,7 +3398,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET LSET CompiledCOVID19CaseDetails"
-      DTS:ThreadHint="3">
+      DTS:ThreadHint="4">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3422,7 +3414,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET LSET PublicHealthUnit"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="2">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3438,7 +3430,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET LSET PublicHealthUnitsGROUP"
-      DTS:ThreadHint="2">
+      DTS:ThreadHint="3">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3470,7 +3462,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET LSETOngoingOutbreaksPhu"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="5">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3486,11 +3478,11 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="TRUNCATE CasesReport_Stage"
-      DTS:ThreadHint="5">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{C3FDD2CD-2699-42D1-B595-2C759833A693}"
+          SQLTask:Connection="{8D5D2F90-E0A3-40E2-8CC3-22B0577965C6}"
           SQLTask:SqlStatementSource="TRUNCATE TABLE CasesReport" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -3502,11 +3494,11 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="TRUNCATE CompiledCOVID19CaseDetails_Stage"
-      DTS:ThreadHint="3">
+      DTS:ThreadHint="4">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{C3FDD2CD-2699-42D1-B595-2C759833A693}"
+          SQLTask:Connection="{8D5D2F90-E0A3-40E2-8CC3-22B0577965C6}"
           SQLTask:SqlStatementSource="TRUNCATE TABLE CompiledCOVID19CaseDetails" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -3518,11 +3510,11 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="TRUNCATE OngoingOutbreaksPhu_Stage"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="5">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{C3FDD2CD-2699-42D1-B595-2C759833A693}"
+          SQLTask:Connection="{8D5D2F90-E0A3-40E2-8CC3-22B0577965C6}"
           SQLTask:SqlStatementSource="TRUNCATE TABLE OngoingOutbreaksPhu" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -3534,11 +3526,11 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="TRUNCATE PublicHealthUnitsGROUP_Stage"
-      DTS:ThreadHint="2">
+      DTS:ThreadHint="3">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{C3FDD2CD-2699-42D1-B595-2C759833A693}"
+          SQLTask:Connection="{8D5D2F90-E0A3-40E2-8CC3-22B0577965C6}"
           SQLTask:SqlStatementSource="TRUNCATE TABLE PublicHealthUnitsGROUP" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -3550,11 +3542,11 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="TRUNCATE PublicHealthUnit_Stage"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="2">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{C3FDD2CD-2699-42D1-B595-2C759833A693}"
+          SQLTask:Connection="{8D5D2F90-E0A3-40E2-8CC3-22B0577965C6}"
           SQLTask:SqlStatementSource="TRUNCATE TABLE PublicHealthUnit" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -3566,11 +3558,11 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="TRUNCATE VaccinesByAgePhu_Stage"
-      DTS:ThreadHint="4">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{C3FDD2CD-2699-42D1-B595-2C759833A693}"
+          SQLTask:Connection="{8D5D2F90-E0A3-40E2-8CC3-22B0577965C6}"
           SQLTask:SqlStatementSource="TRUNCATE TABLE VaccinesByAgePhu" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -3808,7 +3800,7 @@
         <NodeLayout
           Size="252,41.6"
           Id="Package\Load OngoingOutbreaksPhu to Stage"
-          TopLeft="851.211591849449,368.254413723306" />
+          TopLeft="851.211591849449,369.528923545102" />
         <NodeLayout
           Size="224,41.6"
           Id="Package\Load PublicHealthUnit to Stage"
@@ -4093,18 +4085,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2 2]"
-          TopLeft="977.211591849449,328.588237181667">
+          TopLeft="977.211591849449,328.588237181666">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,39.66617654164"
+              EndConnector="0,40.940686363436"
               Start="0,0"
-              End="0,32.16617654164">
+              End="0,33.440686363436">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,32.16617654164" />
+                    End="0,33.440686363436" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4225,18 +4217,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3 2]"
-          TopLeft="977.211591849449,409.854413723306">
+          TopLeft="977.211591849449,411.128923545102">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,41.5779412743329"
+              EndConnector="0,40.3034314525369"
               Start="0,0"
-              End="0,34.0779412743329">
+              End="0,32.8034314525369">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,34.0779412743329" />
+                    End="0,32.8034314525369" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
