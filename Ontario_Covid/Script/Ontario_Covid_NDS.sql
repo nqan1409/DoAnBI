@@ -28,13 +28,6 @@ GO
 -- Create tables
 -- ******************************************************
 
-CREATE TABLE [dbo].[Case_Severity](
-	[ID_Case_Severity] [int] IDENTITY(1,1) NOT NULL,
-	[Severity] [nvarchar](255) NULL,
-	[CreatDate] [datetime] NULL,
-	[UpdateDate] [datetime] NULL
-) ON [PRIMARY];
-
 CREATE TABLE [dbo].[DataSource](
 	[ID_DataSource] [int] IDENTITY(1,1) NOT NULL,
 	[DataSourceName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
@@ -43,7 +36,7 @@ CREATE TABLE [dbo].[DataSource](
 ) ON [PRIMARY];
 
 CREATE TABLE [dbo].[AgeGroup](
-	[ID_AgeGroupSK] [int] NOT NULL,
+	[ID_AgeGroupSK] [int] IDENTITY(1,1) NOT NULL,
 	[Age_Group] [nvarchar](255) NULL,
 	[ID_DataSource] [int] NULL,
 	[CreateDate] [datetime] NULL,
@@ -126,13 +119,6 @@ CREATE TABLE [dbo].[ReportedCases](
 -- ******************************************************
 -- Add Primary Keys
 -- ******************************************************
-
-ALTER TABLE [dbo].[Case_Severity] WITH CHECK ADD 
-    CONSTRAINT [PK_Case_Severity] PRIMARY KEY CLUSTERED
-	(
-	[ID_Case_Severity]
-	) ON [PRIMARY];
-GO
 
 ALTER TABLE [dbo].[DataSource] WITH CHECK ADD 
     CONSTRAINT [PK_DataSource] PRIMARY KEY CLUSTERED
