@@ -33,6 +33,8 @@ BEGIN
 					Gender = CASE
 									WHEN Gender = 'FEMALE' THEN 'Female' 
 									WHEN Gender = 'MALE' THEN 'Male' 
+									WHEN Gender = 'GENDER DIVERSE' THEN 'Not Reported' 
+									WHEN Gender = 'UNSPECIFIED' THEN 'Not Reported' 
 									ELSE Gender
 								END,
 					CaseAcquisitionInfo = CASE
