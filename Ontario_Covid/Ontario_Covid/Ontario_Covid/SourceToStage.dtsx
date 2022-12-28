@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="3"
-  DTS:VersionGUID="{96B39CAF-BE83-4807-BBA9-4F22FE9F52A8}">
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{C0E448E6-7479-451B-A781-ADC3304392DD}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -41,15 +41,15 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[LocalHost.Stage]"
+      DTS:refId="Package.ConnectionManagers[LocalHost.Ontario_Covid_Stage]"
       DTS:CreationName="OLEDB"
-      DTS:DTSID="{42C1977B-E8C4-427D-851B-196D55A03517}"
-      DTS:ObjectName="LocalHost.Stage">
+      DTS:DTSID="{8D5D2F90-E0A3-40E2-8CC3-22B0577965C6}"
+      DTS:ObjectName="LocalHost.Ontario_Covid_Stage">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="1"
           DTS:ConnectRetryInterval="5"
-          DTS:ConnectionString="Data Source=.;Initial Catalog=Stage;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{42C1977B-E8C4-427D-851B-196D55A03517}LocalHost.Stage;Auto Translate=False;" />
+          DTS:ConnectionString="Data Source=.;Initial Catalog=Ontario_Covid_Stage;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{8D5D2F90-E0A3-40E2-8CC3-22B0577965C6}LocalHost.Ontario_Covid_Stage;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -172,7 +172,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="GET LSET, CET CasesReport"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="4">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -220,7 +220,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="GET LSET, CET OngoingOutbreaksPhu"
-      DTS:ThreadHint="2">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -244,7 +244,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="GET LSET, CET PublicHealthUnit"
-      DTS:ThreadHint="3">
+      DTS:ThreadHint="5">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -268,7 +268,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="GET LSET, CET PublicHealthUnitsGROUP"
-      DTS:ThreadHint="4">
+      DTS:ThreadHint="2">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -292,7 +292,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="GET LSET, CET VaccinesByAgePhu"
-      DTS:ThreadHint="5">
+      DTS:ThreadHint="3">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -823,8 +823,8 @@
               <connections>
                 <connection
                   refId="Package\Load CasesReport to Stage\CasesReport_Stage.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[LocalHost.Stage]"
-                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.Stage]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.Ontario_Covid_Stage]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.Ontario_Covid_Stage]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1019,6 +1019,10 @@
                       dataType="wstr"
                       length="255"
                       name="PHUPostalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load CasesReport to Stage\CasesReport_Stage.Inputs[OLE DB Destination Input].ExternalColumns[ObjectId]"
+                      dataType="i4"
+                      name="ObjectId" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1097,7 +1101,7 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT * FROM CompiledCOVID19CaseDetailsDataClean WHERE (CreatDate &gt;= ? AND CreatDate &lt; ?) OR (UpdateDate &gt;= ? AND UpdateDate &lt; ?)</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT * FROM CompiledCOVID19CaseDetailsDataClean WHERE (CreatDate &gt;= ? AND CreatDate &lt; ? AND province = 'Ontario') OR (UpdateDate &gt;= ? AND UpdateDate &lt; ? AND province = 'Ontario')</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."
@@ -1438,8 +1442,8 @@
               <connections>
                 <connection
                   refId="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails_Stage.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[LocalHost.Stage]"
-                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.Stage]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.Ontario_Covid_Stage]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.Ontario_Covid_Stage]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -1525,7 +1529,7 @@
                       name="row_id" />
                     <externalMetadataColumn
                       refId="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails_Stage.Inputs[OLE DB Destination Input].ExternalColumns[date_reported]"
-                      dataType="dbTimeStamp"
+                      dataType="dbDate"
                       name="date_reported" />
                     <externalMetadataColumn
                       refId="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails_Stage.Inputs[OLE DB Destination Input].ExternalColumns[health_region]"
@@ -1868,8 +1872,8 @@
               <connections>
                 <connection
                   refId="Package\Load OngoingOutbreaksPhu to Stage\OngoingOutbreaksPhu_Stage.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[LocalHost.Stage]"
-                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.Stage]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.Ontario_Covid_Stage]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.Ontario_Covid_Stage]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -2321,8 +2325,8 @@
               <connections>
                 <connection
                   refId="Package\Load PublicHealthUnit to Stage\PublicHealthUnit_Stage.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[LocalHost.Stage]"
-                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.Stage]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.Ontario_Covid_Stage]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.Ontario_Covid_Stage]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -2726,8 +2730,8 @@
               <connections>
                 <connection
                   refId="Package\Load PublicHealthUnitsGROUP to Stage\PublicHealthUnitsGROUP_Stage.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[LocalHost.Stage]"
-                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.Stage]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.Ontario_Covid_Stage]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.Ontario_Covid_Stage]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -3143,8 +3147,8 @@
               <connections>
                 <connection
                   refId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu_Stage.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[LocalHost.Stage]"
-                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.Stage]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.Ontario_Covid_Stage]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.Ontario_Covid_Stage]"
                   description="The OLE DB runtime connection used to access the database."
                   name="OleDbConnection" />
               </connections>
@@ -3231,6 +3235,10 @@
                       refId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu_Stage.Inputs[OLE DB Destination Input].ExternalColumns[third_dose_cumulative]"
                       dataType="i4"
                       name="third_dose_cumulative" />
+                    <externalMetadataColumn
+                      refId="Package\Load VaccinesByAgePhu to Stage\VaccinesByAgePhu_Stage.Inputs[OLE DB Destination Input].ExternalColumns[Id]"
+                      dataType="i4"
+                      name="Id" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -3278,7 +3286,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET CET CasesReport"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="4">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3310,7 +3318,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET CET OngoingOutbreaksPhu"
-      DTS:ThreadHint="2">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3326,7 +3334,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET CET PublicHealthUnit"
-      DTS:ThreadHint="3">
+      DTS:ThreadHint="5">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3342,7 +3350,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET CET PublicHealthUnitsGROUP"
-      DTS:ThreadHint="4">
+      DTS:ThreadHint="2">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3358,7 +3366,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET CET VaccinesByAgePhu"
-      DTS:ThreadHint="5">
+      DTS:ThreadHint="3">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3374,7 +3382,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET LSET CasesReport"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="4">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3406,7 +3414,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET LSET PublicHealthUnit"
-      DTS:ThreadHint="3">
+      DTS:ThreadHint="5">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3422,7 +3430,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET LSET PublicHealthUnitsGROUP"
-      DTS:ThreadHint="4">
+      DTS:ThreadHint="2">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3454,7 +3462,7 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="SET LSETOngoingOutbreaksPhu"
-      DTS:ThreadHint="2">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -3470,11 +3478,11 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="TRUNCATE CasesReport_Stage"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="4">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{42C1977B-E8C4-427D-851B-196D55A03517}"
+          SQLTask:Connection="{8D5D2F90-E0A3-40E2-8CC3-22B0577965C6}"
           SQLTask:SqlStatementSource="TRUNCATE TABLE CasesReport" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -3490,7 +3498,7 @@
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{42C1977B-E8C4-427D-851B-196D55A03517}"
+          SQLTask:Connection="{8D5D2F90-E0A3-40E2-8CC3-22B0577965C6}"
           SQLTask:SqlStatementSource="TRUNCATE TABLE CompiledCOVID19CaseDetails" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -3502,11 +3510,11 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="TRUNCATE OngoingOutbreaksPhu_Stage"
-      DTS:ThreadHint="2">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{42C1977B-E8C4-427D-851B-196D55A03517}"
+          SQLTask:Connection="{8D5D2F90-E0A3-40E2-8CC3-22B0577965C6}"
           SQLTask:SqlStatementSource="TRUNCATE TABLE OngoingOutbreaksPhu" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -3518,11 +3526,11 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="TRUNCATE PublicHealthUnitsGROUP_Stage"
-      DTS:ThreadHint="4">
+      DTS:ThreadHint="2">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{42C1977B-E8C4-427D-851B-196D55A03517}"
+          SQLTask:Connection="{8D5D2F90-E0A3-40E2-8CC3-22B0577965C6}"
           SQLTask:SqlStatementSource="TRUNCATE TABLE PublicHealthUnitsGROUP" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -3534,11 +3542,11 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="TRUNCATE PublicHealthUnit_Stage"
-      DTS:ThreadHint="3">
+      DTS:ThreadHint="5">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{42C1977B-E8C4-427D-851B-196D55A03517}"
+          SQLTask:Connection="{8D5D2F90-E0A3-40E2-8CC3-22B0577965C6}"
           SQLTask:SqlStatementSource="TRUNCATE TABLE PublicHealthUnit" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -3550,11 +3558,11 @@
       DTS:ExecutableType="Microsoft.ExecuteSQLTask"
       DTS:LocaleID="-1"
       DTS:ObjectName="TRUNCATE VaccinesByAgePhu_Stage"
-      DTS:ThreadHint="5">
+      DTS:ThreadHint="3">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
-          SQLTask:Connection="{42C1977B-E8C4-427D-851B-196D55A03517}"
+          SQLTask:Connection="{8D5D2F90-E0A3-40E2-8CC3-22B0577965C6}"
           SQLTask:SqlStatementSource="TRUNCATE TABLE VaccinesByAgePhu" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
@@ -3760,126 +3768,126 @@
         <NodeLayout
           Size="211.2,41.6"
           Id="Package\GET LSET, CET CasesReport"
-          TopLeft="153.559843969418,286.988237181667" />
+          TopLeft="7.13127004718281,288.900001914361" />
         <NodeLayout
           Size="293.6,41.6"
           Id="Package\GET LSET, CET CompiledCOVID19CaseDetails"
-          TopLeft="449.358415443606,286.988237181667" />
+          TopLeft="302.929841521371,288.900001914361" />
         <NodeLayout
           Size="258.4,41.6"
           Id="Package\GET LSET, CET OngoingOutbreaksPhu"
-          TopLeft="848.011591849449,286.988237181666" />
+          TopLeft="701.583017927214,288.90000191436" />
         <NodeLayout
           Size="229.6,41.6"
           Id="Package\GET LSET, CET PublicHealthUnit"
-          TopLeft="1168.9733383458,288.687583610728" />
+          TopLeft="1022.54476442357,290.599348343422" />
         <NodeLayout
           Size="268.8,41.6"
           Id="Package\GET LSET, CET PublicHealthUnitsGROUP"
-          TopLeft="1481.70777991645,286.138563967136" />
+          TopLeft="1335.27920599422,288.05032869983" />
         <NodeLayout
           Size="240.8,41.6"
           Id="Package\GET LSET, CET VaccinesByAgePhu"
-          TopLeft="1835.62729976754,286.138563967136" />
+          TopLeft="1689.19872584531,288.05032869983" />
         <NodeLayout
           Size="205.6,41.6"
           Id="Package\Load CasesReport to Stage"
-          TopLeft="156.359843969418,368.254413723306" />
+          TopLeft="9.93127004718279,370.166178456" />
         <NodeLayout
           Size="288,41.6"
           Id="Package\Load CompiledCOVID19CaseDetails to Stage"
-          TopLeft="452.158415443606,368.254413723307" />
+          TopLeft="305.729841521371,370.166178456001" />
         <NodeLayout
           Size="252,41.6"
           Id="Package\Load OngoingOutbreaksPhu to Stage"
-          TopLeft="851.211591849449,368.254413723306" />
+          TopLeft="704.783017927214,371.440688277796" />
         <NodeLayout
           Size="224,41.6"
           Id="Package\Load PublicHealthUnit to Stage"
-          TopLeft="1171.7733383458,369.953760152368" />
+          TopLeft="1025.34476442357,371.865524885062" />
         <NodeLayout
           Size="262.4,41.6"
           Id="Package\Load PublicHealthUnitsGROUP to Stage"
-          TopLeft="1484.90777991645,367.404740508776" />
+          TopLeft="1338.47920599422,369.31650524147" />
         <NodeLayout
           Size="235.2,41.6"
           Id="Package\Load VaccinesByAgePhu to Stage"
-          TopLeft="1838.42729976754,366.312303518665" />
+          TopLeft="1691.99872584531,368.224068251359" />
         <NodeLayout
           Size="180,41.6"
           Id="Package\SET CET CasesReport"
-          TopLeft="169.159843969418,118.720589900306" />
+          TopLeft="22.7312700471828,120.632354633" />
         <NodeLayout
           Size="262.4,41.6"
           Id="Package\SET CET CompiledCOVID19CaseDetails"
-          TopLeft="464.958415443606,118.720589900306" />
+          TopLeft="318.529841521371,120.632354633" />
         <NodeLayout
           Size="227.2,41.6"
           Id="Package\SET CET OngoingOutbreaksPhu"
-          TopLeft="863.611591849449,118.720589900306" />
+          TopLeft="717.183017927214,120.632354633" />
         <NodeLayout
           Size="198.4,41.6"
           Id="Package\SET CET PublicHealthUnit"
-          TopLeft="1184.5733383458,120.419936329367" />
+          TopLeft="1038.14476442357,122.331701062061" />
         <NodeLayout
           Size="237.6,41.6"
           Id="Package\SET CET PublicHealthUnitsGROUP"
-          TopLeft="1497.30777991645,117.870916685775" />
+          TopLeft="1350.87920599422,119.782681418469" />
         <NodeLayout
           Size="209.6,41.6"
           Id="Package\SET CET VaccinesByAgePhu"
-          TopLeft="1851.22729976754,117.870916685775" />
+          TopLeft="1704.79872584531,119.782681418469" />
         <NodeLayout
           Size="184.8,41.6"
           Id="Package\SET LSET CasesReport"
-          TopLeft="166.759843969418,451.43235499764" />
+          TopLeft="20.3312700471828,453.344119730334" />
         <NodeLayout
           Size="267.2,41.6"
           Id="Package\SET LSET CompiledCOVID19CaseDetails"
-          TopLeft="462.558415443606,451.43235499764" />
+          TopLeft="316.129841521371,453.344119730334" />
         <NodeLayout
           Size="203.2,41.6"
           Id="Package\SET LSET PublicHealthUnit"
-          TopLeft="1182.1733383458,453.131701426701" />
+          TopLeft="1035.74476442357,455.043466159395" />
         <NodeLayout
           Size="242.4,41.6"
           Id="Package\SET LSET PublicHealthUnitsGROUP"
-          TopLeft="1494.90777991645,450.582681783109" />
+          TopLeft="1348.47920599422,452.494446515803" />
         <NodeLayout
           Size="214.4,41.6"
           Id="Package\SET LSET VaccinesByAgePhu"
-          TopLeft="1848.82729976754,450.582681783109" />
+          TopLeft="1702.39872584531,452.494446515803" />
         <NodeLayout
           Size="228.8,41.6"
           Id="Package\SET LSETOngoingOutbreaksPhu"
-          TopLeft="862.811591849449,451.432354997639" />
+          TopLeft="716.383017927214,453.344119730333" />
         <NodeLayout
           Size="224.8,41.6"
           Id="Package\TRUNCATE CasesReport_Stage"
-          TopLeft="146.759843969418,201.898531174639" />
+          TopLeft="0.331270047182798,203.810295907333" />
         <NodeLayout
           Size="306.4,41.6"
           Id="Package\TRUNCATE CompiledCOVID19CaseDetails_Stage"
-          TopLeft="442.958415443606,201.898531174639" />
+          TopLeft="296.529841521371,203.810295907333" />
         <NodeLayout
           Size="271.2,41.6"
           Id="Package\TRUNCATE OngoingOutbreaksPhu_Stage"
-          TopLeft="841.611591849449,201.898531174639" />
+          TopLeft="695.183017927214,203.810295907333" />
         <NodeLayout
           Size="243.2,41.6"
           Id="Package\TRUNCATE PublicHealthUnit_Stage"
-          TopLeft="1162.1733383458,203.597877603701" />
+          TopLeft="1015.74476442357,205.509642336395" />
         <NodeLayout
           Size="281.6,41.6"
           Id="Package\TRUNCATE PublicHealthUnitsGROUP_Stage"
-          TopLeft="1475.30777991645,201.048857960108" />
+          TopLeft="1328.87920599422,202.960622692802" />
         <NodeLayout
           Size="254.4,41.6"
           Id="Package\TRUNCATE VaccinesByAgePhu_Stage"
-          TopLeft="1828.82729976754,201.048857960108" />
+          TopLeft="1682.39872584531,202.960622692802" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="259.159843969418,160.320589900306">
+          TopLeft="112.731270047183,162.232354633">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -3901,7 +3909,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="259.159843969418,243.498531174639">
+          TopLeft="112.731270047183,245.410295907333">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -3923,7 +3931,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1 1]"
-          TopLeft="596.158415443606,243.498531174639">
+          TopLeft="449.729841521371,245.410295907333">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -3945,18 +3953,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1 2]"
-          TopLeft="977.211591849449,243.498531174639">
+          TopLeft="830.783017927214,245.410295907333">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,43.4897060070274"
+              EndConnector="0,43.4897060070275"
               Start="0,0"
-              End="0,35.9897060070274">
+              End="0,35.9897060070275">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,35.9897060070274" />
+                    End="0,35.9897060070275" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3967,7 +3975,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1 3]"
-          TopLeft="1283.7733383458,245.197877603701">
+          TopLeft="1137.34476442357,247.109642336395">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -3989,7 +3997,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1 4]"
-          TopLeft="1616.10777991645,242.648857960108">
+          TopLeft="1469.67920599422,244.560622692802">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4011,7 +4019,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1 4 1]"
-          TopLeft="1956.02729976754,242.648857960108">
+          TopLeft="1809.59872584531,244.560622692802">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4033,7 +4041,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="259.159843969418,328.588237181667">
+          TopLeft="112.731270047183,330.500001914361">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4055,7 +4063,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2 1]"
-          TopLeft="596.158415443606,328.588237181667">
+          TopLeft="449.729841521371,330.500001914361">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4077,18 +4085,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2 2]"
-          TopLeft="977.211591849449,328.588237181667">
+          TopLeft="830.783017927214,330.50000191436">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,39.66617654164"
+              EndConnector="0,40.940686363436"
               Start="0,0"
-              End="0,32.16617654164">
+              End="0,33.440686363436">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,32.16617654164" />
+                    End="0,33.440686363436" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4099,7 +4107,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2 3]"
-          TopLeft="1283.7733383458,330.287583610728">
+          TopLeft="1137.34476442357,332.199348343422">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4121,7 +4129,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2 4]"
-          TopLeft="1616.10777991645,327.738563967136">
+          TopLeft="1469.67920599422,329.65032869983">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4143,7 +4151,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2 4 1]"
-          TopLeft="1956.02729976754,327.738563967136">
+          TopLeft="1809.59872584531,329.65032869983">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4165,7 +4173,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="259.159843969418,409.854413723306">
+          TopLeft="112.731270047183,411.766178456">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4187,7 +4195,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3 1]"
-          TopLeft="596.158415443606,409.854413723307">
+          TopLeft="449.729841521371,411.766178456001">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4209,18 +4217,18 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3 2]"
-          TopLeft="977.211591849449,409.854413723306">
+          TopLeft="830.783017927214,413.040688277796">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,41.5779412743329"
+              EndConnector="0,40.3034314525369"
               Start="0,0"
-              End="0,34.0779412743329">
+              End="0,32.8034314525369">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,34.0779412743329" />
+                    End="0,32.8034314525369" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4231,7 +4239,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3 3]"
-          TopLeft="1283.7733383458,411.553760152368">
+          TopLeft="1137.34476442357,413.465524885062">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4253,7 +4261,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3 4]"
-          TopLeft="1616.10777991645,409.004740508776">
+          TopLeft="1469.67920599422,410.91650524147">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4275,7 +4283,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 4]"
-          TopLeft="596.158415443606,160.320589900306">
+          TopLeft="449.729841521371,162.232354633">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4297,7 +4305,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 5]"
-          TopLeft="977.211591849449,160.320589900306">
+          TopLeft="830.783017927214,162.232354633">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4319,7 +4327,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 6]"
-          TopLeft="1283.7733383458,162.019936329367">
+          TopLeft="1137.34476442357,163.931701062061">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4341,7 +4349,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 7]"
-          TopLeft="1616.10777991645,159.470916685775">
+          TopLeft="1469.67920599422,161.382681418469">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4363,7 +4371,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 7 1]"
-          TopLeft="1956.02729976754,159.470916685775">
+          TopLeft="1809.59872584531,161.382681418469">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4392,13 +4400,13 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="169.6,41.6"
-          Id="Package\Load CasesReport to Stage\CasesReport_Stage"
-          TopLeft="447.3,209" />
-        <NodeLayout
           Size="136.8,41.6"
           Id="Package\Load CasesReport to Stage\CasesReport"
           TopLeft="457.7,51" />
+        <NodeLayout
+          Size="169.6,41.6"
+          Id="Package\Load CasesReport to Stage\CasesReport_Stage"
+          TopLeft="447.3,209" />
         <EdgeLayout
           Id="Package\Load CasesReport to Stage.Paths[OLE DB Source Output]"
           TopLeft="529.1,92.6">
@@ -4456,13 +4464,13 @@
       <GraphLayout
         Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="251.2,41.6"
-          Id="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails_Stage"
-          TopLeft="60,218" />
-        <NodeLayout
           Size="219.2,41.6"
           Id="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails"
           TopLeft="70.4,60" />
+        <NodeLayout
+          Size="251.2,41.6"
+          Id="Package\Load CompiledCOVID19CaseDetails to Stage\CompiledCOVID19CaseDetails_Stage"
+          TopLeft="60,218" />
         <EdgeLayout
           Id="Package\Load CompiledCOVID19CaseDetails to Stage.Paths[OLE DB Source Output]"
           TopLeft="182.8,101.6">

@@ -6,22 +6,22 @@ GO
 -- Drop Database
 -- ****************************************
 
-IF EXISTS (SELECT [name] FROM [master].[sys].[databases] WHERE [name] = N'NDS')
-    DROP DATABASE NDS;
+IF EXISTS (SELECT [name] FROM [master].[sys].[databases] WHERE [name] = N'Ontario_Covid_NDS')
+    DROP DATABASE Ontario_Covid_NDS;
 
 -- If the database has any other open connections close the network connection.
 IF @@ERROR = 3702 
-    RAISERROR('NDS database cannot be dropped because there are still other open connections', 127, 127) WITH NOWAIT, LOG;
+    RAISERROR('Ontario_Covid_NDS database cannot be dropped because there are still other open connections', 127, 127) WITH NOWAIT, LOG;
 GO
 
 -- ****************************************
 -- Create Database
 -- ****************************************
 
-CREATE DATABASE NDS;
+CREATE DATABASE Ontario_Covid_NDS;
 GO
 
-USE NDS;
+USE Ontario_Covid_NDS;
 GO
 
 -- ******************************************************
@@ -38,7 +38,6 @@ CREATE TABLE [dbo].[DataSource](
 CREATE TABLE [dbo].[AgeGroup](
 	[ID_AgeGroupSK] [int] IDENTITY(1,1) NOT NULL,
 	[Age_Group] [nvarchar](255) NULL,
-	[ID_DataSource] [int] NULL,
 	[CreateDate] [datetime] NULL,
 	[UpdateDate] [datetime] NULL
 ) ON [PRIMARY];
@@ -208,13 +207,6 @@ ALTER TABLE [dbo].[VaccineByAge] ADD
     (
         [ID_AgeGroupSK]
     ) REFERENCES [dbo].[AgeGroup] ([ID_AgeGroupSK]);
-GO
-
-ALTER TABLE [dbo].[AgeGroup] ADD 
-    CONSTRAINT [FK_AgeGroup_DataSource] FOREIGN KEY
-    (
-        [ID_DataSource]
-    ) REFERENCES [dbo].[DataSource] ([ID_DataSource]);
 GO
 
 ALTER TABLE [dbo].[ReportedCases] ADD 
